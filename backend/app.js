@@ -5,7 +5,6 @@ const productRoutes = require('./routes/product');
 
 const app = express();
 app.use(bodyParser.json());
-app.use('/product', productRoutes);
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
@@ -15,6 +14,7 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
 });
+app.use('/product', productRoutes);
 const PORT = 5000;
 const startServer = async () => {
   try {

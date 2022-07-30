@@ -1,6 +1,6 @@
 const SpecialOffersSlider = () => {
     return (
-        <div className="bg-black w-[100rem] h-[35rem]">HEJ</div>
+        <div className="bg-black w-[1600px] h-[700px]">HEJ</div>
     )
 }
 
