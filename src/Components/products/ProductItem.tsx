@@ -4,7 +4,7 @@ interface ProductProps {
 
 const ProductItem = ({title}: ProductProps) => {
     return(
-        <div>Hej</div>
+        <div className="h-[400px] w-[450px] border-2 ">{title}</div>
     )
 }
 
