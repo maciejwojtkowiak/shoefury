@@ -1,9 +1,9 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from 'express';
 
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const productRoutes = require('./routes/product');
+import express from 'express';
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+import productRoutes from './routes/product';
 
 const app = express();
 app.use(bodyParser.json());
