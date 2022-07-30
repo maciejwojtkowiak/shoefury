@@ -1,9 +1,16 @@
+import  { Fragment } from 'react';
 import './App.css';
-import Navbar from './Components/Navbar/Navbar';
+import Hero from './components/hero/Hero';
+import Navbar from './components/navbar/Navbar';
+import SpecialOffersSlider from './components/specialOffersSlider/SpecialOffersSlider';
 
 function App() {
   return (
-   <Navbar />
+    <Fragment>
+      <Navbar />
+      <Hero />
+    </Fragment>
+   
   );
 }
 
