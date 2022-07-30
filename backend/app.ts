@@ -1,3 +1,5 @@
+import { NextFunction, Request, Response } from "express";
+
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -5,7 +7,7 @@ const productRoutes = require('./routes/product');
 
 const app = express();
 app.use(bodyParser.json());
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
     'Access-Control-Allow-Methods',
