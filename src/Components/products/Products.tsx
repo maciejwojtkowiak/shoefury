@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react"
+import { Fragment, useEffect, useState } from "react"
 import { Product } from "../../types/product"
+import ProductItem from "./ProductItem"
 
 const Products = () => {
     const [products, setProducts] = useState<Product[]>([])
@@ -15,9 +16,13 @@ const Products = () => {
         }
         loadProducts()
     })
-    console.log(products)
+    
     return(
-        <h1 className="grid place-items-center">Products</h1>
+        <Fragment>
+             <h1 className="grid place-items-center">Products</h1>
+             {products.map(product => <ProductItem title={product.title} />)}
+        </Fragment>
+       
     )
 }
 
