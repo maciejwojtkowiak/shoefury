@@ -14,6 +14,7 @@ export const register = async (req: Request, res: Response) => {
   const email = body.email;
   const password = body.password;
   const user = new User();
+
   user.name = name;
   user.email = email;
   user.setPassword(password);
@@ -22,7 +23,12 @@ export const register = async (req: Request, res: Response) => {
     algorithm: 'HS256',
     expiresIn: '1h',
   });
-  res.status(201).json({ message: 'User created!', token: token });
+  res
+    .cookie('token', token, {
+      expires: new Date(new Date().getTime() + 900000),
+    })
+    .status(200)
+    .json({ message: 'LOGGED IN SUCCESSFULLY' });
 };
 
 export const login = (req: Request, res: Response) => {};

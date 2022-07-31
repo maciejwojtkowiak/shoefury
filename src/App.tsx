@@ -11,11 +11,12 @@ import { IsUnAuthRoutes } from './utils/PrivateRoutes';
 
 function App() {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(userAction.setIsAuth(localStorage.getItem('token')));
   }, [dispatch]);
   const isAuth = useSelector((state: RootState) => state.userReducer.isAuth);
-  console.log(isAuth);
+
   return (
     <BrowserRouter>
       <Routes>
