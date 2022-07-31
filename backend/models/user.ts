@@ -39,4 +39,5 @@ user.method(
   { collection: 'users' }
 );
 
-export const User = mongoose.model<IUser, UserModel>('User', user);
+const User = mongoose.model<IUser, UserModel>('User', user);
+export default User;

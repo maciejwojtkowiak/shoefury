@@ -5,9 +5,12 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import productRoutes from './routes/product';
 import authRoutes from './routes/auth';
+import dotenv from 'dotenv';
 
 const app = express();
 app.use(bodyParser.json());
+dotenv.config({ path: './secret.env' });
+
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
@@ -22,10 +25,8 @@ app.use('/auth', authRoutes);
 const PORT = 5000;
 const startServer = async () => {
   try {
-    await mongoose.connect(
-      'mongodb+srv://maciejtest:test12345@cluster0.vv1w4.mongodb.net/shop?retryWrites=true&w=majority'
-    );
     app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+    await mongoose.connect(`${process.env.MONGO_KEY}`);
   } catch (error) {
     console.error(error);
     process.exit(1);
