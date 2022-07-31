@@ -7,4 +7,14 @@ declare global {
   }
 }
 
+interface Error {
+  status?: number;
+}
+
+declare module 'http' {
+  interface IncomingHttpHeaders {
+    Authorization?: string;
+  }
+}
+
 export {};
