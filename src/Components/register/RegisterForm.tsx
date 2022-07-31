@@ -13,9 +13,9 @@ const RegisterForm = () => {
     setValue(e.target.value);
   };
 
-  const onClickHandler = (e: React.FormEvent) => {
+  const onClickHandler = async (e: React.FormEvent) => {
     e.preventDefault();
-    fetch('http://localhost:5000/auth/register', {
+    const response = await fetch('http://localhost:5000/auth/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -26,6 +26,8 @@ const RegisterForm = () => {
         password: password,
       }),
     });
+    const data = await response.json();
+    localStorage.setItem('token', data.token);
   };
   return (
     <form className="grid place-items-center h-screen border-2">
