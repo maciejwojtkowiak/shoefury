@@ -4,6 +4,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import productRoutes from './routes/product';
+import authRoutes from './routes/auth';
 
 const app = express();
 app.use(bodyParser.json());
@@ -17,6 +18,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next();
 });
 app.use('/product', productRoutes);
+app.use('/auth', authRoutes);
 const PORT = 5000;
 const startServer = async () => {
   try {

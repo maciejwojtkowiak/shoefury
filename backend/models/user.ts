@@ -28,15 +28,15 @@ const user = new Schema<IUser, UserModel, IUserMethods>({
   salt: String,
 });
 
-user.method('hash password', function setPassword(password) {
-  this.salt = crypto.randomBytes(16).toString('hex');
-  this.hash = crypto
-    .pbkdf2Sync(password, this.salt, 1000, 64, 'sha512')
-    .toString('hex');
-});
+user.method(
+  'setPassword',
+  function setPassword(password) {
+    this.salt = crypto.randomBytes(16).toString('hex');
+    this.hash = crypto
+      .pbkdf2Sync(password, this.salt, 1000, 64, 'sha512')
+      .toString('hex');
+  },
+  { collection: 'users' }
+);
 
 export const User = mongoose.model<IUser, UserModel>('User', user);
-
-const newUser = new User();
-
-newUser.setPassword('hej');
