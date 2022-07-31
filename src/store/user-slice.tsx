@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const userSlice = createSlice({
   name: 'user',
@@ -6,8 +6,8 @@ const userSlice = createSlice({
     isAuth: false,
   },
   reducers: {
-    setIsAuth(state) {
-      if (localStorage.getItem('token')) state.isAuth = true;
+    setIsAuth(state, action: PayloadAction<string | null>) {
+      if (action.payload) state.isAuth = true;
       else state.isAuth = false;
     },
   },

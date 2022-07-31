@@ -13,7 +13,6 @@ export const addProduct = async (req: Request, res: Response) => {
 
 export const getProducts = async (req: Request, res: Response) => {
   const products = await Product.find();
-  console.log(products);
   res
     .status(200)
     .json({ message: 'Get products successfully', products: products });
