@@ -21,9 +21,8 @@ const Products = () => {
   console.log(products);
   return (
     <Fragment>
-      <h1 className="grid place-items-center">Products</h1>
       <div className="w-full grid place-items-center">
-        <div className=" w-[1800px] grid place-items-center grid-cols-3">
+        <div className=" w-[1800px] grid place-items-center grid-cols-3 gap-16">
           {products.map((product) => (
             <ProductItem
               key={product.title}
