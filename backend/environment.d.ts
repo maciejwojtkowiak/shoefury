@@ -1,3 +1,5 @@
+import { Multer } from 'multer';
+
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
@@ -15,6 +17,10 @@ declare module 'http' {
   interface IncomingHttpHeaders {
     Authorization?: string;
   }
+}
+
+declare global {
+  interface PathParams extends Multer {}
 }
 
 export {};

@@ -18,7 +18,7 @@ const Products = () => {
   useEffect(() => {
     loadProducts();
   }, [loadProducts]);
-
+  console.log(products);
   return (
     <Fragment>
       <h1 className="grid place-items-center">Products</h1>

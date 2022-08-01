@@ -21,13 +21,15 @@ const AddProduct = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: formData,
+      body: JSON.stringify({
+        title: productName,
+      }),
     });
     console.log(selectedFile);
   };
   return (
     <div className="h-screen grid place-items-center">
-      <form className="flex  justify-center items-center flex-col border-2 px-6 py-24 bg-white  ">
+      <form className="flex  justify-center items-center flex-col border-2 px-6 py-24 bg-white gap-8  ">
         <input placeholder="Product name" onChange={onChangeHandler} />
         <input placeholder="Product name" onChange={onFileUpload} type="file" />
         <button onClick={onClickHandler}>Add</button>

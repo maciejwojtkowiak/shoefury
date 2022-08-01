@@ -7,8 +7,10 @@ import productRoutes from './routes/product';
 import authRoutes from './routes/auth';
 import dotenv from 'dotenv';
 import multer from 'multer';
-import { fileURLToPath } from 'url';
+import path from 'path';
 
+type DestinationCallback = (error: Error | null, destination: string) => void;
+type FileNameCallback = (error: Error | null, filename: string) => void;
 const app = express();
 app.use(bodyParser.json());
 dotenv.config({ path: './secret.env' });
@@ -25,14 +27,25 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next();
 });
 const storage = multer.diskStorage({
-  destination: (req, res, cb) => {
+  destination: (
+    req: Request,
+    res: Express.Multer.File,
+    cb: DestinationCallback
+  ) => {
     cb(null, 'imgaes');
   },
-  filename: (req, file, cb) => {
+  filename: (
+    req: Request,
+    file: Express.Multer.File,
+    cb: FileNameCallback
+  ): void => {
     cb(null, new Date().toISOString() + '-' + file.originalname);
   },
 });
 
+app.use(multer({ storage: storage }).single);
+
+app.use('/images', express.static(path.join(path.join(__dirname, 'images'))));
 app.use('/product', productRoutes);
 app.use('/auth', authRoutes);
 const PORT = 5000;

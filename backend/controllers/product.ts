@@ -5,6 +5,7 @@ export const addProduct = async (req: Request, res: Response) => {
   const title = req.body.title;
   const product = new Product({
     title: title,
+    imageUrl: '../images/maciek.jpg',
   });
 
   await product.save();

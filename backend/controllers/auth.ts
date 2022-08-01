@@ -23,13 +23,7 @@ export const register = async (req: Request, res: Response) => {
     algorithm: 'HS256',
     expiresIn: '1h',
   });
-  res
-    .cookie('token', token, {
-      expires: new Date(new Date().getTime() + 900000),
-      domain: 'http://localhost:3000',
-    })
-    .status(200)
-    .json({ message: 'LOGGED IN SUCCESSFULLY' });
+  res.status(200).json({ message: 'LOGGED IN SUCCESSFULLY', token: token });
 };
 
 export const login = (req: Request, res: Response) => {};
