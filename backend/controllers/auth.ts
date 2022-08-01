@@ -26,6 +26,7 @@ export const register = async (req: Request, res: Response) => {
   res
     .cookie('token', token, {
       expires: new Date(new Date().getTime() + 900000),
+      domain: 'http://localhost:3000',
     })
     .status(200)
     .json({ message: 'LOGGED IN SUCCESSFULLY' });

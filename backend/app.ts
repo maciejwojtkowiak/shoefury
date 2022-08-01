@@ -6,13 +6,15 @@ import bodyParser from 'body-parser';
 import productRoutes from './routes/product';
 import authRoutes from './routes/auth';
 import dotenv from 'dotenv';
+import multer from 'multer';
+import { fileURLToPath } from 'url';
 
 const app = express();
 app.use(bodyParser.json());
 dotenv.config({ path: './secret.env' });
 
 app.use((req: Request, res: Response, next: NextFunction) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader(
     'Access-Control-Allow-Methods',
@@ -21,6 +23,14 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
   next();
+});
+const storage = multer.diskStorage({
+  destination: (req, res, cb) => {
+    cb(null, 'imgaes');
+  },
+  filename: (req, file, cb) => {
+    cb(null, new Date().toISOString() + '-' + file.originalname);
+  },
 });
 
 app.use('/product', productRoutes);
