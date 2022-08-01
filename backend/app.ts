@@ -32,18 +32,18 @@ const storage = multer.diskStorage({
     res: Express.Multer.File,
     cb: DestinationCallback
   ) => {
-    cb(null, 'imgaes');
+    cb(null, 'images');
   },
   filename: (
     req: Request,
     file: Express.Multer.File,
     cb: FileNameCallback
   ): void => {
-    cb(null, new Date().toISOString() + '-' + file.originalname);
+    cb(null, file.originalname);
   },
 });
 
-app.use(multer({ storage: storage }).single);
+app.use(multer({ storage: storage }).single('image'));
 
 app.use('/images', express.static(path.join(path.join(__dirname, 'images'))));
 app.use('/product', productRoutes);

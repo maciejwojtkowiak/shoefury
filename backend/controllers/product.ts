@@ -2,10 +2,12 @@ import { Request, Response } from 'express';
 import Product from '../models/product';
 
 export const addProduct = async (req: Request, res: Response) => {
+  console.log(req.body.titl);
   const title = req.body.title;
+
   const product = new Product({
     title: title,
-    imageUrl: '../images/maciek.jpg',
+    imageUrl: req.file?.path,
   });
 
   await product.save();

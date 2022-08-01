@@ -14,18 +14,13 @@ const AddProduct = () => {
   const onClickHandler = (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('title', 'productName');
+    formData.append('title', productName);
     formData.append('image', selectedFile as File);
+    console.log(formData);
     fetch('http://localhost:5000/product/add-product', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        title: productName,
-      }),
+      body: formData,
     });
-    console.log(selectedFile);
   };
   return (
     <div className="h-screen grid place-items-center">
