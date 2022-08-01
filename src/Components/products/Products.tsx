@@ -25,7 +25,11 @@ const Products = () => {
       <div className="w-full grid place-items-center">
         <div className=" w-[1800px] grid place-items-center grid-cols-3">
           {products.map((product) => (
-            <ProductItem key={product.title} title={product.title} />
+            <ProductItem
+              key={product.title}
+              title={product.title}
+              imageUrl={product.imageUrl}
+            />
           ))}
         </div>
       </div>

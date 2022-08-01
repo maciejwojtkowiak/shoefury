@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import FormInput from './FormInput';
+import config from '../../config.json';
 
 const RegisterForm = () => {
   const [name, setName] = useState('');
@@ -15,7 +16,7 @@ const RegisterForm = () => {
 
   const onClickHandler = async (e: React.FormEvent) => {
     e.preventDefault();
-    const response = await fetch('http://localhost:5000/auth/register', {
+    const response = await fetch(`${config.backendDomain}/auth/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import config from '../../config.json';
 
 const AddProduct = () => {
   const [productName, setProductName] = useState('');
@@ -16,8 +17,7 @@ const AddProduct = () => {
     const formData = new FormData();
     formData.append('title', productName);
     formData.append('image', selectedFile as File);
-    console.log(formData);
-    fetch('http://localhost:5000/product/add-product', {
+    fetch(`${config.backendDomain}/product/add-product`, {
       method: 'POST',
       body: formData,
     });
