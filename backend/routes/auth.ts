@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { login, register } from '../controllers/auth';
+import { isAuth, login, register } from '../controllers/auth';
 
 const router = express.Router();
 
@@ -10,5 +10,7 @@ router.get('/register', (req: Request, res: Response) => {
 router.post('/register', register);
 
 router.post('/login', login);
+
+router.patch('/is-auth', isAuth);
 
 export default router;

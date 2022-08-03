@@ -27,3 +27,15 @@ export const register = async (req: Request, res: Response) => {
 };
 
 export const login = (req: Request, res: Response) => {};
+
+export const isAuth = async (req: Request, res: Response) => {
+  const token = req.get('Authorization')?.split(' ')[1];
+  if (token) {
+    try {
+      const decodedToken = jwt.verify(token, `${process.env.SECRET_KEY}`);
+      if (decodedToken) res.status(200).json({ isAuth: true });
+    } catch (e) {
+      res.status(403).json({ isAuth: false });
+    }
+  } else res.status(403).json({ isAuth: false });
+};
