@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import FormInput from './FormInput';
+import FormInput from '../inputs/FormInput';
 import config from '../../config.json';
 
 const RegisterForm = () => {

@@ -28,7 +28,7 @@ const IsAuth = (props: wrapperProps) => {
     setIsLoaded(!isLoading && isAuth);
   }, [isAuth, isLoading]);
   if (isLoaded) return <div>{props.children}</div>;
-  if (!isAuth && !isLoading) return <Navigate to="/" />;
+  if (!isLoading && !isAuth) return <Navigate to="/" />;
   return <div>Loading</div>;
 };
 

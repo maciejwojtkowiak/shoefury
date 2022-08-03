@@ -7,7 +7,14 @@ interface FormInputProps {
 }
 
 const FormInput = ({ onChange, placeholder, type }: FormInputProps) => {
-  return <input onChange={onChange} placeholder={placeholder} type={type} />;
+  return (
+    <input
+      onChange={onChange}
+      placeholder={placeholder}
+      type={type}
+      className="border-b-2 border-orange-200 focus:border-orange-400 focus:outline-none transition delay-50 w-full"
+    />
+  );
 };
 
 export default FormInput;
