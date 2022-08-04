@@ -39,8 +39,13 @@ const SpecialOffersSlider = () => {
         <div className="absolute top-1/2 right-1" onClick={goToNextSlide}>
           <BsFillArrowRightCircleFill size={48} />
         </div>
-        <div className="absolute bottom-[5%]">
-          <TbRectangle />
+        <div className="flex absolute bottom-[5%]">
+          {images.map((_, index) => {
+            if (index === currentSlide) {
+              return <TbRectangle color="red" />;
+            }
+            return <TbRectangle />;
+          })}
         </div>
       </div>
     </div>
