@@ -3,6 +3,7 @@ import config from '../../config.json';
 import FormInput from '../ui/inputs/FormInput';
 import Navbar from '../navbar/Navbar';
 import FileInput from '../ui/inputs/FileInput';
+import FormButton from '../ui/buttons/FormButton';
 
 const AddProduct = () => {
   const [productName, setProductName] = useState('');
@@ -47,12 +48,7 @@ const AddProduct = () => {
             type="text"
           />
           <FileInput label="Upload product image" onFileUpload={onFileUpload} />
-          <button
-            onClick={onClickHandler}
-            className="border-2 border-orange-200 rounded-full px-12 py-2 font-bold text-xl hover:border-orange-500 hover:bg-orange-400 hover:text-white transition"
-          >
-            Add
-          </button>
+          <FormButton buttonText="Add" onClickHandler={onClickHandler} />
         </form>
       </div>
     </Fragment>
