@@ -13,9 +13,7 @@ export const IsAuthRoutes = () => {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       },
     });
-    console.log('IsAuth');
   }, []);
-  console.log('IsAuth');
 
   const isAuth = useSelector((state: RootState) => state.userReducer.isAuth);
   return isAuth ? <Outlet /> : <Navigate to="/" />;

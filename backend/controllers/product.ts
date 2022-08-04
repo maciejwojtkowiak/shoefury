@@ -3,6 +3,7 @@ import Product from '../models/product';
 
 interface IProduct {
   title: string;
+  price: string;
 }
 
 export const addProduct = async (req: Request<{}, {}, IProduct>, res: Response) => {

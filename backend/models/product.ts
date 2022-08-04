@@ -7,12 +7,17 @@ const product = new Schema(
       type: String,
       required: true,
     },
+    price: {
+      type: String,
+      required: true,
+    },
     imageUrl: {
       type: String,
       required: true,
     },
   },
-  { collection: 'products' }
+
+  { collection: 'products', timestamps: true }
 );
 
 const Product = mongoose.model('Product', product);

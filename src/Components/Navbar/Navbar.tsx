@@ -20,7 +20,7 @@ const Navbar = () => {
         </div>
 
         <div className="place-self-end flex gap-4 h-full items-center justify-center">
-          <li>
+          <li className="relative">
             <CartIcon />
           </li>
           <li>
