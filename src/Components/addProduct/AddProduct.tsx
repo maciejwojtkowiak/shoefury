@@ -1,0 +1,62 @@
+import { Fragment, useState } from 'react';
+import config from '../../config.json';
+import FormInput from '../ui/inputs/FormInput';
+import Navbar from '../navbar/Navbar';
+import FileInput from '../ui/inputs/FileInput';
+
+const AddProduct = () => {
+  const [productName, setProductName] = useState('');
+  const [price, setPrice] = useState('');
+  const [selectedFile, setSelectedFile] = useState<File>();
+  const onNameChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setProductName(event.target.value);
+  };
+
+  const onPriceChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPrice(event.target.value);
+  };
+
+  const onFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) setSelectedFile(event.target.files[0]);
+  };
+
+  const onClickHandler = (e: React.FormEvent) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('title', productName);
+    formData.append('image', selectedFile as File);
+    formData.append('price', price);
+    fetch(`${config.backendDomain}/product/add-product`, {
+      method: 'POST',
+      body: formData,
+    });
+  };
+  return (
+    <Fragment>
+      <Navbar />
+      <div className="h-screen grid place-items-center">
+        <form className="flex justify-center items-center flex-col border-2 px-6 py-24 bg-white gap-8 w-[500px] h-[700px]  ">
+          <FormInput
+            placeholder="Product name"
+            onChange={onNameChangeHandler}
+            type="text"
+          />
+          <FormInput
+            placeholder="Product Price"
+            onChange={onPriceChangeHandler}
+            type="text"
+          />
+          <FileInput label="Upload product image" onFileUpload={onFileUpload} />
+          <button
+            onClick={onClickHandler}
+            className="border-2 border-orange-200 rounded-full px-12 py-2 font-bold text-xl hover:border-orange-500 hover:bg-orange-400 hover:text-white transition"
+          >
+            Add
+          </button>
+        </form>
+      </div>
+    </Fragment>
+  );
+};
+
+export default AddProduct;
