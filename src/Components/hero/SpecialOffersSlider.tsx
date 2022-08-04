@@ -11,6 +11,9 @@ const SpecialOffersSlider = () => {
   const goToNextSlide = () => {
     setCurrentSlide((prevSlide) => ++prevSlide);
   };
+  const goToSlideOnDot = (dotIndex: number) => {
+    setCurrentSlide(dotIndex);
+  };
   const images = [
     <img src={shoeImg} alt="shoe img" className="w-full h-full" />,
     <img src={shoeImg} alt="shoe img" className="w-full h-full" />,
@@ -36,15 +39,19 @@ const SpecialOffersSlider = () => {
         <div className="absolute top-1/2 left-[2%] z-10" onClick={goToPreviousSlide}>
           <BsFillArrowLeftCircleFill size={48} />
         </div>
-        <div className="absolute top-1/2 right-1" onClick={goToNextSlide}>
+        <div className="absolute top-1/2 right-[2%]" onClick={goToNextSlide}>
           <BsFillArrowRightCircleFill size={48} />
         </div>
-        <div className="flex absolute bottom-[5%]">
+        <div className="flex gap-2 absolute bottom-[5%] translate-x[50%] translate-y-[50%]">
           {images.map((_, index) => {
             if (index === currentSlide) {
-              return <TbRectangle color="red" />;
+              return <TbRectangle size={32} color="red" />;
             }
-            return <TbRectangle />;
+            return (
+              <button onClick={() => goToSlideOnDot(index)}>
+                <TbRectangle size={32} />{' '}
+              </button>
+            );
           })}
         </div>
       </div>
