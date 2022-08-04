@@ -16,6 +16,9 @@ const RightSideNavbar = () => {
       <li>
         <Link to="/add-product">Add product</Link>
       </li>
+      <li>
+        <Link to="/add-product">Add special offer</Link>
+      </li>
       <li className="mr-4">
         {!isAuth ? (
           <Link to="/register">Register</Link>

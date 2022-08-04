@@ -19,7 +19,7 @@ const Products = () => {
 
   return (
     <Fragment>
-      <div className="w-full grid place-items-center">
+      <div className="w-full grid place-items-center mt-24">
         <div className=" w-[1800px] grid place-items-center grid-cols-3 gap-16">
           {products.map((product) => (
             <ProductItem

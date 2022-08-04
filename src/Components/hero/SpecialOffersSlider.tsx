@@ -1,6 +1,6 @@
 import shoeImg from '../../images/shoe.png';
-import { TbRectangle } from 'react-icons/tb';
 import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill } from 'react-icons/bs';
+import { FaSquare } from 'react-icons/fa';
 import { useState } from 'react';
 
 const SpecialOffersSlider = () => {
@@ -36,20 +36,20 @@ const SpecialOffersSlider = () => {
             </div>
           );
         })}
-        <div className="absolute top-1/2 left-[2%] z-10" onClick={goToPreviousSlide}>
+        <button className="absolute top-1/2 left-[2%] z-10" onClick={goToPreviousSlide}>
           <BsFillArrowLeftCircleFill size={48} />
-        </div>
-        <div className="absolute top-1/2 right-[2%]" onClick={goToNextSlide}>
+        </button>
+        <button className="absolute top-1/2 right-[2%]" onClick={goToNextSlide}>
           <BsFillArrowRightCircleFill size={48} />
-        </div>
+        </button>
         <div className="flex gap-2 absolute bottom-[5%] translate-x[50%] translate-y-[50%]">
           {images.map((_, index) => {
             if (index === currentSlide) {
-              return <TbRectangle size={32} color="red" />;
+              return <FaSquare size={32} color="#fb923c" />;
             }
             return (
               <button onClick={() => goToSlideOnDot(index)}>
-                <TbRectangle size={32} />{' '}
+                <FaSquare size={32} color="#e5e5e5" />{' '}
               </button>
             );
           })}
