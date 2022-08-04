@@ -8,13 +8,11 @@ interface RegisterData {
   password: string;
 }
 
-export const register = async (req: Request, res: Response) => {
-  const body = req.body as RegisterData;
-  const name = body.name;
-  const email = body.email;
-  const password = body.password;
+export const register = async (req: Request<{}, {}, RegisterData>, res: Response) => {
+  const name = req.body.name;
+  const email = req.body.email;
+  const password = req.body.password;
   const user = new User();
-
   user.name = name;
   user.email = email;
   user.setPassword(password);

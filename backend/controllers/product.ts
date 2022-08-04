@@ -1,8 +1,11 @@
 import { Request, Response } from 'express';
 import Product from '../models/product';
 
-export const addProduct = async (req: Request, res: Response) => {
-  console.log(req.body.titl);
+interface IProduct {
+  title: string;
+}
+
+export const addProduct = async (req: Request<{}, {}, IProduct>, res: Response) => {
   const title = req.body.title;
 
   const product = new Product({
@@ -16,7 +19,5 @@ export const addProduct = async (req: Request, res: Response) => {
 
 export const getProducts = async (req: Request, res: Response) => {
   const products = await Product.find();
-  res
-    .status(200)
-    .json({ message: 'Get products successfully', products: products });
+  res.status(200).json({ message: 'Get products successfully', products: products });
 };
