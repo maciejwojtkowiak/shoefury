@@ -37,7 +37,15 @@ app.use(multer({ storage: storage }).single('image'));
 app.use('/images', express.static(path.join(path.join(__dirname, 'images'))));
 app.use('/product', productRoutes);
 app.use('/auth', authRoutes);
-app.use((err: CustomError, req: Request, res: Response, next: NextFunction) => {});
+app.use((err: CustomError, req: Request, res: Response, next: NextFunction) => {
+  if (err.status) {
+    if (err.status === 403) res.json({ message: 'Please log in!' });
+  }
+  if (!err.status) {
+    err.status = 500;
+    res.json({ message: 'Something went wrong, try again later' });
+  }
+});
 const PORT = 5000;
 const startServer = async () => {
   try {
