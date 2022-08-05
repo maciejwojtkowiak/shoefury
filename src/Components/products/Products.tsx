@@ -1,12 +1,13 @@
 import { Fragment, useCallback, useEffect, useState } from 'react';
 import { Product } from '../../types/product';
 import ProductItem from './ProductItem';
+import config from '../../config.json';
 
 const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const loadProducts = useCallback(async () => {
     try {
-      const response = await fetch('http://localhost:5000/product/get-products');
+      const response = await fetch(`${config.backendDomain}/product/get-products`);
       const products: Product[] = (await response.json()).products;
       setProducts(products);
     } catch (error) {

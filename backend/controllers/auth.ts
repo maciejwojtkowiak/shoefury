@@ -15,6 +15,10 @@ export const register = async (req: Request<{}, {}, RegisterData>, res: Response
   const user = new User();
   user.name = name;
   user.email = email;
+  user.cart = {
+    items: [],
+    quantity: 0,
+  };
   user.setPassword(password);
   await user.save();
   const token = jwt.sign({ userId: user._id }, `${process.env.SECRET_KEY}`, {
