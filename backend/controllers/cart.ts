@@ -11,7 +11,7 @@ export const addToCart = async (req: Request, res: Response, next: NextFunction)
   })) as IProduct;
 
   const cartItem = currentUser!.cart.items.find(
-    (item) => item.productId.toString() === addedProduct._id.toString()
+    (item) => item.product.toString() === addedProduct._id.toString()
   );
   console.log(cartItem);
   if (cartItem) {
@@ -20,7 +20,7 @@ export const addToCart = async (req: Request, res: Response, next: NextFunction)
   if (!cartItem) {
     const cartItems = currentUser!.cart.items;
     const updatedCart = {
-      items: [...cartItems, { productId: addedProduct._id, quantity: 1 }],
+      items: [...cartItems, { product: addedProduct._id, quantity: 1 }],
     };
     currentUser!.cart = updatedCart;
   }

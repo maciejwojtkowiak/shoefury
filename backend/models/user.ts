@@ -1,9 +1,8 @@
 import mongoose, { Model, ObjectId, Schema } from 'mongoose';
 import crypto from 'crypto';
-import { IProduct } from '../types/Product';
 
 interface Item {
-  productId: ObjectId;
+  product: ObjectId;
   quantity: number;
 }
 
@@ -38,7 +37,7 @@ const user = new Schema<IUser, UserModel, IUserMethods>({
   cart: {
     items: [
       {
-        productId: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
+        product: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
         quantity: { type: Number, required: true },
       },
     ],
