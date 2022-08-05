@@ -1,5 +1,5 @@
 import { Fragment, useCallback, useEffect, useState } from 'react';
-import { Product } from '../../types/product';
+import { Product } from '../../types/Product';
 import ProductItem from './ProductItem';
 import config from '../../config.json';
 

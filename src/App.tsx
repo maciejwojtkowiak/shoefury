@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { userAction } from './store/user-slice';
 import { IsUnAuthRoutes } from './utils/PrivateRoutes';
 import { checkIsAuth } from './utils/checkIsAuth';
+import CartPage from './pages/CartPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -29,8 +30,8 @@ function App() {
         <Route element={<IsUnAuthRoutes />}>
           <Route path="/register" element={<Register />} />
         </Route>
-
         <Route path="/add-product" element={<AddProductPage />} />
+        <Route path="/cart" element={<CartPage />} />
       </Routes>
     </BrowserRouter>
   );
