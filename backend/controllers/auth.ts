@@ -17,7 +17,6 @@ export const register = async (req: Request<{}, {}, RegisterData>, res: Response
   user.email = email;
   user.cart = {
     items: [],
-    quantity: 0,
   };
   user.setPassword(password);
   await user.save();
