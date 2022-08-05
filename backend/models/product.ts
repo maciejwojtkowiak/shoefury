@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
+import { IProduct } from '../types/Product';
 const { Schema } = mongoose;
 
-const product = new Schema(
+const product = new Schema<IProduct>(
   {
     title: {
       type: String,

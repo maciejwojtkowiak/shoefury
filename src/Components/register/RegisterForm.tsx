@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import FormInput from '../ui/inputs/FormInput';
 import config from '../../config.json';
+import FormButton from '../ui/buttons/FormButton';
 
 const RegisterForm = () => {
   const [name, setName] = useState('');
@@ -47,7 +48,7 @@ const RegisterForm = () => {
         type="password"
         onChange={(e) => onChangeHandler(e, setPassword)}
       />
-      <button onClick={onClickHandler}>Register</button>
+      <FormButton buttonText="Register" onClickHandler={onClickHandler} />
     </form>
   );
 };

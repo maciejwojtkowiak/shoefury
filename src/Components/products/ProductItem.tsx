@@ -15,6 +15,17 @@ const ProductItem = ({ imageUrl, title }: ProductProps) => {
   const onCartTouchEnd = () => {
     setCartTouched(false);
   };
+  const onAddToCart = () => {
+    fetch(`${config.backendDomain}/cart/add`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+      body: JSON.stringify({ productTitle: title }),
+    });
+    console.log('hej');
+  };
   console.log('touch', cartTouched);
   return (
     <div className="h-[400px] w-[450px] bg-white drop-shadow-lg rounded-lg grid place-items-center">
@@ -27,6 +38,7 @@ const ProductItem = ({ imageUrl, title }: ProductProps) => {
       <div
         onMouseOver={onCartTouchStart}
         onMouseLeave={onCartTouchEnd}
+        onClick={onAddToCart}
         className="justify-self-end mr-8 p-2 border-2 rounded-full hover:bg-orange-400 duration-300 cursor-pointer"
       >
         <BsCartPlus size={24} color={cartTouched ? 'white' : 'black'} />
