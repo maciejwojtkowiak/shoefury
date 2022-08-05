@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { userAction } from './store/user-slice';
 import { IsUnAuthRoutes } from './utils/PrivateRoutes';
+import { checkIsAuth } from './utils/checkIsAuth';
 
 function App() {
   const dispatch = useDispatch();
@@ -14,6 +15,12 @@ function App() {
   useEffect(() => {
     dispatch(userAction.setIsAuth(localStorage.getItem('token')));
   }, [dispatch]);
+  useEffect(() => {
+    const checkAuth = async () => {
+      console.log(await checkIsAuth());
+    };
+    checkAuth();
+  }, []);
 
   return (
     <BrowserRouter>

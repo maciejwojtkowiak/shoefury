@@ -11,7 +11,9 @@ const RightSideNavbar = () => {
   return (
     <div className="place-self-end flex gap-4 h-full items-center justify-center">
       <li className="relative">
-        <CartIcon />
+        <Link to="/cart">
+          <CartIcon />
+        </Link>
       </li>
       <li>
         <Link to="/add-product">Add product</Link>

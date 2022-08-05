@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import productRoutes from './routes/product';
 import authRoutes from './routes/auth';
+import cartRoutes from './routes/cart';
 import dotenv from 'dotenv';
 import multer from 'multer';
 import path from 'path';
@@ -37,6 +38,7 @@ app.use(multer({ storage: storage }).single('image'));
 app.use('/images', express.static(path.join(path.join(__dirname, 'images'))));
 app.use('/product', productRoutes);
 app.use('/auth', authRoutes);
+app.use('/cart', cartRoutes);
 app.use((err: CustomError, req: Request, res: Response, next: NextFunction) => {
   if (err.status) {
     if (err.status === 403) res.json({ message: 'Please log in!' });
