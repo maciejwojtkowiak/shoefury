@@ -18,7 +18,7 @@ export const register = async (
   try {
     const result = validationResult(req);
     if (!result.isEmpty()) {
-      console.log('FAILED');
+      console.log(result.array());
       const error = new Error('validation failed') as CustomError;
       error.status = 422;
       throw error;

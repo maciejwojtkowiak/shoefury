@@ -18,7 +18,7 @@ export const isAuth = (req: Request, res: Response, next: NextFunction) => {
     decodedToken = jwt.verify(token, `${process.env.SECRET_KEY}`) as IUserPayload;
   } catch (err) {
     const error = new Error('Not authenticated') as CustomError;
-    error.status = 403;
+    error.status = 401;
     next(error);
   }
   if (!decodedToken) {

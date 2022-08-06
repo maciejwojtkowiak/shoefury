@@ -23,9 +23,7 @@ router.post(
         }
       })
       .normalizeEmail(),
-    body('password')
-      .trim()
-      .isStrongPassword({ minLength: 8, minLowercase: 1, minUppercase: 1 }),
+    body('password').trim(),
   ],
   register
 );
