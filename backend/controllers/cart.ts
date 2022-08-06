@@ -14,6 +14,7 @@ export const addToCart = async (req: Request, res: Response, next: NextFunction)
     (item) => item.product.toString() === addedProduct._id.toString()
   );
   console.log(cartItem);
+  console.log(addedProduct);
   if (cartItem) {
     cartItem.quantity++;
   }
@@ -24,6 +25,7 @@ export const addToCart = async (req: Request, res: Response, next: NextFunction)
     };
     currentUser!.cart = updatedCart;
   }
+  console.log(currentUser!.cart);
 
   await currentUser!.save();
   res.status(201).json({ message: 'success' });
@@ -31,7 +33,7 @@ export const addToCart = async (req: Request, res: Response, next: NextFunction)
 
 export const getCart = async (req: Request, res: Response) => {
   const currentUser = await User.findOne({ _id: req.body.userId });
-  const products = await currentUser!.populate('cart.items.productId');
+  const products = await currentUser!.populate('cart.items.product');
   console.log('ITEMS', products.cart.items);
   res.status(200).json({ products: products });
 };
