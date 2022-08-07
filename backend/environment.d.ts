@@ -5,6 +5,7 @@ declare global {
     interface ProcessEnv {
       MONGO_KEY: string;
       SECRET_KEY: string;
+      STRIPE_KEY: string;
     }
   }
 }

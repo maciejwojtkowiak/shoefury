@@ -4,13 +4,16 @@ import Product from '../models/product';
 interface IProduct {
   title: string;
   price: string;
+  imageUrl: string;
 }
 
 export const addProduct = async (req: Request<{}, {}, IProduct>, res: Response) => {
   const title = req.body.title;
+  const price = req.body.price;
 
   const product = new Product({
     title: title,
+    price: price,
     imageUrl: req.file?.path,
   });
 

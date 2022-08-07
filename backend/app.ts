@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 import productRoutes from './routes/product';
 import authRoutes from './routes/auth';
 import cartRoutes from './routes/cart';
+import checkoutRoutes from './routes/checkout';
 import dotenv from 'dotenv';
 import multer from 'multer';
 import path from 'path';
@@ -35,10 +36,12 @@ const storage = multer.diskStorage({
 });
 
 app.use(multer({ storage: storage }).single('image'));
+
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/product', productRoutes);
 app.use('/auth', authRoutes);
 app.use('/cart', cartRoutes);
+app.use('/checkout', checkoutRoutes);
 app.use((error: CustomError, req: Request, res: Response, next: NextFunction) => {
   const status = error.status || 500;
   const message = error.message || 'Something went wrong';

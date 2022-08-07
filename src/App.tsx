@@ -6,7 +6,7 @@ import Register from './pages/Register';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { userAction } from './store/user-slice';
-import { IsUnAuthRoutes } from './utils/PrivateRoutes';
+import { IsAuthRoutes, IsUnAuthRoutes } from './utils/PrivateRoutes';
 import { checkIsAuth } from './utils/checkIsAuth';
 import CartPage from './pages/CartPage';
 
@@ -30,8 +30,10 @@ function App() {
         <Route element={<IsUnAuthRoutes />}>
           <Route path="/register" element={<Register />} />
         </Route>
-        <Route path="/add-product" element={<AddProductPage />} />
-        <Route path="/cart" element={<CartPage />} />
+        <Route element={<IsAuthRoutes />}>
+          <Route path="/add-product" element={<AddProductPage />} />
+          <Route path="/cart" element={<CartPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
