@@ -3,7 +3,6 @@ import { Fragment, useEffect, useState } from 'react';
 import Navbar from '../navbar/Navbar';
 import ColumnTitle from './ColumnTitle';
 import ProductRow from './ProductRow';
-import { response } from 'express';
 
 const Cart = () => {
   const [products, setProducts] = useState<any>([]);

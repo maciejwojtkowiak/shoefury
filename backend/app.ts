@@ -47,10 +47,12 @@ app.use((error: CustomError, req: Request, res: Response, next: NextFunction) =>
   const message = error.message || 'Something went wrong';
   res.status(status).json({ message: message });
 });
-const PORT = 5000;
+
 const startServer = async () => {
   try {
-    app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+    app.listen(process.env.PORT, () =>
+      console.log(`Server started on port ${process.env.PORT}`)
+    );
     await mongoose.connect(`${process.env.MONGO_KEY}`);
   } catch (error) {
     console.error(error);

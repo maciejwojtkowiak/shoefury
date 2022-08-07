@@ -3,6 +3,7 @@ import { Multer } from 'multer';
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
+      PORT: string;
       MONGO_KEY: string;
       SECRET_KEY: string;
       STRIPE_KEY: string;
