@@ -1,12 +1,17 @@
 import { Fragment, useCallback, useEffect, useState } from 'react';
-import { Product } from '../../types/product';
+import { Product } from '../../types/Product';
 import ProductItem from './ProductItem';
+import config from '../../config.json';
+import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 
 const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [page, setPage] = useState(1);
   const loadProducts = useCallback(async () => {
     try {
-      const response = await fetch('http://localhost:5000/product/get-products');
+      const response = await fetch(
+        `${config.backendDomain}/product/get-products?page=${page}`
+      );
       const products: Product[] = (await response.json()).products;
       setProducts(products);
     } catch (error) {
@@ -16,6 +21,14 @@ const Products = () => {
   useEffect(() => {
     loadProducts();
   }, [loadProducts]);
+
+  const moveForward = () => {
+    setPage((prevPage) => ++prevPage);
+  };
+
+  const moveBack = () => {
+    setPage((prevPage) => --prevPage);
+  };
 
   return (
     <Fragment>
@@ -28,6 +41,15 @@ const Products = () => {
               imageUrl={product.imageUrl}
             />
           ))}
+        </div>
+        <div className="w-full flex justify-center items-center pt-24 pb-12 ">
+          <button onClick={moveBack}>
+            <MdArrowBackIos size={48} />
+          </button>
+          {page}
+          <button onClick={moveForward}>
+            <MdArrowForwardIos size={48} />
+          </button>
         </div>
       </div>
     </Fragment>

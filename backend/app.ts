@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 import productRoutes from './routes/product';
 import authRoutes from './routes/auth';
 import cartRoutes from './routes/cart';
+import checkoutRoutes from './routes/checkout';
 import dotenv from 'dotenv';
 import multer from 'multer';
 import path from 'path';
@@ -35,23 +36,23 @@ const storage = multer.diskStorage({
 });
 
 app.use(multer({ storage: storage }).single('image'));
-app.use('/images', express.static(path.join(path.join(__dirname, 'images'))));
+
+app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/product', productRoutes);
 app.use('/auth', authRoutes);
 app.use('/cart', cartRoutes);
-app.use((err: CustomError, req: Request, res: Response, next: NextFunction) => {
-  if (err.status) {
-    if (err.status === 403) res.json({ message: 'Please log in!' });
-  }
-  if (!err.status) {
-    err.status = 500;
-    res.json({ message: 'Something went wrong, try again later' });
-  }
+app.use('/checkout', checkoutRoutes);
+app.use((error: CustomError, req: Request, res: Response, next: NextFunction) => {
+  const status = error.status || 500;
+  const message = error.message || 'Something went wrong';
+  res.status(status).json({ message: message });
 });
-const PORT = 5000;
+
 const startServer = async () => {
   try {
-    app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+    app.listen(process.env.PORT, () =>
+      console.log(`Server started on port ${process.env.PORT}`)
+    );
     await mongoose.connect(`${process.env.MONGO_KEY}`);
   } catch (error) {
     console.error(error);

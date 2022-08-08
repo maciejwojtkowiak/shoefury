@@ -1,12 +1,20 @@
-import mongoose, { Model, Schema } from 'mongoose';
+import mongoose, { Model, ObjectId, Schema } from 'mongoose';
 import crypto from 'crypto';
-import { IProduct } from '../types/Product';
+
+interface Item {
+  product: ObjectId;
+  quantity: number;
+}
+
+interface cart {
+  items: Item[];
+}
 
 interface IUser {
   name: string;
   email: string;
   password: string;
-  cart: IProduct[];
+  cart: cart;
   hash: string;
   salt: string;
 }
@@ -26,12 +34,14 @@ const user = new Schema<IUser, UserModel, IUserMethods>({
     type: String,
     required: true,
   },
-  cart: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Product',
-    },
-  ],
+  cart: {
+    items: [
+      {
+        product: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
+        quantity: { type: Number, required: true },
+      },
+    ],
+  },
   hash: String,
   salt: String,
 });

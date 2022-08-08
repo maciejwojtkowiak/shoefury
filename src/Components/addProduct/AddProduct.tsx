@@ -29,6 +29,9 @@ const AddProduct = () => {
     formData.append('price', price);
     fetch(`${config.backendDomain}/product/add-product`, {
       method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
       body: formData,
     });
   };

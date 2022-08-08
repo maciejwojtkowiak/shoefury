@@ -24,9 +24,8 @@ const ProductItem = ({ imageUrl, title }: ProductProps) => {
       },
       body: JSON.stringify({ productTitle: title }),
     });
-    console.log('hej');
   };
-  console.log('touch', cartTouched);
+
   return (
     <div className="h-[400px] w-[450px] bg-white drop-shadow-lg rounded-lg grid place-items-center">
       {title}

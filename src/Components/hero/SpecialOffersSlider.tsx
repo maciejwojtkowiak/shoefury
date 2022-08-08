@@ -24,7 +24,7 @@ const SpecialOffersSlider = () => {
       <div className="flex rounded-lg md:h-96  overflow-hidden">
         {images.map((image, index) => {
           return (
-            <div className="w-full grid place-items-center overflow-hidden">
+            <div key={index} className="w-full grid place-items-center overflow-hidden">
               <div
                 className="w-full h-full absolute z-[-2] transition grid place-items-center"
                 style={{
