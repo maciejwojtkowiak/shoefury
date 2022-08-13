@@ -6,14 +6,20 @@ import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 
 const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(1);
+  const [pagesCount, setPagesCount] = useState(1)
+  const [isAtMaxPage, setIsAtMaxPage] = useState(false)
+  const [isAtMinPage, setIsAtMinPage] = useState(false)
   const loadProducts = useCallback(async () => {
     try {
       const response = await fetch(
         `${config.backendDomain}/product/get-products?page=${page}`
       );
-      const products: Product[] = (await response.json()).products;
+      const data = await response.json()
+      const products: Product[] = data.products;
+      const pagesCount = data.pagesCount
       setProducts(products);
+      setPagesCount(pagesCount)
     } catch (error) {
       console.log(error);
     }
@@ -30,10 +36,15 @@ const Products = () => {
     setPage((prevPage) => --prevPage);
   };
 
+  useEffect(() => {
+    setIsAtMaxPage(page === pagesCount)
+    setIsAtMinPage(page === 1)
+  }, [page, pagesCount, setIsAtMaxPage, setIsAtMinPage])
+
   return (
     <Fragment>
       <div className="w-full grid place-items-center mt-24">
-        <div className=" w-[1800px] grid place-items-center grid-cols-3 gap-16">
+        <div className=" w-[1800px]  grid  grid-cols-3 place-items-center gap-16">
           {products.map((product) => (
             <ProductItem
               key={product.title}
@@ -44,11 +55,11 @@ const Products = () => {
         </div>
         <div className="w-full flex justify-center items-center pt-24 pb-12 ">
           <button onClick={moveBack}>
-            <MdArrowBackIos size={48} />
+            <MdArrowBackIos size={48} color={isAtMinPage ? "gray" : "black"} />
           </button>
           {page}
           <button onClick={moveForward}>
-            <MdArrowForwardIos size={48} />
+            <MdArrowForwardIos size={48} color={isAtMaxPage ? "gray" : "black "} />
           </button>
         </div>
       </div>
