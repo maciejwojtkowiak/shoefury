@@ -6,7 +6,7 @@ import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 
 const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(2);
   const loadProducts = useCallback(async () => {
     try {
       const response = await fetch(
@@ -17,10 +17,10 @@ const Products = () => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [page]);
   useEffect(() => {
     loadProducts();
-  }, [loadProducts]);
+  }, [loadProducts, page]);
 
   const moveForward = () => {
     setPage((prevPage) => ++prevPage);
