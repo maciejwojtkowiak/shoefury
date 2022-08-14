@@ -6,6 +6,10 @@ export interface GetProductsResponse {
     totalProducts: string
 }
 
+export interface CheckAuthResponse {
+    isAuth: boolean
+}
+
 export interface ApiResponse<T> {
     data: T
 }

@@ -40,6 +40,10 @@ const Products = () => {
     setIsAtMinPage(page === 1)
   }, [page, pagesCount, setIsAtMaxPage, setIsAtMinPage])
 
+  const isAtLimitPageAttr = {
+    disabled: true
+  }
+
   return (
     <Fragment>
       <div className="w-full grid place-items-center mt-24">
@@ -49,15 +53,16 @@ const Products = () => {
               key={product.title}
               title={product.title}
               imageUrl={product.imageUrl}
+              price={product.price}
             />
           ))}
         </div>
         <div className="w-full flex justify-center items-center pt-24 pb-12 ">
-          <button onClick={moveBack}>
+          <button onClick={moveBack} {...isAtMinPage && isAtLimitPageAttr}>
             <MdArrowBackIos size={48} color={isAtMinPage ? "gray" : "black"} />
           </button>
           {page}
-          <button onClick={moveForward}>
+          <button onClick={moveForward}  {...isAtMaxPage && isAtLimitPageAttr}>
             <MdArrowForwardIos size={48} color={isAtMaxPage ? "gray" : "black "} />
           </button>
         </div>

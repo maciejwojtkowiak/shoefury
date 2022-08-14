@@ -5,9 +5,10 @@ import { useState } from 'react';
 interface ProductProps {
   title: string;
   imageUrl: string;
+  price: string;
 }
 
-const ProductItem = ({ imageUrl, title }: ProductProps) => {
+const ProductItem = ({ imageUrl, price, title }: ProductProps) => {
   const [cartTouched, setCartTouched] = useState(false);
   const onCartTouchStart = () => {
     setCartTouched(true);
@@ -34,6 +35,8 @@ const ProductItem = ({ imageUrl, title }: ProductProps) => {
         src={`${config.backendDomain + '/' + imageUrl}`}
         alt="product"
       />
+      <h3 className='text-2xl font-bold'>{price}$</h3>
+
       <div
         onMouseOver={onCartTouchStart}
         onMouseLeave={onCartTouchEnd}
