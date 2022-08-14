@@ -1,7 +1,6 @@
 import  { AxiosError } from "axios";
-import { ApiResponse } from "../../types/ApiResponse";
 import productsClient from "./productsClient";
-import { GetProductsResponse } from "./types";
+import { GetProductsResponse } from "../../types/ApiResponse";
 
 export async function getProducts(pageNum: number): Promise<GetProductsResponse | AxiosError>  {
     try {

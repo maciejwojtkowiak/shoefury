@@ -3,8 +3,7 @@ import { Product } from '../../types/Product';
 import ProductItem from './ProductItem';
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 import { getProducts } from '../../services/productsApi/productsApi';
-import { GetProductsResponse } from '../../services/productsApi/types';
-import { ApiResponse } from '../../types/ApiResponse';
+import { GetProductsResponse } from '../../types/ApiResponse';
 
 const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -44,7 +43,7 @@ const Products = () => {
   return (
     <Fragment>
       <div className="w-full grid place-items-center mt-24">
-        <div className=" w-[1800px]  grid  grid-cols-3 place-items-center gap-16">
+        <div className=" w-[1800px] h-[1400px]  grid  grid-cols-3 grid-rows-3 place-items-center gap-16">
           {products.map((product) => (
             <ProductItem
               key={product.title}
