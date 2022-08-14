@@ -10,13 +10,12 @@ import { CheckAuthResponse } from '../types/ApiResponse';
 export const IsAuthRoutes = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
-  const dispatch = useDispatch()
-  const isAuth = useSelector((state: RootState) => state.userReducer.isAuth)
+  const dispatch = useDispatch();
+  const isAuth = useSelector((state: RootState) => state.userReducer.isAuth);
   useEffect(() => {
     const isAuth = async () => {
-      const data = await checkAuthentication() as CheckAuthResponse
-      console.log('DATA', data)
-      dispatch(userAction.setIsAuth(data.isAuth))
+      const data = (await checkAuthentication()) as CheckAuthResponse;
+      dispatch(userAction.setIsAuth(data.isAuth));
       setIsLoading(false);
     };
     isAuth();

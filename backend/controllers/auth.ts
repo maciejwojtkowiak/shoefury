@@ -18,12 +18,10 @@ export const register = async (
   try {
     const result = validationResult(req);
     if (!result.isEmpty()) {
-      console.log(result.array());
       const error = new Error('validation failed') as CustomError;
       error.status = 422;
       throw error;
     }
-    console.log('AFTER IF');
     const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
