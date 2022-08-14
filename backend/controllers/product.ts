@@ -24,6 +24,7 @@ export const addProduct = async (req: Request<{}, {}, IProduct>, res: Response) 
 export const getProducts = async (req: Request, res: Response) => {
   const LIMIT_PER_PAGE = 9;
   const currentPage = req.query.page || 1;
+  console.log(req.query)
   try {
     const productCount = await Product.countDocuments();
     const pagesCount = Math.ceil(productCount / LIMIT_PER_PAGE)

@@ -4,6 +4,7 @@ import ProductItem from './ProductItem';
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 import { getProducts } from '../../services/productsApi/productsApi';
 import { GetProductsResponse } from '../../services/productsApi/types';
+import { ApiResponse } from '../../types/ApiResponse';
 
 const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -14,6 +15,7 @@ const Products = () => {
   const loadProducts = useCallback(async () => {
     try {
       const data = await getProducts(page) as GetProductsResponse
+      console.log('DATA', data)
       const products: Product[] = data.products;
       const pagesCount = data.pagesCount
       setProducts(products);
