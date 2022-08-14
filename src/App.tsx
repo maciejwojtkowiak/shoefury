@@ -11,18 +11,18 @@ import { IsAuthRoutes, IsUnAuthRoutes } from './utils/PrivateRoutes';
 import CartPage from './pages/CartPage';
 import { checkAuthentication } from './services/authApi/checkIsAuth';
 import { CheckAuthResponse } from './types/ApiResponse';
+import LoginPage from './pages/LoginPage';
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     const isAuth = async () => {
-      const data = await checkAuthentication() as CheckAuthResponse
+      const data = (await checkAuthentication()) as CheckAuthResponse;
       dispatch(userAction.setIsAuth(data.isAuth));
     };
     isAuth();
   }, [dispatch]);
-
 
   return (
     <BrowserRouter>
@@ -35,6 +35,7 @@ function App() {
           <Route path="/add-product" element={<AddProductPage />} />
           <Route path="/cart" element={<CartPage />} />
         </Route>
+        <Route element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
   );

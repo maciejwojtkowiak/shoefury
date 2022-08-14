@@ -3,6 +3,8 @@ import User from '../models/user';
 import jwt from 'jsonwebtoken';
 import { validationResult } from 'express-validator';
 import { CustomError } from '../types/Error';
+import bcrypt from 'bcrypt';
+import { nextTick } from 'process';
 
 interface RegisterData {
   name: string;
@@ -43,7 +45,34 @@ export const register = async (
   }
 };
 
-export const login = (req: Request, res: Response) => {};
+export const login = async (req: Request, res: Response, next: NextFunction) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  try {
+    const userWithGivenEmail = await User.findOne({ email: email });
+    if (userWithGivenEmail) {
+      const isPasswordCorrect = await bcrypt.compare(password, userWithGivenEmail.hash);
+      if (isPasswordCorrect) {
+        const token = jwt.sign(
+          { userId: userWithGivenEmail._id },
+          `${process.env.SECRET_KEY}`,
+          {
+            algorithm: 'HS256',
+            expiresIn: '1h',
+          }
+        );
+        res.status(200).json({ message: 'LOGGED IN SUCCESSFULLY', token: token });
+      }
+      if (!isPasswordCorrect) {
+        const error = new Error('Wrong password') as CustomError;
+        error.status = 401;
+        throw error;
+      }
+    }
+  } catch (error) {
+    next(error);
+  }
+};
 
 export const isAuth = async (req: Request, res: Response) => {
   const token = req.get('Authorization')?.split(' ')[1];

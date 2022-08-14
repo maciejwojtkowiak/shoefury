@@ -28,14 +28,14 @@ const ProductItem = ({ imageUrl, price, title }: ProductProps) => {
   };
 
   return (
-    <div className="h-[400px] w-[450px] bg-white drop-shadow-lg rounded-lg grid place-items-center">
+    <div className="h-[400px] w-[450px] bg-white drop-shadow-lg rounded-lg grid place-items-center ">
       {title}
       <img
         className="h-48 w-48"
         src={`${config.backendDomain + '/' + imageUrl}`}
         alt="product"
       />
-      <h3 className='text-2xl font-bold'>{price}$</h3>
+      <h3 className="text-2xl font-bold">{price}$</h3>
 
       <div
         onMouseOver={onCartTouchStart}

@@ -1,5 +1,5 @@
 import mongoose, { Model, ObjectId, Schema } from 'mongoose';
-import crypto from 'crypto';
+import bcrypt from 'bcrypt';
 
 interface Item {
   product: ObjectId;
@@ -21,6 +21,7 @@ interface IUser {
 
 interface IUserMethods {
   setPassword(password: string): void;
+  decryptPasswordSuccess(password: string): void;
 }
 
 type UserModel = Model<IUser, {}, IUserMethods>;
@@ -49,10 +50,7 @@ const user = new Schema<IUser, UserModel, IUserMethods>({
 user.method(
   'setPassword',
   function setPassword(password) {
-    this.salt = crypto.randomBytes(16).toString('hex');
-    this.hash = crypto
-      .pbkdf2Sync(password, this.salt, 1000, 64, 'sha512')
-      .toString('hex');
+    this.password = bcrypt.hash(password, 16);
   },
   { collection: 'users' }
 );

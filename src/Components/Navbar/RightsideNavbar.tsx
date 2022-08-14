@@ -2,6 +2,7 @@ import CartIcon from '../svg/CartIcon';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
+import { Fragment } from 'react';
 
 const RightSideNavbar = () => {
   const onLogout = () => {
@@ -23,7 +24,10 @@ const RightSideNavbar = () => {
       </li>
       <li className="mr-4">
         {!isAuth ? (
-          <Link to="/register">Register</Link>
+          <div className="flex gap-4">
+            <Link to="/register">Register</Link>
+            <Link to="/login">Login</Link>
+          </div>
         ) : (
           <form>
             <button onClick={onLogout}>Logout</button>
