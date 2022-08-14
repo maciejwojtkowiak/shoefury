@@ -1,8 +1,9 @@
 import { Fragment, useCallback, useEffect, useState } from 'react';
 import { Product } from '../../types/Product';
 import ProductItem from './ProductItem';
-import config from '../../config.json';
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
+import { getProducts } from '../../services/productsApi/productsApi';
+import { GetProductsResponse } from '../../services/productsApi/types';
 
 const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -12,10 +13,7 @@ const Products = () => {
   const [isAtMinPage, setIsAtMinPage] = useState(false)
   const loadProducts = useCallback(async () => {
     try {
-      const response = await fetch(
-        `${config.backendDomain}/product/get-products?page=${page}`
-      );
-      const data = await response.json()
+      const data = await getProducts(page) as GetProductsResponse
       const products: Product[] = data.products;
       const pagesCount = data.pagesCount
       setProducts(products);
