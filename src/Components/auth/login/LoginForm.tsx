@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Login } from '../../../services/authApi/login';
 import FormButton from '../../ui/buttons/FormButton';
 import FormInput from '../../ui/inputs/FormInput';
@@ -8,6 +9,7 @@ import FormHeader from '../ui/FormHeader';
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
   const onValueChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     setValueFunc: (val: string) => void
@@ -21,6 +23,7 @@ const LoginForm = () => {
       console.log('RESPONSE', response);
       // TO DO add type to login
       localStorage.setItem('token', response.data.token!);
+      navigate('/', { replace: true });
     } catch (e) {
       console.log(e);
     }

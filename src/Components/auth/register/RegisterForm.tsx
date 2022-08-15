@@ -4,11 +4,16 @@ import config from '../../../config.json';
 import FormButton from '../../ui/buttons/FormButton';
 import LogoSection from '../ui/FormHeader';
 import AuthForm from '../ui/AuthForm';
+import { useNavigate } from 'react-router-dom';
+import { userAction } from '../../../store/user-slice';
+import { useDispatch } from 'react-redux';
 
 const RegisterForm = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const onChangeHandler = (
     e: React.ChangeEvent<HTMLInputElement>,
     setValue: (val: string) => void
@@ -32,6 +37,8 @@ const RegisterForm = () => {
     });
     const data = await response.json();
     localStorage.setItem('token', data.token);
+    dispatch(userAction.setIsAuth(true));
+    navigate('/', { replace: true });
   };
   return (
     <AuthForm>

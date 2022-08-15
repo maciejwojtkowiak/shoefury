@@ -12,9 +12,12 @@ export const IsAuthRoutes = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const dispatch = useDispatch();
   const isAuth = useSelector((state: RootState) => state.userReducer.isAuth);
+  console.log('ADD PRODUCT AUTH', isAuth);
   useEffect(() => {
     const isAuth = async () => {
-      const data = (await checkAuthentication()) as CheckAuthResponse;
+      const data = (await checkAuthentication(
+        localStorage.getItem('token')
+      )) as CheckAuthResponse;
       dispatch(userAction.setIsAuth(data.isAuth));
       setIsLoading(false);
     };

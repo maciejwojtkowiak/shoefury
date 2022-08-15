@@ -18,7 +18,9 @@ function App() {
 
   useEffect(() => {
     const isAuth = async () => {
-      const data = (await checkAuthentication()) as CheckAuthResponse;
+      const data = (await checkAuthentication(
+        localStorage.getItem('token')
+      )) as CheckAuthResponse;
       dispatch(userAction.setIsAuth(data.isAuth));
     };
     isAuth();
