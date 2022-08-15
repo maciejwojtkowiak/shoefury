@@ -4,7 +4,6 @@ import jwt from 'jsonwebtoken';
 import { validationResult } from 'express-validator';
 import { CustomError } from '../types/Error';
 import bcrypt from 'bcrypt';
-import { nextTick } from 'process';
 
 interface RegisterData {
   name: string;
@@ -33,7 +32,7 @@ export const register = async (
     user.cart = {
       items: [],
     };
-    user.setPassword(password);
+    user.password = password;
     await user.save();
     const token = jwt.sign({ userId: user._id }, `${process.env.SECRET_KEY}`, {
       algorithm: 'HS256',
@@ -48,11 +47,14 @@ export const register = async (
 export const login = async (req: Request, res: Response, next: NextFunction) => {
   const email = req.body.email;
   const password = req.body.password;
+  console.log('CORRECT 1');
   try {
     const userWithGivenEmail = await User.findOne({ email: email });
+    console.log('USER', userWithGivenEmail);
     if (userWithGivenEmail) {
-      const isPasswordCorrect = await bcrypt.compare(password, userWithGivenEmail.hash);
+      const isPasswordCorrect = password === userWithGivenEmail.password;
       if (isPasswordCorrect) {
+        console.log('CORRECT');
         const token = jwt.sign(
           { userId: userWithGivenEmail._id },
           `${process.env.SECRET_KEY}`,

@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from 'express';
-import { IAuthUserRequest } from '../types/User';
 import User from '../models/user';
 import Product from '../models/product';
 import { IProduct } from '../types/Product';

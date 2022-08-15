@@ -28,7 +28,7 @@ router.post(
   register
 );
 
-router.post('/login', login);
+router.patch('/login', login);
 
 router.patch('/is-auth', isAuth);
 

@@ -15,8 +15,6 @@ interface IUser {
   email: string;
   password: string;
   cart: cart;
-  hash: string;
-  salt: string;
 }
 
 interface IUserMethods {
@@ -43,8 +41,9 @@ const user = new Schema<IUser, UserModel, IUserMethods>({
       },
     ],
   },
-  hash: String,
-  salt: String,
+  password: {
+    type: String,
+  },
 });
 
 user.method(
