@@ -36,6 +36,7 @@ const RegisterForm = () => {
       }),
     });
     const data = await response.json();
+    console.log('REGISTER DATA', data);
     localStorage.setItem('token', data.token);
     dispatch(userAction.setIsAuth(true));
     navigate('/', { replace: true });

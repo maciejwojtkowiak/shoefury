@@ -14,13 +14,11 @@ const Products = () => {
   const [isAtMaxPage, setIsAtMaxPage] = useState(false);
   const [isAtMinPage, setIsAtMinPage] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
-  console.log(error);
   const loadProducts = useCallback(async () => {
     try {
       const data = (await getProducts(page)) as GetProductsResponse;
       const products: Product[] = data.products;
       const pagesCount = data.pagesCount;
-      console.log('PRODUCTS', data);
       setProducts(products);
       setPagesCount(pagesCount);
       setError(null);

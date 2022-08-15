@@ -6,11 +6,13 @@ export async function checkAuthentication(
   token: string | null
 ): Promise<CheckAuthResponse | AxiosError> {
   try {
+    console.log('FUNCTION', token);
     const response = await authClient.patch<CheckAuthResponse>(`/is-auth`, {
       headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        Authorization: 'Bearer ' + token,
       },
     });
+    console.log('RESPONSE', response);
     return response.data;
   } catch (error) {
     const axiosError = error as AxiosError;

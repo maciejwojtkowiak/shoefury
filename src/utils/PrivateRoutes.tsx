@@ -1,4 +1,5 @@
 import { Outlet, Navigate } from 'react-router-dom';
+import config from '../config.json';
 import { RootState } from '../store/store';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -12,12 +13,17 @@ export const IsAuthRoutes = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const dispatch = useDispatch();
   const isAuth = useSelector((state: RootState) => state.userReducer.isAuth);
-  console.log('ADD PRODUCT AUTH', isAuth);
   useEffect(() => {
     const isAuth = async () => {
-      const data = (await checkAuthentication(
-        localStorage.getItem('token')
-      )) as CheckAuthResponse;
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${config.backendDomain}/auth/is-auth`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+      });
+      const data = await response.json();
       dispatch(userAction.setIsAuth(data.isAuth));
       setIsLoading(false);
     };
