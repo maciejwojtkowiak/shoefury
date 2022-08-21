@@ -5,8 +5,6 @@ import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { userAction } from '../store/user-slice';
-import { checkAuthentication } from '../services/authApi/checkIsAuth';
-import { CheckAuthResponse } from '../types/ApiResponse';
 
 export const IsAuthRoutes = () => {
   const [isLoading, setIsLoading] = useState(true);

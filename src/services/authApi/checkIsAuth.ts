@@ -7,15 +7,12 @@ export async function checkAuthentication(
 ): Promise<CheckAuthResponse | AxiosError> {
   try {
     console.log('FUNCTION', token);
-    const response = await authClient.patch<CheckAuthResponse>(`/is-auth`, {
-      headers: {
-        Authorization: 'Bearer ' + token,
-      },
-    });
+    const response = await authClient.patch<CheckAuthResponse>(`/is-auth`);
     console.log('RESPONSE', response);
     return response.data;
   } catch (error) {
     const axiosError = error as AxiosError;
     return axiosError;
   }
+  
 }

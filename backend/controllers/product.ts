@@ -42,3 +42,9 @@ export const getProducts = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Products can not be fetched, try again later' });
   }
 };
+
+export const getProduct = async (req: Request, res: Response) => {
+  const productTitle = req.body.title;
+  const foundProduct = await Product.find({ title: productTitle });
+  res.status(200).json({ message: 'Product found', foundProduct: foundProduct });
+};
