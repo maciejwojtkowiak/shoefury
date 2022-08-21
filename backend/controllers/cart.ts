@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from 'express';
-import { IAuthUserRequest } from '../types/User';
 import User from '../models/user';
 import Product from '../models/product';
 import { IProduct } from '../types/Product';
@@ -13,8 +12,7 @@ export const addToCart = async (req: Request, res: Response, next: NextFunction)
   const cartItem = currentUser!.cart.items.find(
     (item) => item.product.toString() === addedProduct._id.toString()
   );
-  console.log(cartItem);
-  console.log(addedProduct);
+
   if (cartItem) {
     cartItem.quantity++;
   }
@@ -25,7 +23,6 @@ export const addToCart = async (req: Request, res: Response, next: NextFunction)
     };
     currentUser!.cart = updatedCart;
   }
-  console.log(currentUser!.cart);
 
   await currentUser!.save();
   res.status(201).json({ message: 'success' });
@@ -34,6 +31,5 @@ export const addToCart = async (req: Request, res: Response, next: NextFunction)
 export const getCart = async (req: Request, res: Response) => {
   const currentUser = await User.findOne({ _id: req.body.userId });
   const products = await currentUser!.populate('cart.items.product');
-  console.log('ITEMS', products.cart.items);
   res.status(200).json({ products: products });
 };

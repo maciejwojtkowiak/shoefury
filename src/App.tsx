@@ -7,21 +7,23 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { userAction } from './store/user-slice';
 import { IsAuthRoutes, IsUnAuthRoutes } from './utils/PrivateRoutes';
-import { checkIsAuth } from './utils/checkIsAuth';
 import CartPage from './pages/CartPage';
+import { checkAuthentication } from './services/authApi/checkIsAuth';
+import { CheckAuthResponse } from './types/ApiResponse';
+import LoginPage from './pages/LoginPage';
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(userAction.setIsAuth(localStorage.getItem('token')));
-  }, [dispatch]);
-  useEffect(() => {
-    const checkAuth = async () => {
-      console.log(await checkIsAuth());
+    const isAuth = async () => {
+      const data = (await checkAuthentication(
+        localStorage.getItem('token')
+      )) as CheckAuthResponse;
+      dispatch(userAction.setIsAuth(data.isAuth));
     };
-    checkAuth();
-  }, []);
+    isAuth();
+  }, [dispatch]);
 
   return (
     <BrowserRouter>
@@ -34,6 +36,7 @@ function App() {
           <Route path="/add-product" element={<AddProductPage />} />
           <Route path="/cart" element={<CartPage />} />
         </Route>
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,5 +1,9 @@
 import mongoose, { Model, ObjectId, Schema } from 'mongoose';
+<<<<<<< HEAD
+import bcrypt from 'bcrypt';
+=======
 import crypto from 'crypto';
+>>>>>>> 0f3e316aa0f864c989d2bf0018757c30c7daa76a
 
 interface Item {
   product: ObjectId;
@@ -15,12 +19,16 @@ interface IUser {
   email: string;
   password: string;
   cart: cart;
+<<<<<<< HEAD
+=======
   hash: string;
   salt: string;
+>>>>>>> 0f3e316aa0f864c989d2bf0018757c30c7daa76a
 }
 
 interface IUserMethods {
   setPassword(password: string): void;
+  decryptPasswordSuccess(password: string): void;
 }
 
 type UserModel = Model<IUser, {}, IUserMethods>;
@@ -42,17 +50,20 @@ const user = new Schema<IUser, UserModel, IUserMethods>({
       },
     ],
   },
+<<<<<<< HEAD
+  password: {
+    type: String,
+  },
+=======
   hash: String,
   salt: String,
+>>>>>>> 0f3e316aa0f864c989d2bf0018757c30c7daa76a
 });
 
 user.method(
   'setPassword',
   function setPassword(password) {
-    this.salt = crypto.randomBytes(16).toString('hex');
-    this.hash = crypto
-      .pbkdf2Sync(password, this.salt, 1000, 64, 'sha512')
-      .toString('hex');
+    this.password = bcrypt.hash(password, 16);
   },
   { collection: 'users' }
 );

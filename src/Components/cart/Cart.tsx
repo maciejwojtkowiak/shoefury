@@ -16,7 +16,6 @@ const Cart = () => {
           },
         });
         const data = await response.json();
-        console.log('DATA', data.products.cart.items);
         setProducts(data.products.cart.items);
       } catch (e) {
         console.log(e);

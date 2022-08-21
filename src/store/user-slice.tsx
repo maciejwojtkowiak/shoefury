@@ -6,7 +6,7 @@ const userSlice = createSlice({
     isAuth: false,
   },
   reducers: {
-    setIsAuth(state, action: PayloadAction<string | null>) {
+    setIsAuth(state, action: PayloadAction<boolean | null>) {
       if (action.payload) state.isAuth = true;
       else state.isAuth = false;
     },
