@@ -74,7 +74,6 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
 
 export const isAuth = async (req: Request, res: Response) => {
   const token = req.get('Authorization')?.split(' ')[1];
-  console.log('TOKEN', req.get('Authorization'));
   if (token) {
     try {
       const decodedToken = jwt.verify(token, `${process.env.SECRET_KEY}`);
