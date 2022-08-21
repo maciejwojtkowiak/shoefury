@@ -12,6 +12,7 @@ export const addToCart = async (req: Request, res: Response, next: NextFunction)
   const cartItem = currentUser!.cart.items.find(
     (item) => item.product.toString() === addedProduct._id.toString()
   );
+
   if (cartItem) {
     cartItem.quantity++;
   }
@@ -30,6 +31,5 @@ export const addToCart = async (req: Request, res: Response, next: NextFunction)
 export const getCart = async (req: Request, res: Response) => {
   const currentUser = await User.findOne({ _id: req.body.userId });
   const products = await currentUser!.populate('cart.items.product');
-
   res.status(200).json({ products: products });
 };

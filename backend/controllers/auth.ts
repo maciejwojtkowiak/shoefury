@@ -10,37 +10,20 @@ interface RegisterData {
   password: string;
 }
 
-export const register = async (
-  req: Request<{}, {}, RegisterData>,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const result = validationResult(req);
-    if (!result.isEmpty()) {
-      const error = new Error('validation failed') as CustomError;
-      error.status = 422;
-      throw error;
-    }
-    const name = req.body.name;
-    const email = req.body.email;
-    const password = req.body.password;
-    const user = new User();
-    user.name = name;
-    user.email = email;
-    user.cart = {
-      items: [],
-    };
-    user.password = password;
-    await user.save();
-    const token = jwt.sign({ userId: user._id }, `${process.env.SECRET_KEY}`, {
-      algorithm: 'HS256',
-      expiresIn: '1h',
-    });
-    res.status(200).json({ message: 'LOGGED IN SUCCESSFULLY', token: token });
-  } catch (err) {
-    next(err);
-  }
+export const register = async (req: Request<{}, {}, RegisterData>, res: Response) => {
+  const name = req.body.name;
+  const email = req.body.email;
+  const password = req.body.password;
+  const user = new User();
+  user.name = name;
+  user.email = email;
+  user.setPassword(password);
+  await user.save();
+  const token = jwt.sign({ userId: user._id }, `${process.env.SECRET_KEY}`, {
+    algorithm: 'HS256',
+    expiresIn: '1h',
+  });
+  res.status(200).json({ message: 'LOGGED IN SUCCESSFULLY', token: token });
 };
 
 export const login = async (req: Request, res: Response, next: NextFunction) => {

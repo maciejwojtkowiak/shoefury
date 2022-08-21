@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { userAction } from './store/user-slice';
 import { IsAuthRoutes, IsUnAuthRoutes } from './utils/PrivateRoutes';
-
 import CartPage from './pages/CartPage';
 import { checkAuthentication } from './services/authApi/checkIsAuth';
 import { CheckAuthResponse } from './types/ApiResponse';

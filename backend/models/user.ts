@@ -1,5 +1,9 @@
 import mongoose, { Model, ObjectId, Schema } from 'mongoose';
+<<<<<<< HEAD
 import bcrypt from 'bcrypt';
+=======
+import crypto from 'crypto';
+>>>>>>> 0f3e316aa0f864c989d2bf0018757c30c7daa76a
 
 interface Item {
   product: ObjectId;
@@ -15,6 +19,11 @@ interface IUser {
   email: string;
   password: string;
   cart: cart;
+<<<<<<< HEAD
+=======
+  hash: string;
+  salt: string;
+>>>>>>> 0f3e316aa0f864c989d2bf0018757c30c7daa76a
 }
 
 interface IUserMethods {
@@ -41,9 +50,14 @@ const user = new Schema<IUser, UserModel, IUserMethods>({
       },
     ],
   },
+<<<<<<< HEAD
   password: {
     type: String,
   },
+=======
+  hash: String,
+  salt: String,
+>>>>>>> 0f3e316aa0f864c989d2bf0018757c30c7daa76a
 });
 
 user.method(
