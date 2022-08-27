@@ -1,5 +1,5 @@
 import axios from 'axios';
-import config from '../../config.json';
+import config from 'config.json';
 
 // TO DO AUTH ALE NIE AXIOSEM BO TO GUWNO
 const authClient = axios.create({

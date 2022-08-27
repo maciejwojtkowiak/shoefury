@@ -1,10 +1,10 @@
 import { Fragment, useCallback, useEffect, useState } from 'react';
-import { Product } from '../../types/Product';
+import { Product } from 'types/product';
 import ProductItem from './ProductItem';
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
-import { getProducts } from '../../services/productsApi/productsApi';
-import { GetProductsResponse } from '../../types/ApiResponse';
-import ErrorComponent from '../errors/ErrorComponent';
+import { getProducts } from 'services/productsApi/productsApi';
+import { GetProductsResponse } from 'types/ApiResponse';
+import ErrorComponent from 'components/errors/ErrorComponent';
 import { AxiosError } from 'axios';
 
 const Products = () => {
@@ -23,7 +23,6 @@ const Products = () => {
       setPagesCount(pagesCount);
       setError(null);
     } catch (error) {
-      console.log('PRODUCT ERROR', error);
       setError(error as AxiosError);
     }
   }, [page]);
