@@ -1,5 +1,5 @@
 import { Outlet, Navigate } from 'react-router-dom';
-import config from '../config.json';
+import config from 'config/config.json';
 import { RootState } from '../store/store';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
