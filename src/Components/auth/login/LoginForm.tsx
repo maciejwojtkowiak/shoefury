@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Login } from '../../../services/authApi/login';
-import FormButton from '../../ui/buttons/FormButton';
-import FormInput from '../../ui/inputs/FormInput';
+import { Login } from 'services/authApi/login';
+import FormButton from 'components/ui/buttons/FormButton';
+import FormInput from 'components/ui/inputs/FormInput';
 import AuthForm from '../ui/AuthForm';
 import FormHeader from '../ui/FormHeader';
 

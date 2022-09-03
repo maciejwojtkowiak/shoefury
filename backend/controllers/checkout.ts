@@ -26,7 +26,7 @@ export const createCheckout = async (
         product_data: {
           name: product.product.title,
           description: product.product.title,
-          images: ['http://localhost:5000/' + product.product.imageUrl],
+         
         },
       },
       quantity: product.quantity,

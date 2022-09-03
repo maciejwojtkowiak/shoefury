@@ -1,4 +1,4 @@
-import { Product } from "./Product";
+import { Product } from "types/product";
 
 export interface GetProductsResponse {
     products: Product[];

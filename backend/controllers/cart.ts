@@ -33,3 +33,8 @@ export const getCart = async (req: Request, res: Response) => {
   const products = await currentUser!.populate('cart.items.product');
   res.status(200).json({ products: products });
 };
+
+export const deleteItemFromCart = async (req: Request, res: Response) => {
+
+  res.status(200).json({products: "hej"})
+}

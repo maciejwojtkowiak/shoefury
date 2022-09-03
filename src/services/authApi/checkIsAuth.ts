@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { CheckAuthResponse } from '../../types/ApiResponse';
+import { CheckAuthResponse } from 'types/ApiResponse';
 import authClient from './authClient';
 
 export async function checkAuthentication(

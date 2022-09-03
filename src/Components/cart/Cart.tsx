@@ -1,18 +1,20 @@
-import config from '../../config.json';
-import { Fragment, useEffect, useState } from 'react';
-import Navbar from '../navbar/Navbar';
-import ColumnTitle from './ColumnTitle';
-import ProductRow from './ProductRow';
+import config from "../../config.json";
+import { Fragment, useEffect, useState } from "react";
+import Navbar from "../navbar/Navbar";
+import ColumnTitle from "./ColumnTitle";
+
+import { CartProduct } from "types/cart";
+import CartItem from "./CartItem";
 
 const Cart = () => {
-  const [products, setProducts] = useState<any>([]);
+  const [products, setProducts] = useState<CartProduct[]>([]);
   useEffect(() => {
-    const getProducts = async () => {
+    const getCartProducts = async () => {
       try {
         const response = await fetch(`${config.backendDomain}/cart/get-cart`, {
           headers: {
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + localStorage.getItem('token'),
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
           },
         });
         const data = await response.json();
@@ -21,20 +23,21 @@ const Cart = () => {
         console.log(e);
       }
     };
-    getProducts();
+    getCartProducts();
   }, []);
 
   const onClickHandler = async () => {
     const response = await fetch(`${config.backendDomain}/checkout/create-checkout`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ products: products }),
     });
     const data = await response.json();
     window.location.href = data.url;
   };
+  console.log("PRODS", products);
 
   return (
     <Fragment>
@@ -44,21 +47,20 @@ const Cart = () => {
         </div>
         <div className="w-[50%] h-full border-2 justify-self-center grid grid-rows-[90%,1fr] text-right ">
           <div className="h-[90%] w-full">
-            <div className="w-full grid grid-cols-3 place-items-center mt-8">
+            <div className="w-full grid grid-cols-3 place-items-center mt-8 ">
               <ColumnTitle title="Product name" />
               <ColumnTitle title="Quantity" />
               <ColumnTitle title="Price" />
             </div>
 
-            {products.map((product: any) => {
+            {products.map((product: CartProduct) => {
               return (
-                <div className="w-full grid grid-cols-3 place-items-center ">
-                  <ProductRow property={product.product.title} />
-                  <ProductRow property={product.quantity} />
-                  <ProductRow
-                    property={(product.product.price * product.quantity).toString()}
-                  />
-                </div>
+                <CartItem
+                  key={product._id}
+                  title={product.product.title}
+                  quantity={product.quantity}
+                  price={product.product.price}
+                />
               );
             })}
           </div>

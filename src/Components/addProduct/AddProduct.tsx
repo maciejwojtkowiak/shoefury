@@ -1,9 +1,9 @@
 import { Fragment, useState } from 'react';
-import config from '../../config.json';
-import FormInput from '../ui/inputs/FormInput';
-import Navbar from '../navbar/Navbar';
-import FileInput from '../ui/inputs/FileInput';
-import FormButton from '../ui/buttons/FormButton';
+import config from 'config.json';
+import FormInput from 'components/ui/inputs/FormInput';
+import Navbar from 'components/navbar/Navbar';
+import FileInput from 'components/ui/inputs/FileInput';
+import FormButton from 'components/ui/buttons/FormButton';
 
 const AddProduct = () => {
   const [productName, setProductName] = useState('');
