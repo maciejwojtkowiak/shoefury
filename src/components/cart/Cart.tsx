@@ -1,10 +1,11 @@
+import React, { Fragment, useEffect, useState } from "react";
 import config from "config/config.json";
-import { Fragment, useEffect, useState } from "react";
-import Navbar from "../navbar/Navbar";
-import ColumnTitle from "./ColumnTitle";
-
 import { CartProduct } from "types/cart";
+
+import Navbar from "../navbar/Navbar";
+
 import CartItem from "./CartItem";
+import ColumnTitle from "./ColumnTitle";
 
 const Cart = () => {
   const [products, setProducts] = useState<CartProduct[]>([]);
@@ -27,13 +28,16 @@ const Cart = () => {
   }, []);
 
   const onClickHandler = async () => {
-    const response = await fetch(`${config.backendDomain}/checkout/create-checkout`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetch(
+      `${config.backendDomain}/checkout/create-checkout`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ products }),
       },
-      body: JSON.stringify({ products: products }),
-    });
+    );
     const data = await response.json();
     window.location.href = data.url;
   };

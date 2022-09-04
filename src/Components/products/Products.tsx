@@ -1,11 +1,13 @@
-import { Fragment, useCallback, useEffect, useState } from 'react';
-import { Product } from 'types/product';
-import ProductItem from './ProductItem';
-import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
-import { getProducts } from 'services/productsApi/productsApi';
-import { GetProductsResponse } from 'types/ApiResponse';
-import ErrorComponent from 'components/errors/ErrorComponent';
-import { AxiosError } from 'axios';
+import React, { Fragment, useCallback, useEffect, useState } from "react";
+import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
+import { AxiosError } from "axios";
+import { getProducts } from "services/productsApi/productsApi";
+// import { GetProductsResponse } from "types/ApiResponse";
+import { Product } from "types/product";
+
+import ErrorComponent from "components/errors/ErrorComponent";
+
+import ProductItem from "./ProductItem";
 
 const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -16,7 +18,7 @@ const Products = () => {
   const [error, setError] = useState<AxiosError | null>(null);
   const loadProducts = useCallback(async () => {
     try {
-      const data = (await getProducts(page)) as GetProductsResponse;
+      const data = await getProducts(page);
       const products: Product[] = data.products;
       const pagesCount = data.pagesCount;
       setProducts(products);
@@ -30,11 +32,11 @@ const Products = () => {
     loadProducts();
   }, [loadProducts, page]);
 
-  const moveForward = () => {
+  const moveForward = (): void => {
     setPage((prevPage) => ++prevPage);
   };
 
-  const moveBack = () => {
+  const moveBack = (): void => {
     setPage((prevPage) => --prevPage);
   };
 
@@ -51,7 +53,7 @@ const Products = () => {
     <Fragment>
       <div className="w-full grid place-items-center mt-24">
         <div className=" w-[1800px] h-[1400px]  grid  grid-cols-3 grid-rows-3 place-items-center gap-16">
-          {error ? (
+          {error != null ? (
             <ErrorComponent
               status={error.status!}
               message={error.message}
@@ -74,11 +76,14 @@ const Products = () => {
         </div>
         <div className="w-full flex justify-center items-center pt-24 pb-12 ">
           <button onClick={moveBack} {...(isAtMinPage && isAtLimitPageAttr)}>
-            <MdArrowBackIos size={48} color={isAtMinPage ? 'gray' : 'black'} />
+            <MdArrowBackIos size={48} color={isAtMinPage ? "gray" : "black"} />
           </button>
           {page}
           <button onClick={moveForward} {...(isAtMaxPage && isAtLimitPageAttr)}>
-            <MdArrowForwardIos size={48} color={isAtMaxPage ? 'gray' : 'black '} />
+            <MdArrowForwardIos
+              size={48}
+              color={isAtMaxPage ? "gray" : "black "}
+            />
           </button>
         </div>
       </div>

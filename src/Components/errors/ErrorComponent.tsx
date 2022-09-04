@@ -1,11 +1,17 @@
+import React from "react";
 interface ErrorProps {
   FetchFunction?: () => void;
   message: string;
   status: string;
-  tryAgain?: boolean;
+  tryAgain: boolean;
 }
 
-const ErrorComponent = ({ FetchFunction, message, status, tryAgain }: ErrorProps) => {
+const ErrorComponent = ({
+  FetchFunction,
+  message,
+  status,
+  tryAgain,
+}: ErrorProps): JSX.Element => {
   return (
     <div>
       <h1>{status}</h1>

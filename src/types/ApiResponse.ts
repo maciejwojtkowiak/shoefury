@@ -1,15 +1,19 @@
 import { Product } from "types/product";
 
 export interface GetProductsResponse {
-    products: Product[];
-    pagesCount: number; 
-    totalProducts: string
+  products: Product[];
+  pagesCount: number;
+  totalProducts: string;
+}
+
+export interface GetProductResponse {
+  product: Product;
 }
 
 export interface CheckAuthResponse {
-    isAuth: boolean
+  isAuth: boolean;
 }
 
 export interface ApiResponse<T> {
-    data: T
+  data: T;
 }
