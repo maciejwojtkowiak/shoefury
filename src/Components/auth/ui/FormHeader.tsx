@@ -1,6 +1,8 @@
-import LogoIcon from '../../svg/LogoIcon';
+import React from "react";
 
-const FormHeader = () => {
+import LogoIcon from "../../svg/LogoIcon";
+
+const FormHeader = ():  => {
   return (
     <div className="place-self-stretch-center text-4xl font-bold flex flex-row">
       <div className=" drop-shadow-xl rounded-md">

@@ -1,45 +1,46 @@
-import React, { useState } from 'react';
-import FormInput from '../../ui/inputs/FormInput';
-import config from 'config/config.json';
-import FormButton from '../../ui/buttons/FormButton';
-import LogoSection from '../ui/FormHeader';
-import AuthForm from '../ui/AuthForm';
-import { useNavigate } from 'react-router-dom';
-import { userAction } from '../../../store/user-slice';
-import { useDispatch } from 'react-redux';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import config from "config/config.json";
 
-const RegisterForm = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+import { userAction } from "../../../store/user-slice";
+import FormButton from "../../ui/buttons/FormButton";
+import FormInput from "../../ui/inputs/FormInput";
+import AuthForm from "../ui/AuthForm";
+import LogoSection from "../ui/FormHeader";
+
+const RegisterForm = (): JSX.Element => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const onChangeHandler = (
     e: React.ChangeEvent<HTMLInputElement>,
-    setValue: (val: string) => void
-  ) => {
+    setValue: (val: string) => void,
+  ): void => {
     e.preventDefault();
     setValue(e.target.value);
   };
 
-  const onClickHandler = async (e: React.FormEvent) => {
+  const onClickHandler = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     const response = await fetch(`${config.backendDomain}/auth/register`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: name,
-        email: email,
-        password: password,
+        name,
+        email,
+        password,
       }),
     });
     const data = await response.json();
-    console.log('REGISTER DATA', data);
-    localStorage.setItem('token', data.token);
+    console.log("REGISTER DATA", data);
+    localStorage.setItem("token", data.token);
     dispatch(userAction.setIsAuth(true));
-    navigate('/', { replace: true });
+    navigate("/", { replace: true });
   };
   return (
     <AuthForm>

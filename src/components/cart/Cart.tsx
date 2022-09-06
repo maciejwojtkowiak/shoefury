@@ -15,7 +15,7 @@ const Cart = () => {
         const response = await fetch(`${config.backendDomain}/cart/get-cart`, {
           headers: {
             "Content-Type": "application/json",
-            Authorization: "Bearer " + localStorage.getItem("token"),
+            Authorization: `Bearer  + ${localStorage.getItem("token") ?? ""}`,
           },
         });
         const data = await response.json();

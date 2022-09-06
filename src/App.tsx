@@ -1,30 +1,36 @@
-import AddProductPage from './pages/AddProductPage';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { checkAuthentication } from './services/authApi/checkIsAuth';
-import { CheckAuthResponse } from './types/ApiResponse';
-import './App.css';
-import MainPage from './pages/MainPage';
-import Register from './pages/Register';
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { userAction } from './store/user-slice';
-import { IsAuthRoutes, IsUnAuthRoutes } from './utils/PrivateRoutes';
-import CartPage from './pages/CartPage';
-import LoginPage from './pages/LoginPage';
-import { Paths } from 'config/Paths';
-import DetailPage from 'pages/DetailPage';
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Paths } from "config/Paths";
+import DetailPage from "pages/DetailPage";
 
-function App() {
+import AddProductPage from "./pages/AddProductPage";
+import CartPage from "./pages/CartPage";
+import LoginPage from "./pages/LoginPage";
+import MainPage from "./pages/MainPage";
+import Register from "./pages/Register";
+import { checkAuthentication } from "./services/authApi/checkIsAuth";
+import { userAction } from "./store/user-slice";
+import { CheckAuthResponse } from "./types/ApiResponse";
+import { IsAuthRoutes, IsUnAuthRoutes } from "./utils/PrivateRoutes";
+
+import "./App.css";
+
+function App(): JSX.Element {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const isAuth = async () => {
+    const isAuth = async (): Promise<void> => {
       const data = (await checkAuthentication(
-        localStorage.getItem('token')
+        localStorage.getItem("token"),
       )) as CheckAuthResponse;
       dispatch(userAction.setIsAuth(data.isAuth));
     };
-    isAuth();
+    try {
+      void isAuth();
+    } catch (e) {
+      console.log(e);
+    }
   }, [dispatch]);
 
   return (

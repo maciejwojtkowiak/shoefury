@@ -1,36 +1,41 @@
-import { Fragment, useState } from 'react';
-import config from 'config/config.json';
-import FormInput from 'components/ui/inputs/FormInput';
-import Navbar from 'components/navbar/Navbar';
-import FileInput from 'components/ui/inputs/FileInput';
-import FormButton from 'components/ui/buttons/FormButton';
+import React, { Fragment, useState } from "react";
+import config from "config/config.json";
 
-const AddProduct = () => {
-  const [productName, setProductName] = useState('');
-  const [price, setPrice] = useState('');
+import Navbar from "components/navbar/Navbar";
+import FormButton from "components/ui/buttons/FormButton";
+import FileInput from "components/ui/inputs/FileInput";
+import FormInput from "components/ui/inputs/FormInput";
+
+const AddProduct = (): JSX.Element => {
+  const [productName, setProductName] = useState("");
+  const [price, setPrice] = useState("");
   const [selectedFile, setSelectedFile] = useState<File>();
-  const onNameChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onNameChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ): void => {
     setProductName(event.target.value);
   };
 
-  const onPriceChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onPriceChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ): void => {
     setPrice(event.target.value);
   };
 
-  const onFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) setSelectedFile(event.target.files[0]);
+  const onFileUpload = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    if (event.target.files != null) setSelectedFile(event.target.files[0]);
   };
 
-  const onClickHandler = (e: React.FormEvent) => {
+  const onClickHandler = (e: React.FormEvent): void => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('title', productName);
-    formData.append('image', selectedFile as File);
-    formData.append('price', price);
+    formData.append("title", productName);
+    formData.append("image", selectedFile as File);
+    formData.append("price", price);
     fetch(`${config.backendDomain}/product/add-product`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        Authorization: `Bearer + ${localStorage.getItem("token") ?? ""}`,
       },
       body: formData,
     });
