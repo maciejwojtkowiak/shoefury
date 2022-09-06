@@ -8,7 +8,6 @@ module.exports = {
     "standard-with-typescript",
     "plugin:prettier/recommended",
   ],
-  overrides: [],
   parserOptions: {
     project: "tsconfig.json",
     tsconfigRootDir: __dirname,

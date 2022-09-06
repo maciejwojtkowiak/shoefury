@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { BsCartPlus } from "react-icons/bs";
+import { Link } from "react-router-dom";
 import config from "config/config.json";
 import { Paths } from "config/Paths";
 import { motion } from "framer-motion";
 
 interface ProductProps {
-  id: number;
+  id: string;
   title: string;
   imageUrl: string;
   price: string;
@@ -38,6 +39,7 @@ const ProductItem = ({
       console.log("hej");
     }
   };
+  console.log("ID");
 
   return (
     <motion.div
@@ -48,8 +50,8 @@ const ProductItem = ({
         },
       }}
     >
-      <a
-        href={`${Paths.PRODUCT}/${id}`}
+      <Link
+        to={`${Paths.PRODUCT}/${id}`}
         className="h-[400px] w-[450px] bg-white drop-shadow-lg rounded-lg grid place-items-center cursor-pointer"
       >
         {title}
@@ -68,7 +70,7 @@ const ProductItem = ({
         >
           <BsCartPlus size={24} color={cartTouched ? "white" : "black"} />
         </div>
-      </a>
+      </Link>
     </motion.div>
   );
 };

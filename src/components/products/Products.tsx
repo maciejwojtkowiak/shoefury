@@ -48,6 +48,7 @@ const Products = (): JSX.Element => {
   const isAtLimitPageAttr = {
     disabled: true,
   };
+  console.log("PRODUCTS", products);
 
   return (
     <Fragment>
@@ -68,7 +69,7 @@ const Products = (): JSX.Element => {
                   title={product.title}
                   imageUrl={product.imageUrl}
                   price={product.price}
-                  id={product.id}
+                  id={product._id}
                 />
               ))}
             </Fragment>
