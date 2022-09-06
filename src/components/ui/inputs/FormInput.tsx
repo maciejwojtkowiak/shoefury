@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface FormInputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -6,7 +6,11 @@ interface FormInputProps {
   type: string;
 }
 
-const FormInput = ({ onChange, placeholder, type }: FormInputProps) => {
+const FormInput = ({
+  onChange,
+  placeholder,
+  type,
+}: FormInputProps): JSX.Element => {
   return (
     <input
       onChange={onChange}

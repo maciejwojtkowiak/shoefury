@@ -1,7 +1,10 @@
-import mountainRun from '../../images/mountain.gif';
-import SpecialOffersSlider from './SpecialOffersSlider';
+import React from "react";
 
-const Hero = () => {
+import mountainRun from "../../images/mountain.gif";
+
+import SpecialOffersSlider from "./SpecialOffersSlider";
+
+const Hero = (): JSX.Element => {
   return (
     <div className="grid grid-rows-[repeat(2,minmax(min-content,350px))]  mt-8  ">
       <img

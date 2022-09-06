@@ -2,7 +2,7 @@ import React from "react";
 
 import LogoIcon from "../../svg/LogoIcon";
 
-const FormHeader = ():  => {
+const FormHeader = (): JSX.Element => {
   return (
     <div className="place-self-stretch-center text-4xl font-bold flex flex-row">
       <div className=" drop-shadow-xl rounded-md">

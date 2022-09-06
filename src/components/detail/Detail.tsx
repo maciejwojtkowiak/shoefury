@@ -1,15 +1,11 @@
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-import { useParams } from "react-router-dom"
-import {useEffect} from "react"
+const Detail = (): JSX.Element => {
+  const { id } = useParams();
+  console.log(id);
+  useEffect(() => {}, []);
+  return <div>hej</div>;
+};
 
-
-
-const Detail = () => {
-    const {id} = useParams()
-    useEffect(() => {
-
-    }, [])
-    return <div>hej</div>
-}
-
-export default Detail
+export default Detail;

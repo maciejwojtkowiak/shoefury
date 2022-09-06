@@ -1,10 +1,12 @@
+import React from "react";
+
 interface ProductRowProps {
   title: string;
   quantity: number;
   price: string;
 }
 
-const CartItem = ({ title, quantity, price }: ProductRowProps) => {
+const CartItem = ({ title, quantity, price }: ProductRowProps): JSX.Element => {
   console.log("price", price);
   return (
     <div className="w-full grid grid-cols-3 place-items-center relative">

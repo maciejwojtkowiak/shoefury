@@ -1,7 +1,9 @@
-import Detail from "components/detail/Detail"
+import React from "react";
 
-const DetailPage = () => {
-    return <Detail />;
-}
+import Detail from "components/detail/Detail";
 
-export default DetailPage
+const DetailPage = (): JSX.Element => {
+  return <Detail />;
+};
+
+export default DetailPage;

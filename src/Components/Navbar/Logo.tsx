@@ -1,7 +1,9 @@
-import LogoIcon from '../svg/LogoIcon';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
-const Logo = () => {
+import LogoIcon from "../svg/LogoIcon";
+
+const Logo = (): JSX.Element => {
   return (
     <Link to="/">
       <div className="flex  items-center">

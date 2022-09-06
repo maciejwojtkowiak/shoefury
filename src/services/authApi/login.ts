@@ -1,10 +1,15 @@
-import authClient from './authClient';
+import { LoginResponse } from "types/ApiResponse";
 
-export async function Login(email: string, password: string) {
-  const response = await authClient.patch('/login', {
-    email: email,
-    password: password,
-  })
+import authClient from "./authClient";
 
-  return response;
+export async function Login(
+  email: string,
+  password: string,
+): Promise<LoginResponse> {
+  const response = await authClient.patch("/login", {
+    email,
+    password,
+  });
+
+  return response.data;
 }

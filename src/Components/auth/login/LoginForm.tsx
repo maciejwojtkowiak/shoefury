@@ -26,7 +26,7 @@ const LoginForm = (): JSX.Element => {
       const response = await Login(email, password);
       console.log("RESPONSE", response);
       // TO DO add type to login
-      localStorage.setItem("token", await response.data.token!);
+      localStorage.setItem("token", response.token ?? "");
       navigate("/", { replace: true });
     } catch (e) {
       console.log(e);

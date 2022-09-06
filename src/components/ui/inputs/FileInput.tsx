@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
 interface FileInputProps {
   label: string;
   onFileUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const FileInput = ({ label, onFileUpload }: FileInputProps) => {
+const FileInput = ({ label, onFileUpload }: FileInputProps): JSX.Element => {
   return (
     <div>
       <label

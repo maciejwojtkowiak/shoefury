@@ -1,7 +1,7 @@
 import React from "react";
 interface FormButtonProps {
   buttonText: string;
-  onClickHandler: (event: React.MouseEvent<HTMLButtonElement>) => Promise<void>;
+  onClickHandler: (event: React.FormEvent<HTMLButtonElement>) => Promise<void>;
 }
 
 const FormButton = ({

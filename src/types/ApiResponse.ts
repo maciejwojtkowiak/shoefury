@@ -17,3 +17,8 @@ export interface CheckAuthResponse {
 export interface ApiResponse<T> {
   data: T;
 }
+
+export interface LoginResponse {
+  message: string;
+  token: string;
+}

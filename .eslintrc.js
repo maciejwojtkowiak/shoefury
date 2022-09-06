@@ -10,12 +10,13 @@ module.exports = {
   ],
   overrides: [],
   parserOptions: {
+    project: "tsconfig.json",
+    tsconfigRootDir: __dirname,
     ecmaFeatures: {
       jsx: true,
     },
     ecmaVersion: "latest",
     sourceType: "module",
-    project: "shoefury/tsconfig.json",
   },
   settings: {
     react: {
@@ -65,5 +66,6 @@ module.exports = {
       },
     ],
     "comma-dangle": 0,
+    "@typescript-eslint/strict-boolean-expressions": 0,
   },
 };

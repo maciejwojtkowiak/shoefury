@@ -26,13 +26,15 @@ const AddProduct = (): JSX.Element => {
     if (event.target.files != null) setSelectedFile(event.target.files[0]);
   };
 
-  const onClickHandler = (e: React.FormEvent): void => {
-    e.preventDefault();
+  const onClickHandler = async (
+    event: React.FormEvent<HTMLButtonElement>,
+  ): Promise<void> => {
+    event.preventDefault();
     const formData = new FormData();
     formData.append("title", productName);
     formData.append("image", selectedFile as File);
     formData.append("price", price);
-    fetch(`${config.backendDomain}/product/add-product`, {
+    await fetch(`${config.backendDomain}/product/add-product`, {
       method: "POST",
       headers: {
         Authorization: `Bearer + ${localStorage.getItem("token") ?? ""}`,
