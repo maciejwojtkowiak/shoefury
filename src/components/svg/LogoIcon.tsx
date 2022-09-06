@@ -1,7 +1,7 @@
-import { Fragment } from 'react';
-import { HiLightningBolt } from 'react-icons/hi';
+import React, { Fragment } from "react";
+import { HiLightningBolt } from "react-icons/hi";
 
-const LogoIcon = () => {
+const LogoIcon = (): JSX.Element => {
   return (
     <Fragment>
       <svg width="0" height="0">
@@ -16,7 +16,7 @@ const LogoIcon = () => {
           <stop stopColor="#f97316" offset="100%" />
         </linearGradient>
       </svg>
-      <HiLightningBolt style={{ fill: 'url(#orange-gradient)' }} size={48} />
+      <HiLightningBolt style={{ fill: "url(#orange-gradient)" }} size={48} />
     </Fragment>
   );
 };

@@ -1,12 +1,14 @@
-import CartIcon from '../svg/CartIcon';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
-import { Paths } from 'config/Paths';
+import React from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { Paths } from "config/Paths";
 
-const RightSideNavbar = () => {
-  const onLogout = () => {
-    localStorage.removeItem('token');
+import { RootState } from "../../store/store";
+import CartIcon from "../svg/CartIcon";
+
+const RightSideNavbar = (): JSX.Element => {
+  const onLogout = (): void => {
+    localStorage.removeItem("token");
   };
   const isAuth = useSelector((state: RootState) => state.userReducer.isAuth);
   return (

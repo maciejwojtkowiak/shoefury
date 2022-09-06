@@ -7,10 +7,10 @@ import Navbar from "../navbar/Navbar";
 import CartItem from "./CartItem";
 import ColumnTitle from "./ColumnTitle";
 
-const Cart = () => {
+const Cart = (): JSX.Element => {
   const [products, setProducts] = useState<CartProduct[]>([]);
   useEffect(() => {
-    const getCartProducts = async () => {
+    const getCartProducts = async (): Promise<void> => {
       try {
         const response = await fetch(`${config.backendDomain}/cart/get-cart`, {
           headers: {
@@ -24,10 +24,10 @@ const Cart = () => {
         console.log(e);
       }
     };
-    getCartProducts();
+    void getCartProducts();
   }, []);
 
-  const onClickHandler = async () => {
+  const onClickHandler = async (): Promise<void> => {
     const response = await fetch(
       `${config.backendDomain}/checkout/create-checkout`,
       {
@@ -70,7 +70,7 @@ const Cart = () => {
           </div>
           <button
             className="border-2 justify-self-end px-16 py-2 bg-orange-300 mb-8 mr-8 text-4xl font-bold text-white "
-            onClick={onClickHandler}
+            onClick={() => onClickHandler}
           >
             Buy
           </button>

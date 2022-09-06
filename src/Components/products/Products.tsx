@@ -9,7 +9,7 @@ import ErrorComponent from "components/errors/ErrorComponent";
 
 import ProductItem from "./ProductItem";
 
-const Products = () => {
+const Products = (): JSX.Element => {
   const [products, setProducts] = useState<Product[]>([]);
   const [page, setPage] = useState(1);
   const [pagesCount, setPagesCount] = useState(1);
@@ -29,7 +29,7 @@ const Products = () => {
     }
   }, [page]);
   useEffect(() => {
-    loadProducts();
+    void loadProducts();
   }, [loadProducts, page]);
 
   const moveForward = (): void => {
@@ -55,10 +55,10 @@ const Products = () => {
         <div className=" w-[1800px] h-[1400px]  grid  grid-cols-3 grid-rows-3 place-items-center gap-16">
           {error != null ? (
             <ErrorComponent
-              status={error.status!}
+              status={error.status ?? "500"}
               message={error.message}
               tryAgain={true}
-              FetchFunction={loadProducts}
+              FetchFunction={() => loadProducts}
             />
           ) : (
             <Fragment>

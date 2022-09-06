@@ -11,22 +11,26 @@ interface ProductProps {
   price: string;
 }
 
-const ProductItem = ({ id, imageUrl, price, title }: ProductProps) => {
-  const hej = "12";
+const ProductItem = ({
+  id,
+  imageUrl,
+  price,
+  title,
+}: ProductProps): JSX.Element => {
   const [cartTouched, setCartTouched] = useState(false);
-  const onCartTouchStart = () => {
+  const onCartTouchStart = (): void => {
     setCartTouched(true);
   };
-  const onCartTouchEnd = () => {
+  const onCartTouchEnd = (): void => {
     setCartTouched(false);
   };
-  const onAddToCart = () => {
+  const onAddToCart = async (): Promise<void> => {
     try {
-      fetch(`${config.backendDomain}/cart/add`, {
+      await fetch(`${config.backendDomain}/cart/add`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: `Bearer ${localStorage.getItem("token") ?? ""}`,
         },
         body: JSON.stringify({ productTitle: title }),
       });
@@ -59,7 +63,7 @@ const ProductItem = ({ id, imageUrl, price, title }: ProductProps) => {
         <div
           onMouseOver={onCartTouchStart}
           onMouseLeave={onCartTouchEnd}
-          onClick={onAddToCart}
+          onClick={() => onAddToCart}
           className="justify-self-end mr-8 p-2 border-2 rounded-full hover:bg-orange-400 duration-300 cursor-pointer"
         >
           <BsCartPlus size={24} color={cartTouched ? "white" : "black"} />

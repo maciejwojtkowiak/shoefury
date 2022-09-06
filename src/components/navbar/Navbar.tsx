@@ -1,5 +1,5 @@
-import Logo from 'components/navbar/Logo';
-import RightSideNavbar from 'components/navbar/RightsideNavbar';
+import Logo from "components/navbar/Logo";
+import RightSideNavbar from "components/navbar/RightsideNavbar";
 
 const Navbar = () => {
   return (

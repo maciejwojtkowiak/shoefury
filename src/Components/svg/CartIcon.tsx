@@ -1,7 +1,7 @@
-import { Fragment } from 'react';
-import { BsFillCartFill } from 'react-icons/bs';
+import React, { Fragment } from "react";
+import { BsFillCartFill } from "react-icons/bs";
 
-const CartIcon = () => {
+const CartIcon = (): JSX.Element => {
   return (
     <Fragment>
       <svg width="0" height="0">
@@ -16,7 +16,7 @@ const CartIcon = () => {
           <stop stopColor="#f97316" offset="100%" />
         </linearGradient>
       </svg>
-      <BsFillCartFill style={{ fill: 'url(#orange-gradient)' }} size={32} />
+      <BsFillCartFill style={{ fill: "url(#orange-gradient)" }} size={32} />
     </Fragment>
   );
 };
