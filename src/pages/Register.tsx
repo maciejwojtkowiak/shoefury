@@ -1,6 +1,8 @@
-import RegisterForm from 'components/auth/register/RegisterForm';
+import React from "react";
 
-const Register = () => {
+import RegisterForm from "components/auth/register/RegisterForm";
+
+const Register = (): JSX.Element => {
   return <RegisterForm />;
 };
 

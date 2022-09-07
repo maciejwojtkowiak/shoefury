@@ -1,6 +1,8 @@
-import Cart from 'components/cart/Cart';
+import React from "react";
 
-const CartPage = () => {
+import Cart from "components/cart/Cart";
+
+const CartPage = (): JSX.Element => {
   return <Cart />;
 };
 

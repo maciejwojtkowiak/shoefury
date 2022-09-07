@@ -1,6 +1,8 @@
-import AddProduct from 'components/addProduct/AddProduct';
-import IsAuth from 'components/wrappers/IsAuth';
-const AddProductPage = () => {
+import React from "react";
+
+import AddProduct from "components/addProduct/AddProduct";
+
+const AddProductPage = (): JSX.Element => {
   return <AddProduct />;
 };
 
