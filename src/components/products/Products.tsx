@@ -8,9 +8,15 @@ import { Product } from "types/product";
 import ErrorComponent from "components/errors/ErrorComponent";
 
 import ProductItem from "./ProductItem";
+import { useSelector } from "react-redux";
+import { RootState } from "store/store";
+import { useDispatch } from "react-redux";
+import { fetchProducts } from "store/products-actions";
 
 const Products = (): JSX.Element => {
-  const [products, setProducts] = useState<Product[]>([]);
+  const dispatch = useDispatch()
+  const products = useSelector((state: RootState) => state.productsReducer.products)
+  
   const [page, setPage] = useState(1);
   const [pagesCount, setPagesCount] = useState(1);
   const [isAtMaxPage, setIsAtMaxPage] = useState(false);
@@ -18,10 +24,8 @@ const Products = (): JSX.Element => {
   const [error, setError] = useState<AxiosError | null>(null);
   const loadProducts = useCallback(async () => {
     try {
-      const data = await getProducts(page);
-      const products: Product[] = data.products;
+      dispatch(fetchProducts(page));
       const pagesCount = data.pagesCount;
-      setProducts(products);
       setPagesCount(pagesCount);
       setError(null);
     } catch (error) {
