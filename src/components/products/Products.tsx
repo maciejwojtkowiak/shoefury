@@ -1,9 +1,9 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react";
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import { AxiosError } from "axios";
-import { getProducts } from "services/productsApi/productsApi";
+
 // import { GetProductsResponse } from "types/ApiResponse";
-import { Product } from "types/product";
+
 
 import ErrorComponent from "components/errors/ErrorComponent";
 
@@ -12,11 +12,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "store/store";
 import { useDispatch } from "react-redux";
 import { fetchProducts } from "store/products-actions";
+import {AppDispatch} from "store/store"
 
 const Products = (): JSX.Element => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch() as AppDispatch
   const products = useSelector((state: RootState) => state.productsReducer.products)
-  
+  const pageCount = useSelector((state: RootState) => state.productsReducer.pageNum)
   const [page, setPage] = useState(1);
   const [pagesCount, setPagesCount] = useState(1);
   const [isAtMaxPage, setIsAtMaxPage] = useState(false);
@@ -25,7 +26,7 @@ const Products = (): JSX.Element => {
   const loadProducts = useCallback(async () => {
     try {
       dispatch(fetchProducts(page));
-      const pagesCount = data.pagesCount;
+      const pagesCount = pageCount;
       setPagesCount(pagesCount);
       setError(null);
     } catch (error) {
