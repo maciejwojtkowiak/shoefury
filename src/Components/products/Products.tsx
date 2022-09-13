@@ -1,23 +1,22 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react";
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
 import { AxiosError } from "axios";
-
-// import { GetProductsResponse } from "types/ApiResponse";
-
+import { fetchProducts } from "store/products-actions";
+import { AppDispatch, RootState } from "store/store";
 
 import ErrorComponent from "components/errors/ErrorComponent";
 
 import ProductItem from "./ProductItem";
-import { useSelector } from "react-redux";
-import { RootState } from "store/store";
-import { useDispatch } from "react-redux";
-import { fetchProducts } from "store/products-actions";
-import {AppDispatch} from "store/store"
 
 const Products = (): JSX.Element => {
-  const dispatch = useDispatch() as AppDispatch
-  const products = useSelector((state: RootState) => state.productsReducer.products)
-  const pageCount = useSelector((state: RootState) => state.productsReducer.pageNum)
+  const dispatch = useDispatch() as AppDispatch;
+  const products = useSelector(
+    (state: RootState) => state.productsReducer.products,
+  );
+  const pageCount = useSelector(
+    (state: RootState) => state.productsReducer.pageNum,
+  );
   const [page, setPage] = useState(1);
   const [pagesCount, setPagesCount] = useState(1);
   const [isAtMaxPage, setIsAtMaxPage] = useState(false);
@@ -25,7 +24,7 @@ const Products = (): JSX.Element => {
   const [error, setError] = useState<AxiosError | null>(null);
   const loadProducts = useCallback(async () => {
     try {
-      dispatch(fetchProducts(page));
+      await dispatch(fetchProducts(page));
       const pagesCount = pageCount;
       setPagesCount(pagesCount);
       setError(null);

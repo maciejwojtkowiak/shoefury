@@ -36,10 +36,9 @@ const ProductItem = ({
         body: JSON.stringify({ productTitle: title }),
       });
     } catch (e) {
-      console.log("hej");
+      console.log(e);
     }
   };
-  console.log("ID");
 
   return (
     <motion.div
@@ -57,11 +56,10 @@ const ProductItem = ({
         {title}
         <img
           className="h-48 w-48"
-          src={`${config.backendDomain + "/" + imageUrl}`}
+          src={`${config.backendDomain}/${imageUrl}`}
           alt="product"
         />
         <h3 className="text-2xl font-bold">{price}$</h3>
-
         <div
           onMouseOver={onCartTouchStart}
           onMouseLeave={onCartTouchEnd}

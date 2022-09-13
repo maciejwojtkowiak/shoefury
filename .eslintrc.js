@@ -65,6 +65,10 @@ module.exports = {
       },
     ],
     "comma-dangle": 0,
+    "@typescript-eslint/no-unnecessary-type-assertion": [
+      "error",
+      { typesToIgnore: [`AppDispatch`] },
+    ],
     "@typescript-eslint/strict-boolean-expressions": 0,
   },
 };
