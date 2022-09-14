@@ -23,6 +23,7 @@ const Detail = (): JSX.Element => {
       {detailedProduct && (
         <>
           <Navbar />
+
           <ProductDetail product={detailedProduct} />
         </>
       )}

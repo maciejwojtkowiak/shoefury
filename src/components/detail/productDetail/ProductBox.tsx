@@ -7,7 +7,7 @@ interface ProductBoxProps {
 
 const ProductBox = ({ product }: ProductBoxProps): JSX.Element => {
   return (
-    <div className="border-color-red-500 border-2">
+    <div className=" h-[32rem] w-[32rem] border-color-red-500 border-2 mt-32 ml-[48rem]">
       <img src={product.imageUrl} alt="detail product" />
     </div>
   );
