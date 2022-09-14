@@ -10,7 +10,7 @@ interface ProductDetailProps {
 const ProductDetail = ({ product }: ProductDetailProps): JSX.Element => {
   return (
     <React.Fragment>
-      <ProductBox product={product}></ProductBox>
+      <ProductBox product={product} />
     </React.Fragment>
   );
 };

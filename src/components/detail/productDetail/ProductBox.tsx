@@ -6,7 +6,11 @@ interface ProductBoxProps {
 }
 
 const ProductBox = ({ product }: ProductBoxProps): JSX.Element => {
-  return <div>{product._id}</div>;
+  return (
+    <div className="border-color-red-500 border-2">
+      <img src={product.imageUrl} alt="detail product" />
+    </div>
+  );
 };
 
 export default ProductBox;
