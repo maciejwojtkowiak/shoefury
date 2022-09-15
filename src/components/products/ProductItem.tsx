@@ -8,13 +8,13 @@ import { motion } from "framer-motion";
 interface ProductProps {
   id: string;
   title: string;
-  imageUrl: string;
+  imageData: string;
   price: string;
 }
 
 const ProductItem = ({
   id,
-  imageUrl,
+  imageData,
   price,
   title,
 }: ProductProps): JSX.Element => {
@@ -54,11 +54,7 @@ const ProductItem = ({
         className="h-[400px] w-[450px] bg-white drop-shadow-lg rounded-lg grid place-items-center cursor-pointer"
       >
         {title}
-        <img
-          className="h-48 w-48"
-          src={`${config.backendDomain}/${imageUrl}`}
-          alt="product"
-        />
+        <img className="h-48 w-48" src={imageData} alt="product" />
         <h3 className="text-2xl font-bold">{price}$</h3>
         <div
           onMouseOver={onCartTouchStart}

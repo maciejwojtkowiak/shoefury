@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import config from "config/config.json";
 
 import { userAction } from "../../../store/user-slice";
-import FormButton from "../../ui/buttons/FormButton";
+// import FormButton from "../../ui/buttons/FormButton";
 import FormInput from "../../ui/inputs/FormInput";
 import AuthForm from "../ui/AuthForm";
 import LogoSection from "../ui/FormHeader";
@@ -13,7 +13,7 @@ const RegisterForm = (): JSX.Element => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
   const onChangeHandler = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -36,14 +36,14 @@ const RegisterForm = (): JSX.Element => {
         password,
       }),
     });
+    console.log("RES", response);
     const data = await response.json();
     console.log("REGISTER DATA", data);
     localStorage.setItem("token", data.token);
     dispatch(userAction.setIsAuth(true));
-    navigate("/", { replace: true });
   };
   return (
-    <AuthForm>
+    <AuthForm onSubmit={() => onClickHandler}>
       <LogoSection />
       <FormInput
         placeholder="Enter your name"
@@ -61,7 +61,7 @@ const RegisterForm = (): JSX.Element => {
         onChange={(e) => onChangeHandler(e, setPassword)}
       />
 
-      <FormButton buttonText="Register" onClickHandler={onClickHandler} />
+      <button type="submit">Register</button>
     </AuthForm>
   );
 };

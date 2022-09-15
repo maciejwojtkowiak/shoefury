@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AxiosError } from "axios";
 import { fetchProducts } from "store/products-actions";
 import { AppDispatch, RootState } from "store/store";
+import { decodeBase64 } from "utils/decodeBase64";
 
 import ErrorComponent from "components/errors/ErrorComponent";
 
@@ -71,7 +72,7 @@ const Products = (): JSX.Element => {
                 <ProductItem
                   key={product.title}
                   title={product.title}
-                  imageUrl={product.imageUrl}
+                  imageData={decodeBase64(product.imageData)}
                   price={product.price}
                   id={product._id}
                 />
