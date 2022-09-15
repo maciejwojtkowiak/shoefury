@@ -1,14 +1,14 @@
 import {
-  GetProductResponse,
-  GetProductsResponse,
+  IGetProductResponse,
+  IGetProductsResponse,
 } from "../../types/ApiResponse";
 
 import productsClient from "./productsClient";
 
 export async function getProducts(
   pageNum: number,
-): Promise<GetProductsResponse> {
-  const response = await productsClient.get<GetProductsResponse>(
+): Promise<IGetProductsResponse> {
+  const response = await productsClient.get<IGetProductsResponse>(
     `/get-products?page=${pageNum}`,
   );
   const data = response.data;
@@ -17,7 +17,7 @@ export async function getProducts(
 
 export async function getProduct(
   productId: string,
-): Promise<GetProductResponse> {
-  const response = await productsClient.get<GetProductResponse>("hej");
+): Promise<IGetProductResponse> {
+  const response = await productsClient.get<IGetProductResponse>("hej");
   return response.data;
 }

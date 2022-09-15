@@ -1,16 +1,16 @@
 import { Product } from "types/product";
 
-export interface GetProductsResponse {
+export interface IGetProductsResponse {
   products: Product[];
   pagesCount: number;
   totalProducts: string;
 }
 
-export interface GetProductResponse {
+export interface IGetProductResponse {
   product: Product;
 }
 
-export interface CheckAuthResponse {
+export interface ICheckAuthResponse {
   isAuth: boolean;
 }
 
@@ -18,7 +18,7 @@ export interface ApiResponse<T> {
   data: T;
 }
 
-export interface LoginResponse {
+export interface ILoginResponse {
   message: string;
   token: string;
 }

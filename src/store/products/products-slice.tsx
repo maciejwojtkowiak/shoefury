@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { GetProductsResponse } from "types/ApiResponse";
+import { IGetProductsResponse } from "types/ApiResponse";
 
 import { IProductInitial } from "./types/productState";
 
@@ -16,7 +16,7 @@ const productsSlice = createSlice({
   reducers: {
     setProductsData(
       state: IProductInitial,
-      action: PayloadAction<GetProductsResponse>,
+      action: PayloadAction<IGetProductsResponse>,
     ) {
       state.products = [...action.payload.products];
       state.pageNum = action.payload.pagesCount;

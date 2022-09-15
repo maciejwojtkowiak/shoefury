@@ -2,7 +2,7 @@ import React, { Fragment, useCallback, useEffect, useState } from "react";
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { AxiosError } from "axios";
-import { fetchProducts } from "store/products-actions";
+import { fetchProducts } from "store/products/products-actions";
 import { AppDispatch, RootState } from "store/store";
 import { decodeBase64 } from "utils/decodeBase64";
 

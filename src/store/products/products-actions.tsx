@@ -1,7 +1,8 @@
 import { getProducts } from "services/productsApi/productsApi";
 
+import { AppDispatch } from "../store";
+
 import { productsAction } from "./products-slice";
-import { AppDispatch } from "./store";
 
 export const fetchProducts = (pageNum: number) => {
   return async (dispatch: AppDispatch) => {

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-// import { useNavigate } from "react-router-dom";
 import config from "config/config.json";
 
+import FormButton from "components/ui/buttons/FormButton";
+
 import { userAction } from "../../../store/user-slice";
-// import FormButton from "../../ui/buttons/FormButton";
 import FormInput from "../../ui/inputs/FormInput";
 import AuthForm from "../ui/AuthForm";
 import LogoSection from "../ui/FormHeader";
@@ -23,27 +23,33 @@ const RegisterForm = (): JSX.Element => {
     setValue(e.target.value);
   };
 
-  const onClickHandler = async (e: React.FormEvent): Promise<void> => {
+  const onClickHandler = (e: React.FormEvent): void => {
     e.preventDefault();
-    const response = await fetch(`${config.backendDomain}/auth/register`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        password,
-      }),
-    });
-    console.log("RES", response);
-    const data = await response.json();
-    console.log("REGISTER DATA", data);
-    localStorage.setItem("token", data.token);
-    dispatch(userAction.setIsAuth(true));
+
+    const handleRegister = async (): Promise<void> => {
+      try {
+        const response = await fetch(`${config.backendDomain}/auth/register`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            password,
+          }),
+        });
+        const data = await response.json();
+        localStorage.setItem("token", data.token);
+        dispatch(userAction.setIsAuth(true));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    void handleRegister();
   };
   return (
-    <AuthForm onSubmit={() => onClickHandler}>
+    <AuthForm>
       <LogoSection />
       <FormInput
         placeholder="Enter your name"
@@ -61,7 +67,7 @@ const RegisterForm = (): JSX.Element => {
         onChange={(e) => onChangeHandler(e, setPassword)}
       />
 
-      <button type="submit">Register</button>
+      <FormButton buttonText="Register" onClickHandler={onClickHandler} />
     </AuthForm>
   );
 };
