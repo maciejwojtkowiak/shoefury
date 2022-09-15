@@ -1,7 +1,8 @@
 import React from "react";
 import { Product } from "types/product";
 
-import ProductBox from "./ProductBox";
+import ProductImageBox from "./ProductImageBox";
+import ProductPriceBox from "./ProductPriceBox";
 
 interface ProductDetailProps {
   product: Product;
@@ -9,9 +10,10 @@ interface ProductDetailProps {
 
 const ProductDetail = ({ product }: ProductDetailProps): JSX.Element => {
   return (
-    <React.Fragment>
-      <ProductBox product={product} />
-    </React.Fragment>
+    <div className="w-[90rem] h-[32rem] mt-32 ml-[48rem] grid justify-content-center auto-cols-min grid-flow-col">
+      <ProductImageBox product={product} />
+      <ProductPriceBox product={product} />
+    </div>
   );
 };
 
