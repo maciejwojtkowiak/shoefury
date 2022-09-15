@@ -27,21 +27,23 @@ const Cart = (): JSX.Element => {
     void getCartProducts();
   }, []);
 
-  const onClickHandler = async (): Promise<void> => {
-    const response = await fetch(
-      `${config.backendDomain}/checkout/create-checkout`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+  const goToCheckout = (): void => {
+    const createCheckout = async (): Promise<void> => {
+      const response = await fetch(
+        `${config.backendDomain}/checkout/create-checkout`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ products }),
         },
-        body: JSON.stringify({ products }),
-      },
-    );
-    const data = await response.json();
-    window.location.href = data.url;
+      );
+      const data = await response.json();
+      window.location.href = data.url;
+    };
+    void createCheckout();
   };
-  console.log("PRODS", products);
 
   return (
     <Fragment>
@@ -70,7 +72,7 @@ const Cart = (): JSX.Element => {
           </div>
           <button
             className="border-2 justify-self-end px-16 py-2 bg-orange-300 mb-8 mr-8 text-4xl font-bold text-white "
-            onClick={() => onClickHandler}
+            onClick={goToCheckout}
           >
             Buy
           </button>

@@ -2,7 +2,7 @@ import React from "react";
 
 interface AuthFormProps {
   children: React.ReactNode;
-  onSubmit: () => void;
+  onSubmit?: () => void;
 }
 
 const AuthForm = ({ children, onSubmit }: AuthFormProps): JSX.Element => {

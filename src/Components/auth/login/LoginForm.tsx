@@ -18,19 +18,20 @@ const LoginForm = (): JSX.Element => {
   ): void => {
     setValueFunc(e.target.value);
   };
-  const onClickHandler = async (
-    event: React.FormEvent<HTMLButtonElement>,
-  ): Promise<void> => {
+  const loginHandler = (event: React.FormEvent<HTMLButtonElement>): void => {
     event.preventDefault();
-    try {
-      const response = await Login(email, password);
-      console.log("RESPONSE", response);
-      // TO DO add type to login
-      localStorage.setItem("token", response.token ?? "");
-      navigate("/", { replace: true });
-    } catch (e) {
-      console.log(e);
-    }
+    const handleLogin = async (): Promise<void> => {
+      try {
+        const response = await Login(email, password);
+        console.log("RESPONSE", response);
+        // TO DO add type to login
+        localStorage.setItem("token", response.token ?? "");
+        navigate("/", { replace: true });
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    void handleLogin();
   };
   console.log(email, password);
   return (
@@ -46,7 +47,7 @@ const LoginForm = (): JSX.Element => {
         placeholder="Enter password"
         type="password"
       />
-      <FormButton onClickHandler={onClickHandler} buttonText="Login" />
+      <FormButton onClickHandler={loginHandler} buttonText="Login" />
     </AuthForm>
   );
 };
