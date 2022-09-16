@@ -58,7 +58,6 @@ const Cart = (): JSX.Element => {
               <ColumnTitle title="Quantity" />
               <ColumnTitle title="Price" />
             </div>
-
             {products.map((product: CartProduct) => {
               return (
                 <CartItem

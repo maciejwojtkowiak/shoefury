@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import config from "config/config.json";
 
-import FormButton from "components/ui/buttons/FormButton";
+import FormButton from "components/ui/buttons/RoundedButton";
 
 import { userAction } from "../../../store/user-slice";
 import FormInput from "../../ui/inputs/FormInput";

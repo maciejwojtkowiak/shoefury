@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Login } from "services/authApi/login";
 
-import FormButton from "components/ui/buttons/FormButton";
+import FormButton from "components/ui/buttons/RoundedButton";
 import FormInput from "components/ui/inputs/FormInput";
 
 import AuthForm from "../ui/AuthForm";

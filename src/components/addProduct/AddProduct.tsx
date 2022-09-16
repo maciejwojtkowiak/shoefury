@@ -2,9 +2,11 @@ import React, { Fragment, useState } from "react";
 import config from "config/config.json";
 
 import Navbar from "components/navbar/Navbar";
+import SquareButton from "components/ui/buttons/SquareButton";
 // import FormButton from "components/ui/buttons/FormButton";
 import FileInput from "components/ui/inputs/FileInput";
 import FormInput from "components/ui/inputs/FormInput";
+import FormArea from "components/ui/textareas/FormArea";
 
 const AddProduct = (): JSX.Element => {
   const [productName, setProductName] = useState("");
@@ -30,7 +32,7 @@ const AddProduct = (): JSX.Element => {
   //   console.log("hej");
   // };
 
-  const onClickHandler = (event: React.FormEvent<HTMLFormElement>): void => {
+  const onClickHandler = (event: React.FormEvent<HTMLButtonElement>): void => {
     event.preventDefault();
     const formData = new FormData();
     formData.append("title", productName);
@@ -56,10 +58,7 @@ const AddProduct = (): JSX.Element => {
     <Fragment>
       <Navbar />
       <div className="h-screen grid place-items-center">
-        <form
-          className="flex justify-center items-center flex-col border-2 px-6 py-24 bg-white gap-8 w-[500px] h-[700px]  "
-          onSubmit={onClickHandler}
-        >
+        <form className="flex justify-center items-center flex-col border-2 px-6 py-24 bg-white gap-8 w-[500px] h-[700px]  ">
           <FormInput
             placeholder="Product name"
             onChange={onNameChangeHandler}
@@ -70,8 +69,15 @@ const AddProduct = (): JSX.Element => {
             onChange={onPriceChangeHandler}
             type="text"
           />
+          <FormArea placeholder="Product description" />
           <FileInput label="Upload product image" onFileUpload={onFileUpload} />
-          <button type="submit">add</button>
+          <SquareButton
+            width="w-[12rem]"
+            height="h-[8rem]"
+            buttonText="Add"
+            onClickHandler={onClickHandler}
+            textSize="xl"
+          />
         </form>
       </div>
     </Fragment>

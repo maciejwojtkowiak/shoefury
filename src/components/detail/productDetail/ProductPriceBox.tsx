@@ -1,7 +1,7 @@
 import React from "react";
 import { Product } from "types/product";
 
-import FormButton from "components/ui/buttons/FormButton";
+import SquareButton from "components/ui/buttons/SquareButton";
 
 interface ProductPriceProps {
   product: Product;
@@ -20,7 +20,11 @@ const ProductPriceBox = ({ product }: ProductPriceProps): JSX.Element => {
         </div>
       </div>
       <div className="h-full">
-        <FormButton buttonText="Add to cart" onClickHandler={onClickHandler} />
+        <SquareButton
+          textSize="4xl"
+          buttonText="Add to cart"
+          onClickHandler={onClickHandler}
+        />
       </div>
     </div>
   );
