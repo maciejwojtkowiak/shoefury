@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Paths } from "config/Paths";
 import DetailPage from "pages/DetailPage";
 
+import Navbar from "components/navbar/Navbar";
+
 import AddProductPage from "./pages/AddProductPage";
 import CartPage from "./pages/CartPage";
 import LoginPage from "./pages/LoginPage";
@@ -35,6 +37,7 @@ function App(): JSX.Element {
 
   return (
     <BrowserRouter>
+      <Navbar />
       <Routes>
         <Route path={Paths.HOME} element={<MainPage />} />
         <Route path={Paths.REGISTER} element={<Register />} />

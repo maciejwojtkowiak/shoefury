@@ -4,8 +4,6 @@ import { Navigate, useParams } from "react-router-dom";
 import { Paths } from "config/Paths";
 import { RootState } from "store/store";
 
-import Navbar from "components/navbar/Navbar";
-
 import ProductDetail from "./productDetail/ProductDetail";
 
 const Detail = (): JSX.Element => {
@@ -22,8 +20,6 @@ const Detail = (): JSX.Element => {
     <React.Fragment>
       {detailedProduct && (
         <>
-          <Navbar />
-
           <ProductDetail product={detailedProduct} />
         </>
       )}

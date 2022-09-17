@@ -1,7 +1,7 @@
-import { Product } from "types/product";
+import { IProduct } from "types/product";
 
 export interface IProductInitial {
-  products: Product[];
+  products: IProduct[];
   pageNum: number;
   totalProducts: string;
 }

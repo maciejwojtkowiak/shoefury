@@ -1,13 +1,13 @@
-import { Product } from "types/product";
+import { IProduct } from "types/product";
 
 export interface IGetProductsResponse {
-  products: Product[];
+  products: IProduct[];
   pagesCount: number;
   totalProducts: string;
 }
 
 export interface IGetProductResponse {
-  product: Product;
+  product: IProduct;
 }
 
 export interface ICheckAuthResponse {

@@ -2,8 +2,6 @@ import React, { Fragment, useEffect, useState } from "react";
 import config from "config/config.json";
 import { CartProduct } from "types/cart";
 
-import Navbar from "../navbar/Navbar";
-
 import CartItem from "./CartItem";
 import ColumnTitle from "./ColumnTitle";
 
@@ -48,9 +46,6 @@ const Cart = (): JSX.Element => {
   return (
     <Fragment>
       <div className="h-screen w-full grid grid-rows-[200px_minmax(900px,_1fr)_100px]  ">
-        <div className="w-full ">
-          <Navbar />
-        </div>
         <div className="w-[50%] h-full border-2 justify-self-center grid grid-rows-[90%,1fr] text-right ">
           <div className="h-[90%] w-full">
             <div className="w-full grid grid-cols-3 place-items-center mt-8 ">

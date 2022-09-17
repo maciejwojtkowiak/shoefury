@@ -1,9 +1,9 @@
 import React from "react";
-import { Product } from "types/product";
+import { IProduct } from "types/product";
 import { decodeBase64 } from "utils/decodeBase64";
 
 interface ProductImageBoxProps {
-  product: Product;
+  product: IProduct;
 }
 
 const ProductImageBox = ({ product }: ProductImageBoxProps): JSX.Element => {
