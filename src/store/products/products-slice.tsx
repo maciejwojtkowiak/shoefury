@@ -1,10 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IGetProductsResponse } from "types/ApiResponse";
+import { IProduct } from "types/product";
 
 import { IProductInitial } from "./types/productState";
 
 const initialState: IProductInitial = {
   products: [],
+  chosenProduct: null,
   pageNum: 0,
   totalProducts: "",
 };
@@ -21,6 +23,10 @@ const productsSlice = createSlice({
       state.products = [...action.payload.products];
       state.pageNum = action.payload.pagesCount;
       state.totalProducts = action.payload.totalProducts;
+    },
+
+    setChosenProduct(state: IProductInitial, action: PayloadAction<IProduct>) {
+      state.chosenProduct = action.payload;
     },
   },
 });
