@@ -11,7 +11,7 @@ const ProductDescription = ({
   productDescription,
 }: ProductDescriptionProps): JSX.Element => {
   return (
-    <div className="grid place-items-center mx-[20%] text-center">
+    <div className="grid place-items-center mx-[20%] mt-[5%] text-center">
       <ProductDescriptionHeader />
       <ProductDescriptionContent productDescription={productDescription} />
     </div>
