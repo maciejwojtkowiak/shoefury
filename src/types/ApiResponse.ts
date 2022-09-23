@@ -1,16 +1,16 @@
-import { Product } from "types/product";
+import { IProduct } from "types/product";
 
-export interface GetProductsResponse {
-  products: Product[];
+export interface IGetProductsResponse {
+  products: IProduct[];
   pagesCount: number;
   totalProducts: string;
 }
 
-export interface GetProductResponse {
-  product: Product;
+export interface IGetProductResponse {
+  product: IProduct;
 }
 
-export interface CheckAuthResponse {
+export interface ICheckAuthResponse {
   isAuth: boolean;
 }
 
@@ -18,7 +18,7 @@ export interface ApiResponse<T> {
   data: T;
 }
 
-export interface LoginResponse {
+export interface ILoginResponse {
   message: string;
   token: string;
 }
