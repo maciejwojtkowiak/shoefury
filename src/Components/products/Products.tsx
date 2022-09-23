@@ -1,5 +1,4 @@
-import React, { Fragment, useCallback, useEffect, useState } from "react";
-import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
+import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AxiosError } from "axios";
 import { fetchProducts } from "store/products/products-actions";
@@ -8,6 +7,7 @@ import { decodeBase64 } from "utils/decodeBase64";
 
 import ErrorComponent from "components/errors/ErrorComponent";
 
+import ProductsNavigation from "./navigation/ProductsNavigation";
 import ProductItem from "./ProductItem";
 
 const Products = (): JSX.Element => {
@@ -18,16 +18,14 @@ const Products = (): JSX.Element => {
   const pageCount = useSelector(
     (state: RootState) => state.productsReducer.pageNum,
   );
-  const [page, setPage] = useState(1);
-  const [pagesCount, setPagesCount] = useState(1);
+  const [actualPage, setActualPage] = useState(1);
   const [isAtMaxPage, setIsAtMaxPage] = useState(false);
   const [isAtMinPage, setIsAtMinPage] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
-  const loadProducts = useCallback((): void => {
+  const loadProducts = (): void => {
     const getProducts = async (): Promise<void> => {
-      await dispatch(fetchProducts(page));
-      const pagesCount = pageCount;
-      setPagesCount(pagesCount);
+      console.log(actualPage);
+      await dispatch(fetchProducts(actualPage));
       setError(null);
     };
     try {
@@ -35,27 +33,26 @@ const Products = (): JSX.Element => {
     } catch (error) {
       setError(error as AxiosError);
     }
-  }, [page]);
+  };
+
   useEffect(() => {
-    void loadProducts();
-  }, [loadProducts, page]);
+    loadProducts();
+  }, [loadProducts, actualPage]);
 
   const moveForward = (): void => {
-    setPage((prevPage) => ++prevPage);
+    console.log("FORWARD");
+    setActualPage((prevPage) => ++prevPage);
   };
 
   const moveBack = (): void => {
-    setPage((prevPage) => --prevPage);
+    setActualPage((prevPage) => --prevPage);
   };
 
   useEffect(() => {
-    setIsAtMaxPage(page === pagesCount);
-    setIsAtMinPage(page === 1);
-  }, [page, pagesCount, setIsAtMaxPage, setIsAtMinPage]);
+    setIsAtMaxPage(actualPage === pageCount);
+    setIsAtMinPage(actualPage === 1);
+  }, [actualPage, pageCount, setIsAtMaxPage, setIsAtMinPage]);
 
-  const isAtLimitPageAttr = {
-    disabled: true,
-  };
   console.log("PRODUCTS", products);
 
   return (
@@ -83,18 +80,13 @@ const Products = (): JSX.Element => {
             </Fragment>
           )}
         </div>
-        <div className="w-full flex justify-center items-center pt-24 pb-12 ">
-          <button onClick={moveBack} {...(isAtMinPage && isAtLimitPageAttr)}>
-            <MdArrowBackIos size={48} color={isAtMinPage ? "gray" : "black"} />
-          </button>
-          {page}
-          <button onClick={moveForward} {...(isAtMaxPage && isAtLimitPageAttr)}>
-            <MdArrowForwardIos
-              size={48}
-              color={isAtMaxPage ? "gray" : "black "}
-            />
-          </button>
-        </div>
+        <ProductsNavigation
+          actualPage={actualPage}
+          isAtMinPage={isAtMinPage}
+          isAtMaxPage={isAtMaxPage}
+          moveBack={moveBack}
+          moveForward={moveForward}
+        />
       </div>
     </Fragment>
   );
