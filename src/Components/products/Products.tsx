@@ -23,12 +23,15 @@ const Products = (): JSX.Element => {
   const [isAtMaxPage, setIsAtMaxPage] = useState(false);
   const [isAtMinPage, setIsAtMinPage] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
-  const loadProducts = useCallback(async () => {
-    try {
+  const loadProducts = useCallback((): void => {
+    const getProducts = async (): Promise<void> => {
       await dispatch(fetchProducts(page));
       const pagesCount = pageCount;
       setPagesCount(pagesCount);
       setError(null);
+    };
+    try {
+      void getProducts();
     } catch (error) {
       setError(error as AxiosError);
     }
@@ -64,7 +67,7 @@ const Products = (): JSX.Element => {
               status={error.status ?? "500"}
               message={error.message}
               tryAgain={true}
-              FetchFunction={() => loadProducts}
+              FetchFunction={loadProducts}
             />
           ) : (
             <Fragment>
