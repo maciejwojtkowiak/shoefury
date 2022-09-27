@@ -43,12 +43,9 @@ const Products = (): JSX.Element => {
 
   useEffect(() => {
     const getProducs = async (): Promise<void> => {
-      const response = await axios.get<IProduct[]>(
-        `${config.backendDomain}/get-products?page=${actualPage}`,
-      );
-      const data = response.data;
-      console.log("PRODUCTS", data);
-      setProducts((prevList) => prevList.concat(data));
+      const products = await getProducts(1);
+      console.log("GOT PRODS", products);
+      setProducts(products);
       setError(null);
     };
     void getProducs();
@@ -72,7 +69,7 @@ const Products = (): JSX.Element => {
     setIsAtMaxPage(actualPage === pageCount);
     setIsAtMinPage(actualPage === 1);
   }, [actualPage, pageCount, setIsAtMaxPage, setIsAtMinPage]);
-
+  console.log("HEJ", products);
   return (
     <Fragment>
       <div className="w-full grid place-items-center mt-24">
