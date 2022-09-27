@@ -1,14 +1,14 @@
+import { IProduct } from "types/product";
+
 import {
   IGetProductResponse,
-  IGetProductsResponse,
+  // IGetProductsResponse,
 } from "../../types/ApiResponse";
 
 import productsClient from "./productsClient";
 
-export async function getProducts(
-  pageNum: number,
-): Promise<IGetProductsResponse> {
-  const response = await productsClient.get<IGetProductsResponse>(
+export async function getProducts(pageNum: number): Promise<IProduct[]> {
+  const response = await productsClient.get<IProduct[]>(
     `/get-products?page=${pageNum}`,
   );
   const data = response.data;
