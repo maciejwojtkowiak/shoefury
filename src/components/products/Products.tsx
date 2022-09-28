@@ -1,11 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { fetchProducts } from "store/products/thunks";
-// import { fetchProducts } from "store/products/products-actions";
 import { AppDispatch, RootState } from "store/store";
-import { IProduct } from "types/product";
 import { decodeBase64 } from "utils/decodeBase64";
 
 import ErrorComponent from "components/errors/ErrorComponent";
@@ -42,11 +39,9 @@ const Products = (): JSX.Element => {
 
   useEffect(() => {
     loadProducts();
-    console.log("LOAD");
   }, [actualPage]);
 
   const moveForward = (): void => {
-    console.log("FORWARD");
     setActualPage((prevPage) => ++prevPage);
   };
 
