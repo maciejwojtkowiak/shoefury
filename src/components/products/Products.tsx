@@ -2,8 +2,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios, { AxiosError } from "axios";
-import config from "config/config.json";
-import { getProducts } from "services/productsApi/productsApi";
+import { fetchProducts } from "store/products/thunks";
 // import { fetchProducts } from "store/products/products-actions";
 import { AppDispatch, RootState } from "store/store";
 import { IProduct } from "types/product";
@@ -15,46 +14,36 @@ import ProductsNavigation from "./navigation/ProductsNavigation";
 import ProductItem from "./ProductItem";
 
 const Products = (): JSX.Element => {
-  // const dispatch = useDispatch() as AppDispatch;
-  // const products = useSelector(
-  //   (state: RootState) => state.productsReducer.products,
-  // );
+  const dispatch = useDispatch() as AppDispatch;
+  const products = useSelector(
+    (state: RootState) => state.productsReducer.products,
+  );
   const pageCount = useSelector(
     (state: RootState) => state.productsReducer.pageNum,
   );
-  const [products, setProducts] = useState<IProduct[]>([]);
+
   const [actualPage, setActualPage] = useState(1);
   const [isAtMaxPage, setIsAtMaxPage] = useState(false);
   const [isAtMinPage, setIsAtMinPage] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
 
-  // const loadProducts = (): void => {
-  //   const getProducts = async (): Promise<void> => {
-  //     console.log(actualPage);
-  //     await dispatch(fetchProducts(actualPage));
-  //     setError(null);
-  //   };
-  //   try {
-  //     void getProducts();
-  //   } catch (error) {
-  //     setError(error as AxiosError);
-  //   }
-  // };
-
-  useEffect(() => {
-    const getProducs = async (): Promise<void> => {
-      const products = await getProducts(1);
-      console.log("GOT PRODS", products);
-      setProducts(products);
+  const loadProducts = (): void => {
+    const getProducts = async (): Promise<void> => {
+      console.log(actualPage);
+      await dispatch(fetchProducts(actualPage));
       setError(null);
     };
-    void getProducs();
-  }, [actualPage]);
+    try {
+      void getProducts();
+    } catch (error) {
+      setError(error as AxiosError);
+    }
+  };
 
-  // useEffect(() => {
-  //   loadProducts();
-  //   console.log("LOAD");
-  // }, [actualPage]);
+  useEffect(() => {
+    loadProducts();
+    console.log("LOAD");
+  }, [actualPage]);
 
   const moveForward = (): void => {
     console.log("FORWARD");

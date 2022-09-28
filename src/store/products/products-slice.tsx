@@ -3,6 +3,7 @@ import { IGetProductsResponse } from "types/ApiResponse";
 import { IProduct } from "types/product";
 
 import { IProductInitial } from "./types/productState";
+import { fetchProducts } from "./thunks";
 
 const initialState: IProductInitial = {
   products: [],
@@ -28,6 +29,16 @@ const productsSlice = createSlice({
     setChosenProduct(state: IProductInitial, action: PayloadAction<IProduct>) {
       state.chosenProduct = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(
+      fetchProducts.fulfilled,
+      (state, action: PayloadAction<IGetProductsResponse>) => {
+        state.products = [...action.payload.products];
+        state.pageNum = action.payload.pagesCount;
+        state.totalProducts = action.payload.totalProducts;
+      },
+    );
   },
 });
 
