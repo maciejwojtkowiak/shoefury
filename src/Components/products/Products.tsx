@@ -6,6 +6,8 @@ import { AppDispatch, RootState } from "store/store";
 import { decodeBase64 } from "utils/decodeBase64";
 
 import ErrorComponent from "components/errors/ErrorComponent";
+import ModalPortal from "components/ui/modal/ModalPortal";
+import { useModal } from "components/ui/modal/use-modal";
 
 import ProductsNavigation from "./navigation/ProductsNavigation";
 import ProductItem from "./ProductItem";
@@ -53,7 +55,8 @@ const Products = (): JSX.Element => {
     setIsAtMaxPage(actualPage === pageCount);
     setIsAtMinPage(actualPage === 1);
   }, [actualPage, pageCount, setIsAtMaxPage, setIsAtMinPage]);
-  console.log("HEJ", products);
+
+  // const modal = useModal();
   return (
     <Fragment>
       <div className="w-full grid place-items-center mt-24">
@@ -87,6 +90,9 @@ const Products = (): JSX.Element => {
           moveForward={moveForward}
         />
       </div>
+      <ModalPortal isVisible={true}>
+        <h1>HEJ HEJ</h1>
+      </ModalPortal>
     </Fragment>
   );
 };
