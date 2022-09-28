@@ -91,7 +91,7 @@ const Products = (): JSX.Element => {
         />
       </div>
       <ModalPortal isVisible={true}>
-        <h1>HEJ HEJ</h1>
+        <div className="w-[900px] h-[1000px]">HEJ HEJ</div>
       </ModalPortal>
     </Fragment>
   );

@@ -4,7 +4,6 @@ import { render, screen } from "@testing-library/react";
 import mockedAxios from "axios";
 import { IProduct } from "types/product";
 
-// import { IProduct } from "types/product";
 import ReduxProvider from "components/wrappers/ReduxProvider";
 
 import Products from "./Products";

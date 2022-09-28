@@ -15,8 +15,8 @@ const ModalPortal = ({
 
   return (
     <Portal rootId="modal">
-      <div className="fixed opacity-50 bg-gray-500 h-screen w-screen z-50">
-        <div className="bg-white w-[600px] h-[400px]">{children}</div>
+      <div className="fixed  bg-gray-500/[0.2] h-screen w-screen z-50 flex justify-center place-items-center">
+        <div className="bg-white min-w-[600px] min-h-[300px]">{children}</div>
       </div>
     </Portal>
   );
