@@ -51,6 +51,10 @@ const Products = (): JSX.Element => {
     setActualPage((prevPage) => --prevPage);
   };
 
+  const moveToPage = (page: number): void => {
+    setActualPage(page);
+  };
+
   useEffect(() => {
     setIsAtMaxPage(actualPage === pageCount);
     setIsAtMinPage(actualPage === 1);
@@ -88,6 +92,8 @@ const Products = (): JSX.Element => {
           isAtMaxPage={isAtMaxPage}
           moveBack={moveBack}
           moveForward={moveForward}
+          moveToPage={moveToPage}
+          pageCount={pageCount}
         />
       </div>
       <ModalPortal
