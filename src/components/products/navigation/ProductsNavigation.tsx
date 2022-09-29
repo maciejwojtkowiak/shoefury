@@ -1,6 +1,8 @@
 import React from "react";
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 
+import PageIndicator from "./PageIndicator";
+
 interface ProductNavigationProps {
   actualPage: number;
   pageCount: number;
@@ -30,11 +32,13 @@ const ProductsNavigation = ({
       <button onClick={moveBack} {...(isAtMinPage && isAtLimitPageAttr)}>
         <MdArrowBackIos size={48} color={isAtMinPage ? "gray" : "black"} />
       </button>
-      <button onClick={() => moveToPage(FIRST_PAGE)}>{FIRST_PAGE}</button>
-      <h6>{actualPage}</h6>
-      {actualPage !== pageCount && (
-        <h6 onClick={() => moveToPage(pageCount)}>{pageCount}</h6>
-      )}
+      {FIRST_PAGE !== actualPage ? (
+        <PageIndicator page={FIRST_PAGE} moveToPage={moveToPage} />
+      ) : null}
+      <PageIndicator page={actualPage} moveToPage={moveToPage} actual={true} />
+      {pageCount !== actualPage ? (
+        <PageIndicator page={pageCount} moveToPage={moveToPage} />
+      ) : null}
       <button onClick={moveForward} {...(isAtMaxPage && isAtLimitPageAttr)}>
         <MdArrowForwardIos size={48} color={isAtMaxPage ? "gray" : "black "} />
       </button>
