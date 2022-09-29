@@ -56,7 +56,7 @@ const Products = (): JSX.Element => {
     setIsAtMinPage(actualPage === 1);
   }, [actualPage, pageCount, setIsAtMaxPage, setIsAtMinPage]);
 
-  // const modal = useModal();
+  const modal = useModal();
   return (
     <Fragment>
       <div className="w-full grid place-items-center mt-24">
@@ -90,7 +90,11 @@ const Products = (): JSX.Element => {
           moveForward={moveForward}
         />
       </div>
-      <ModalPortal isVisible={true}>
+      <ModalPortal
+        modalIsShown={modal.modalIsShown}
+        showHandler={modal.showHandler}
+        hideHandler={modal.hideHandler}
+      >
         <div className="w-[900px] h-[1000px]">HEJ HEJ</div>
       </ModalPortal>
     </Fragment>

@@ -1,18 +1,20 @@
 import { useState } from "react";
 
-interface IUseModal {
-  modalIsShown: boolean;
-  showHandler: () => void;
-}
+import { IUseModal } from "./types";
 
 export const useModal = (): IUseModal => {
-  const [modalIsShown, setModalIsShown] = useState(false);
+  const [modalIsShown, setModalIsShown] = useState(true);
 
   const showHandler = (): void => {
-    setModalIsShown((prevModal) => !prevModal);
+    setModalIsShown(true);
+  };
+
+  const hideHandler = (): void => {
+    setModalIsShown(false);
   };
 
   return {
+    hideHandler,
     modalIsShown,
     showHandler,
   };
