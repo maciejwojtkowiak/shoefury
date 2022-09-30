@@ -17,9 +17,10 @@ const Products = (): JSX.Element => {
   const products = useSelector(
     (state: RootState) => state.productsReducer.products,
   );
-  const pageCount = useSelector(
-    (state: RootState) => state.productsReducer.pageNum,
-  );
+  // const pageCount = useSelector(
+  //   (state: RootState) => state.productsReducer.pageNum,
+  // );
+  const pageCount = 6;
 
   const [actualPage, setActualPage] = useState(1);
   const [isAtMaxPage, setIsAtMaxPage] = useState(false);

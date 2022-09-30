@@ -13,12 +13,17 @@ const PageIndicator = ({
 }: PageIndicatorProps): JSX.Element => {
   const actualStyle = {
     style: {
-      color: "red",
+      color: "#fb923c",
+      fontWeight: "900",
     },
   };
 
   return (
-    <p {...(actual && actualStyle)} onClick={() => moveToPage(page)}>
+    <p
+      {...(actual && actualStyle)}
+      onClick={() => moveToPage(page)}
+      className="cursor-pointer"
+    >
       {page}
     </p>
   );

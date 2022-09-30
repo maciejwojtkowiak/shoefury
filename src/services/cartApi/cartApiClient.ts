@@ -1,8 +1,7 @@
 import axios from "axios";
 import config from "config/config.json";
 
-// TO DO AUTH ALE NIE AXIOSEM BO TO GUWNO
-const authClient = axios.create({
+const cartClient = axios.create({
   baseURL: `${config.backendDomain}/cart/`,
   headers: {
     "Content-Type": "application/json",
@@ -11,4 +10,4 @@ const authClient = axios.create({
   timeout: 10000,
 });
 
-export default authClient;
+export default cartClient;
