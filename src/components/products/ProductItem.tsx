@@ -25,19 +25,23 @@ const ProductItem = ({
   const onCartTouchEnd = (): void => {
     setCartTouched(false);
   };
-  const onAddToCart = async (): Promise<void> => {
-    try {
-      await fetch(`${config.backendDomain}/cart/add`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token") ?? ""}`,
-        },
-        body: JSON.stringify({ productTitle: title }),
-      });
-    } catch (e) {
-      console.log(e);
-    }
+  const onAddToCart = (): void => {
+    const addItem = async (): Promise<void> => {
+      try {
+        await fetch(`${config.backendDomain}/cart/add`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token") ?? ""}`,
+          },
+          body: JSON.stringify({ productTitle: title }),
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    console.log("HEJ");
+    void addItem();
   };
 
   return (
@@ -56,14 +60,14 @@ const ProductItem = ({
         {title}
         <img className="h-48 w-48" src={imageData} alt="product" />
         <h3 className="text-2xl font-bold">{price}$</h3>
-        <div
+        <a
           onMouseOver={onCartTouchStart}
           onMouseLeave={onCartTouchEnd}
-          onClick={() => onAddToCart}
+          onClick={onAddToCart}
           className="justify-self-end mr-8 p-2 border-2 rounded-full hover:bg-orange-400 duration-300 cursor-pointer"
         >
           <BsCartPlus size={24} color={cartTouched ? "white" : "black"} />
-        </div>
+        </a>
       </Link>
     </motion.div>
   );

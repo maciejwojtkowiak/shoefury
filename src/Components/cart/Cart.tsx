@@ -1,22 +1,23 @@
 import React, { Fragment, useEffect, useState } from "react";
 import config from "config/config.json";
-import { CartProduct } from "types/cart";
+import { ICart } from "types/cart";
 
 import CartItem from "./CartItem";
 import ColumnTitle from "./ColumnTitle";
 
 const Cart = (): JSX.Element => {
-  const [products, setProducts] = useState<CartProduct[]>([]);
+  const [products, setProducts] = useState<ICart[]>([]);
   useEffect(() => {
     const getCartProducts = async (): Promise<void> => {
       try {
         const response = await fetch(`${config.backendDomain}/cart/get-cart`, {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer  + ${localStorage.getItem("token") ?? ""}`,
+            Authorization: `Bearer ${localStorage.getItem("token") ?? ""}`,
           },
         });
         const data = await response.json();
+        console.log("DATA", data);
         setProducts(data.products.cart.items);
       } catch (e) {
         console.log(e);
@@ -46,14 +47,14 @@ const Cart = (): JSX.Element => {
   return (
     <Fragment>
       <div className="h-screen w-full grid grid-rows-[200px_minmax(900px,_1fr)_100px]  ">
-        <div className="w-[50%] h-full border-2 justify-self-center grid grid-rows-[90%,1fr] text-right ">
-          <div className="h-[90%] w-full">
+        <div className="w-[50%] border-2 justify-self-center grid grid-rows-2 text-right ">
+          <div className="w-full">
             <div className="w-full grid grid-cols-3 place-items-center mt-8 ">
               <ColumnTitle title="Product name" />
               <ColumnTitle title="Quantity" />
               <ColumnTitle title="Price" />
             </div>
-            {products.map((product: CartProduct) => {
+            {products.map((product) => {
               return (
                 <CartItem
                   key={product._id}

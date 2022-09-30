@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 
 import PageIndicator from "./PageIndicator";
@@ -14,6 +14,8 @@ interface ProductNavigationProps {
 }
 
 const FIRST_PAGE = 1;
+const PAGES_FORWARD = 2;
+const PAGES_BACK = 2;
 
 const ProductsNavigation = ({
   actualPage,
@@ -27,6 +29,20 @@ const ProductsNavigation = ({
   const isAtLimitPageAttr = {
     disabled: true,
   };
+  const [multiplePagesForward, setMultiplePagesForward] = useState(false);
+  const [multiplePagesBack, setMultiplePagesBack] = useState(false);
+  const [twoPagesForward, setTwoPagesForward] = useState(false);
+  const [twoPagesBack, setTwoPagesBack] = useState(false);
+  useEffect(() => {
+    actualPage + PAGES_FORWARD < pageCount
+      ? setTwoPagesForward(true)
+      : setTwoPagesForward(false);
+    actualPage - PAGES_BACK > FIRST_PAGE
+      ? setTwoPagesBack(true)
+      : setTwoPagesBack(false);
+  }, [actualPage]);
+
+  console.log(twoPagesBack);
   return (
     <div className="w-full flex justify-center items-center pt-24 pb-12 ">
       <button onClick={moveBack} {...(isAtMinPage && isAtLimitPageAttr)}>
@@ -35,7 +51,19 @@ const ProductsNavigation = ({
       {FIRST_PAGE !== actualPage ? (
         <PageIndicator page={FIRST_PAGE} moveToPage={moveToPage} />
       ) : null}
+      {twoPagesBack ? (
+        <React.Fragment>
+          <PageIndicator page={actualPage - 2} moveToPage={moveToPage} />
+          <PageIndicator page={actualPage - 1} moveToPage={moveToPage} />
+        </React.Fragment>
+      ) : null}
       <PageIndicator page={actualPage} moveToPage={moveToPage} actual={true} />
+      {twoPagesForward ? (
+        <React.Fragment>
+          <PageIndicator page={actualPage + 1} moveToPage={moveToPage} />
+          <PageIndicator page={actualPage + 2} moveToPage={moveToPage} />
+        </React.Fragment>
+      ) : null}
       {pageCount !== actualPage ? (
         <PageIndicator page={pageCount} moveToPage={moveToPage} />
       ) : null}
