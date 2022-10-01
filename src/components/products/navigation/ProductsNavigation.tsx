@@ -25,11 +25,10 @@ const ProductsNavigation = ({
   moveToPage,
   pageCount,
 }: ProductNavigationProps): JSX.Element => {
-  const isAtLimitPageAttr = {
-    disabled: true,
-  };
   const [forwardDifference, setForwardDifference] = useState(0);
   const [backwardDifference, setBackwardDifference] = useState(0);
+  const [multipleForward, setMultipleForward] = useState(false);
+  const [multipleBackward, setMultipleBackward] = useState(false);
 
   const pagesCalc = (pageMinuend: number, pageSubtrahend: number): number => {
     if (pageMinuend - pageSubtrahend === 0) return 0;
@@ -37,10 +36,15 @@ const ProductsNavigation = ({
     if (pageMinuend - pageSubtrahend === 2) return 1;
     return PAGES_AHEAD;
   };
+  const isAtLimitPageAttr = {
+    disabled: true,
+  };
 
   useEffect(() => {
     setForwardDifference(pagesCalc(pageCount, actualPage));
     setBackwardDifference(pagesCalc(actualPage, FIRST_PAGE));
+    setMultipleForward(pageCount - actualPage > PAGES_AHEAD + 1);
+    setMultipleBackward(actualPage - FIRST_PAGE > PAGES_AHEAD + 1);
   }, [actualPage]);
 
   return (
@@ -51,6 +55,7 @@ const ProductsNavigation = ({
       {FIRST_PAGE !== actualPage ? (
         <PageIndicator page={FIRST_PAGE} moveToPage={moveToPage} />
       ) : null}
+      {multipleBackward && "..."}
       {Array.apply(null, Array(backwardDifference)).map((_, index) => {
         return (
           <PageIndicator
@@ -70,6 +75,7 @@ const ProductsNavigation = ({
           />
         );
       })}
+      {multipleForward && "..."}
       {pageCount !== actualPage ? (
         <PageIndicator page={pageCount} moveToPage={moveToPage} />
       ) : null}
