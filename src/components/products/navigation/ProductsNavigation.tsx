@@ -29,12 +29,22 @@ const ProductsNavigation = ({
   const isAtLimitPageAttr = {
     disabled: true,
   };
+  const [forwardDifference, setForwardDifference] = useState(0);
   const [multiplePagesForward, setMultiplePagesForward] = useState(false);
   const [multiplePagesBack, setMultiplePagesBack] = useState(false);
   const [twoPagesForward, setTwoPagesForward] = useState(false);
   const [twoPagesBack, setTwoPagesBack] = useState(false);
+  // zrob helpera
+  const forwardPagesCalc = (): number => {
+    if (pageCount - actualPage === 0) return 0;
+    if (pageCount - actualPage === 1) return 0;
+    if (pageCount - actualPage === 2) return 1;
+    return 2;
+  };
+
   useEffect(() => {
-    actualPage + PAGES_FORWARD < pageCount
+    setForwardDifference(forwardPagesCalc());
+    actualPage + PAGES_FORWARD <= pageCount
       ? setTwoPagesForward(true)
       : setTwoPagesForward(false);
     actualPage - PAGES_BACK > FIRST_PAGE
@@ -42,7 +52,6 @@ const ProductsNavigation = ({
       : setTwoPagesBack(false);
   }, [actualPage]);
 
-  console.log(twoPagesBack);
   return (
     <div className="w-full flex justify-center items-center pt-24 pb-12 ">
       <button onClick={moveBack} {...(isAtMinPage && isAtLimitPageAttr)}>
@@ -51,19 +60,26 @@ const ProductsNavigation = ({
       {FIRST_PAGE !== actualPage ? (
         <PageIndicator page={FIRST_PAGE} moveToPage={moveToPage} />
       ) : null}
-      {twoPagesBack ? (
-        <React.Fragment>
-          <PageIndicator page={actualPage - 2} moveToPage={moveToPage} />
-          <PageIndicator page={actualPage - 1} moveToPage={moveToPage} />
-        </React.Fragment>
-      ) : null}
+      {/* {forwardDifference > 1 &&
+        Array.apply(null, Array(2)).map((_, index) => {
+          return (
+            <PageIndicator
+              page={actualPage + index - 1}
+              key={index}
+              moveToPage={moveToPage}
+            />
+          );
+        })} */}
       <PageIndicator page={actualPage} moveToPage={moveToPage} actual={true} />
-      {twoPagesForward ? (
-        <React.Fragment>
-          <PageIndicator page={actualPage + 1} moveToPage={moveToPage} />
-          <PageIndicator page={actualPage + 2} moveToPage={moveToPage} />
-        </React.Fragment>
-      ) : null}
+      {Array.apply(null, Array(forwardDifference)).map((_, index) => {
+        return (
+          <PageIndicator
+            page={actualPage + index + 1}
+            key={index}
+            moveToPage={moveToPage}
+          />
+        );
+      })}
       {pageCount !== actualPage ? (
         <PageIndicator page={pageCount} moveToPage={moveToPage} />
       ) : null}
