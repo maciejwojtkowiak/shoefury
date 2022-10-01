@@ -55,7 +55,7 @@ const ProductsNavigation = ({
       {FIRST_PAGE !== actualPage ? (
         <PageIndicator page={FIRST_PAGE} moveToPage={moveToPage} />
       ) : null}
-      {multipleBackward && "..."}
+      {multipleBackward && <span className="mr-2">...</span>}
       {Array.apply(null, Array(backwardDifference)).map((_, index) => {
         return (
           <PageIndicator
@@ -75,7 +75,7 @@ const ProductsNavigation = ({
           />
         );
       })}
-      {multipleForward && "..."}
+      {multipleForward && <span className="mr-2">...</span>}
       {pageCount !== actualPage ? (
         <PageIndicator page={pageCount} moveToPage={moveToPage} />
       ) : null}
