@@ -14,6 +14,7 @@ interface ProductNavigationProps {
 }
 
 const FIRST_PAGE = 1;
+const PAGES_AHEAD = 2;
 
 const ProductsNavigation = ({
   actualPage,
@@ -29,17 +30,12 @@ const ProductsNavigation = ({
   };
   const [forwardDifference, setForwardDifference] = useState(0);
   const [backwardDifference, setBackwardDifference] = useState(0);
-  const [backDifference, setBackDifference] = useState(0);
-  const [multiplePagesForward, setMultiplePagesForward] = useState(false);
-  const [multiplePagesBack, setMultiplePagesBack] = useState(false);
-  const [twoPagesForward, setTwoPagesForward] = useState(false);
-  const [twoPagesBack, setTwoPagesBack] = useState(false);
-  // zrob helpera
+
   const pagesCalc = (pageMinuend: number, pageSubtrahend: number): number => {
     if (pageMinuend - pageSubtrahend === 0) return 0;
     if (pageMinuend - pageSubtrahend === 1) return 0;
     if (pageMinuend - pageSubtrahend === 2) return 1;
-    return 2;
+    return PAGES_AHEAD;
   };
 
   useEffect(() => {
