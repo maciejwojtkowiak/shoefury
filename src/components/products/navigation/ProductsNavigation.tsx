@@ -80,7 +80,7 @@ const ProductsNavigation = ({
         <PageIndicator page={pageCount} moveToPage={moveToPage} />
       ) : null}
       <button onClick={moveForward} {...(isAtMaxPage && isAtLimitPageAttr)}>
-        <MdArrowForwardIos size={48} color={isAtMaxPage ? "gray" : "black "} />
+        <MdArrowForwardIos size={48} color={isAtMaxPage ? "gray" : "black"} />
       </button>
     </div>
   );
