@@ -17,7 +17,6 @@ const Cart = (): JSX.Element => {
           },
         });
         const data = await response.json();
-        console.log("DATA", data.cart.cart);
         setCart(data.cart.cart);
       } catch (e) {
         console.log(e);
@@ -25,7 +24,7 @@ const Cart = (): JSX.Element => {
     };
     void getCartProducts();
   }, []);
-  console.log("CART PRODS", cart);
+
   const goToCheckout = (): void => {
     const createCheckout = async (): Promise<void> => {
       const response = await fetch(
@@ -43,7 +42,7 @@ const Cart = (): JSX.Element => {
     };
     void createCheckout();
   };
-  console.log("PRODUCTs", cart);
+  console.log("PRODUCTs", cart?.items);
   return (
     <Fragment>
       <div className="w-full grid justify-content-center ">
@@ -57,7 +56,8 @@ const Cart = (): JSX.Element => {
             {cart?.items.map((product) => {
               return (
                 <CartItem
-                  key={product.product.title}
+                  key={product.product._id}
+                  id={product.product._id}
                   title={product.product.title}
                   quantity={product.quantity}
                   price={product.product.price}
