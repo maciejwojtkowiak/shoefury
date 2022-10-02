@@ -23,9 +23,10 @@ function App(): JSX.Element {
   console.log("AUTH CHECK");
   // TO DO: Move to axios
   useEffect(() => {
+    console.log("TOKEN APP ", localStorage.getItem("token"));
     const isAuth = async (): Promise<void> => {
       const data = (await checkAuthentication(
-        localStorage.getItem("token"),
+        localStorage.getItem("token") ?? "",
       )) as ICheckAuthResponse;
       console.log("DATA", data);
       dispatch(userAction.setIsAuth(data.isAuth));
