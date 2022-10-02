@@ -6,7 +6,7 @@ import CartItem from "./CartItem";
 import ColumnTitle from "./ColumnTitle";
 
 const Cart = (): JSX.Element => {
-  const [products, setProducts] = useState<ICart[]>([]);
+  const [cart, setCart] = useState<ICart>();
   useEffect(() => {
     const getCartProducts = async (): Promise<void> => {
       try {
@@ -17,15 +17,15 @@ const Cart = (): JSX.Element => {
           },
         });
         const data = await response.json();
-        console.log("DATA", data);
-        setProducts(data.products.cart);
+        console.log("DATA", data.cart.cart);
+        setCart(data.cart.cart);
       } catch (e) {
         console.log(e);
       }
     };
     void getCartProducts();
   }, []);
-
+  console.log("CART PRODS", cart);
   const goToCheckout = (): void => {
     const createCheckout = async (): Promise<void> => {
       const response = await fetch(
@@ -35,7 +35,7 @@ const Cart = (): JSX.Element => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ products }),
+          body: JSON.stringify({ cart }),
         },
       );
       const data = await response.json();
@@ -43,7 +43,7 @@ const Cart = (): JSX.Element => {
     };
     void createCheckout();
   };
-
+  console.log("PRODUCTs", cart);
   return (
     <Fragment>
       <div className="w-full grid justify-content-center ">
@@ -54,10 +54,10 @@ const Cart = (): JSX.Element => {
               <ColumnTitle title="Quantity" />
               <ColumnTitle title="Price" />
             </div>
-            {products.map((product) => {
+            {cart?.items.map((product) => {
               return (
                 <CartItem
-                  key={product._id}
+                  key={product.product.title}
                   title={product.product.title}
                   quantity={product.quantity}
                   price={product.product.price}

@@ -1,7 +1,10 @@
 import { IProduct } from "./product";
 
-export interface ICart {
+interface ICartItem {
   product: IProduct;
   quantity: number;
-  _id: string;
+}
+
+export interface ICart {
+  items: ICartItem[];
 }
