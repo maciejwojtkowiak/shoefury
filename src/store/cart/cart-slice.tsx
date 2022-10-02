@@ -5,7 +5,6 @@ import { ICartState } from "./types/types";
 const cartInitial: ICartState = {
   cart: {
     items: [],
-    _id: "",
   },
 };
 
@@ -14,3 +13,6 @@ const cartSlice = createSlice({
   initialState: cartInitial,
   reducers: {},
 });
+
+export const cartAction = cartSlice.actions;
+export const cartReducer = cartSlice.reducer;

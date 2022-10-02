@@ -25,7 +25,9 @@ const ProductItem = ({
   const onCartTouchEnd = (): void => {
     setCartTouched(false);
   };
-  const onAddToCart = (): void => {
+  const onAddToCart = (event: React.MouseEvent<HTMLAnchorElement>): void => {
+    event.preventDefault();
+    event.stopPropagation();
     const addItem = async (): Promise<void> => {
       try {
         await fetch(`${config.backendDomain}/cart/add`, {
@@ -40,7 +42,6 @@ const ProductItem = ({
         console.log(e);
       }
     };
-    console.log("HEJ");
     void addItem();
   };
 
@@ -63,7 +64,7 @@ const ProductItem = ({
         <a
           onMouseOver={onCartTouchStart}
           onMouseLeave={onCartTouchEnd}
-          onClick={onAddToCart}
+          onClick={(event) => onAddToCart(event)}
           className="justify-self-end mr-8 p-2 border-2 rounded-full hover:bg-orange-400 duration-300 cursor-pointer"
         >
           <BsCartPlus size={24} color={cartTouched ? "white" : "black"} />

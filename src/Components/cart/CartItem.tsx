@@ -3,21 +3,29 @@ import React from "react";
 import config from "../../config/config.json";
 
 interface ProductRowProps {
-  title: string;
+  id: string;
   quantity: number;
   price: string;
+  title: string;
 }
 
-const CartItem = ({ title, quantity, price }: ProductRowProps): JSX.Element => {
+const CartItem = ({
+  id,
+  quantity,
+  price,
+  title,
+}: ProductRowProps): JSX.Element => {
   const deleteItemHandler = (): void => {
     const deleteItem = async (): Promise<void> => {
-      await fetch(`${config.backendDomain}/cart/delete-item`, {
-        method: "DELETE",
+      const response = await fetch(`${config.backendDomain}/cart/delete-item`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token") ?? ""}`,
         },
+        body: JSON.stringify({ productTitle: title }),
       });
+      console.log(response, "RESPONSE DELETE");
     };
     void deleteItem();
   };
