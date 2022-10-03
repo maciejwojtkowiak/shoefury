@@ -1,29 +1,17 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import config from "config/config.json";
-import { ICart } from "types/cart";
+import { fetchCart } from "store/cart/thunks";
+import { AppDispatch, RootState } from "store/store";
 
 import CartItem from "./CartItem";
 import ColumnTitle from "./ColumnTitle";
 
 const Cart = (): JSX.Element => {
-  const [cart, setCart] = useState<ICart>();
+  const cart = useSelector((state: RootState) => state.cartReducer.cart);
+  const dispatch = useDispatch() as AppDispatch;
   useEffect(() => {
-    const getCartProducts = async (): Promise<void> => {
-      try {
-        const response = await fetch(`${config.backendDomain}/cart/get-cart`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token") ?? ""}`,
-          },
-        });
-        const data = await response.json();
-        console.log("DATA", data);
-        setCart(data.cart.cart);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    void getCartProducts();
+    void dispatch(fetchCart());
   }, []);
 
   const goToCheckout = (): void => {
