@@ -7,7 +7,6 @@ export async function checkAuthentication(
   token: string,
 ): Promise<ICheckAuthResponse | AxiosError> {
   try {
-    console.log("FUNCTION", token);
     const response = await authClient.patch<ICheckAuthResponse>(
       `/is-auth`,
       {},
@@ -17,7 +16,6 @@ export async function checkAuthentication(
         },
       },
     );
-    console.log("RESPONSE", response);
     return response.data;
   } catch (error) {
     const axiosError = error as AxiosError;
