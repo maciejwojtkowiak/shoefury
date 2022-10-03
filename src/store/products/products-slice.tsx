@@ -33,7 +33,7 @@ const productsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(
       fetchProducts.fulfilled,
-      (state, action: PayloadAction<IGetProductsResponse>) => {
+      (state: IProductInitial, action: PayloadAction<IGetProductsResponse>) => {
         state.products = [...action.payload.products];
         state.pageNum = action.payload.pagesCount;
         state.totalProducts = action.payload.totalProducts;

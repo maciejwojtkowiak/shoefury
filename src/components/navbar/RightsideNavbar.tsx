@@ -31,9 +31,10 @@ const RightSideNavbar = (): JSX.Element => {
             <Link to={Paths.LOGIN}>Login</Link>
           </div>
         ) : (
-          <form>
+          <div className="flex gap-4">
+            <button>Profile</button>
             <button onClick={onLogout}>Logout</button>
-          </form>
+          </div>
         )}
       </li>
     </div>

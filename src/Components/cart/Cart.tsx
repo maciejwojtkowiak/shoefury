@@ -17,6 +17,7 @@ const Cart = (): JSX.Element => {
           },
         });
         const data = await response.json();
+        console.log("DATA", data);
         setCart(data.cart.cart);
       } catch (e) {
         console.log(e);
