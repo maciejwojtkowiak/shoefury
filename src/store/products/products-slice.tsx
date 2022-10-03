@@ -17,15 +17,6 @@ const productsSlice = createSlice({
   initialState,
 
   reducers: {
-    setProductsData(
-      state: IProductInitial,
-      action: PayloadAction<IGetProductsResponse>,
-    ) {
-      state.products = [...action.payload.products];
-      state.pageNum = action.payload.pagesCount;
-      state.totalProducts = action.payload.totalProducts;
-    },
-
     setChosenProduct(state: IProductInitial, action: PayloadAction<IProduct>) {
       state.chosenProduct = action.payload;
     },
