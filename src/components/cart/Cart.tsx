@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import config from "config/config.json";
+import { checkoutCreation } from "services/checkoutApi/checkoutApi";
 import { fetchCart } from "store/cart/thunks";
 import { AppDispatch, RootState } from "store/store";
 
@@ -16,22 +16,12 @@ const Cart = (): JSX.Element => {
 
   const goToCheckout = (): void => {
     const createCheckout = async (): Promise<void> => {
-      const response = await fetch(
-        `${config.backendDomain}/checkout/create-checkout`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ cart }),
-        },
-      );
-      const data = await response.json();
+      const data = await checkoutCreation(cart);
       window.location.href = data.url;
     };
     void createCheckout();
   };
-  console.log("PRODUCTs", cart?.items);
+
   return (
     <Fragment>
       <div className="w-full grid justify-content-center ">
