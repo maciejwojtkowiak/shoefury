@@ -4,7 +4,7 @@ import config from "config/config.json";
 
 import FormButton from "components/ui/buttons/RoundedButton";
 
-import { userAction } from "../../../store/user-slice";
+import { userAction } from "../../../store/user/user-slice";
 import FormInput from "../../ui/inputs/FormInput";
 import AuthForm from "../ui/AuthForm";
 import LogoSection from "../ui/FormHeader";
