@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Paths } from "config/Paths";
 
+import Profile from "components/profile/Profile";
 import ModalPortal from "components/ui/modal/ModalPortal";
 import { useModal } from "components/ui/modal/use-modal";
 
@@ -42,7 +43,7 @@ const RightSideNavbar = (): JSX.Element => {
         )}
       </li>
       <ModalPortal {...modal}>
-        <div onClick={modal.showHandler}>HEj</div>
+        <Profile />
       </ModalPortal>
     </div>
   );
