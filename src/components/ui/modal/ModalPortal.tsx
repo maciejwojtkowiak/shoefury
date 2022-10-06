@@ -11,9 +11,7 @@ interface ModalPortalProps extends IUseModal {
 
 const ModalPortal = ({
   children,
-  hideHandler,
-  showHandler,
-  modalIsShown,
+  modalProps: { modalIsShown, hideHandler },
 }: ModalPortalProps): JSX.Element | null => {
   if (!modalIsShown) return null;
 

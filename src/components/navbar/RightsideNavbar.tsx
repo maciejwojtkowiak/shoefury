@@ -3,6 +3,9 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Paths } from "config/Paths";
 
+import ModalPortal from "components/ui/modal/ModalPortal";
+import { useModal } from "components/ui/modal/use-modal";
+
 import { RootState } from "../../store/store";
 import CartIcon from "../svg/CartIcon";
 
@@ -11,6 +14,7 @@ const RightSideNavbar = (): JSX.Element => {
     localStorage.removeItem("token");
   };
   const isAuth = useSelector((state: RootState) => state.userReducer.isAuth);
+  const modal = useModal();
   return (
     <div className="place-self-end flex gap-4 h-full items-center justify-center">
       <li className="relative">
@@ -32,11 +36,14 @@ const RightSideNavbar = (): JSX.Element => {
           </div>
         ) : (
           <div className="flex gap-4">
-            <button>Profile</button>
+            <button onClick={modal.showHandler}>Profile</button>
             <button onClick={onLogout}>Logout</button>
           </div>
         )}
       </li>
+      <ModalPortal {...modal}>
+        <div onClick={modal.showHandler}>HEj</div>
+      </ModalPortal>
     </div>
   );
 };
