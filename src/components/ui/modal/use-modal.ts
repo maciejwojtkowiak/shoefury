@@ -14,8 +14,10 @@ export const useModal = (): IUseModal => {
   };
 
   return {
-    hideHandler,
-    modalIsShown,
+    modalProps: {
+      hideHandler,
+      modalIsShown,
+    },
     showHandler,
   };
 };

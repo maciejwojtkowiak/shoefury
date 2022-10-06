@@ -6,6 +6,7 @@ import DetailPage from "pages/DetailPage";
 import { PrivateRoutes } from "utils/PrivateRoutes";
 
 import Navbar from "components/navbar/Navbar";
+import Profile from "components/profile/Profile";
 
 import AddProductPage from "./pages/AddProductPage";
 import CartPage from "./pages/CartPage";
@@ -41,6 +42,7 @@ function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Navbar />
+      <Profile />
       <Routes>
         <Route element={<PrivateRoutes />}>
           <Route path={Paths.ADDPRODUCT} element={<AddProductPage />} />
