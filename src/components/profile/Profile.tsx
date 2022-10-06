@@ -7,7 +7,9 @@ const Profile = (): JSX.Element => {
   const modal = useModal();
   return (
     <ModalPortal {...modal}>
-      <div onClick={modal.showHandler}>HEj</div>
+      <h1 className="h-[1000px] w-[1400px] " onClick={modal.showHandler}>
+        HEj
+      </h1>
     </ModalPortal>
   );
 };

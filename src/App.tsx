@@ -14,7 +14,7 @@ import LoginPage from "./pages/LoginPage";
 import MainPage from "./pages/MainPage";
 import Register from "./pages/Register";
 import { checkAuthentication } from "./services/authApi/checkIsAuth";
-import { userAction } from "./store/user-slice";
+import { userAction } from "./store/user/user-slice";
 import { ICheckAuthResponse } from "./types/ApiResponse";
 
 import "./App.css";
