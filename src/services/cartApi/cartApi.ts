@@ -12,3 +12,8 @@ export const getCart = async (): Promise<ICart> => {
   });
   return response.data.cart;
 };
+
+// export const addItemToCart = async (itemTitle: string): Promise<string> => {
+//   const response = await cartClient.post<string>("/cart/add", { itemTitle });
+//   return response;
+// };
