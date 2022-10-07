@@ -47,13 +47,17 @@ const AddProduct = (): JSX.Element => {
     formData.append("description", description);
     const addProduct = async (): Promise<void> => {
       try {
-        await fetch(`${config.backendDomain}/product/add-product`, {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer + ${localStorage.getItem("token") ?? ""}`,
+        const response = await fetch(
+          `${config.backendDomain}/product/add-product`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer + ${localStorage.getItem("token") ?? ""}`,
+            },
+            body: formData,
           },
-          body: formData,
-        });
+        );
+        console.log(await response.json());
       } catch (error) {
         console.log(error);
       }

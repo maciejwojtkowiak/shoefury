@@ -6,6 +6,11 @@ export interface IGetProductsResponse {
   totalProducts: string;
 }
 
+export interface IResponseError {
+  err: string;
+  message: string;
+}
+
 export interface IGetProductResponse {
   product: IProduct;
 }
@@ -16,6 +21,8 @@ export interface ICheckAuthResponse {
 
 export interface ApiResponse<T> {
   data: T;
+  err: boolean;
+  message: string;
 }
 
 export interface ILoginResponse {
