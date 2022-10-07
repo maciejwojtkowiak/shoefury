@@ -29,3 +29,13 @@ export interface ILoginResponse {
   message: string;
   token: string;
 }
+
+export interface IAddItemToCartResponse {
+  message: string;
+  error: boolean;
+}
+
+export interface IAddProductResponse {
+  message: string;
+  error: boolean;
+}
