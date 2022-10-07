@@ -12,10 +12,10 @@ import CartPage from "./pages/CartPage";
 import LoginPage from "./pages/LoginPage";
 import MainPage from "./pages/MainPage";
 import Register from "./pages/Register";
-// import { checkAuthentication } from "./services/authApi/checkIsAuth";
+import { checkAuthentication } from "./services/authApi/checkIsAuth";
 import { userAction } from "./store/user/user-slice";
+import { ICheckAuthResponse } from "./types/ApiResponse";
 
-// import { ICheckAuthResponse } from "./types/ApiResponse";
 import "./App.css";
 
 function App(): JSX.Element {
@@ -23,20 +23,18 @@ function App(): JSX.Element {
   console.log("AUTH CHECK");
   // TO DO: Move to axios
   useEffect(() => {
-    // console.log("TOKEN APP ", localStorage.getItem("token"));
-    // const isAuth = async (): Promise<void> => {
-    //   const data = (await checkAuthentication(
-    //     localStorage.getItem("token") ?? "",
-    //   )) as ICheckAuthResponse;
-    //   console.log("DATA", data);
-    //   dispatch(userAction.setIsAuth(data.isAuth));
-    // };
-    // try {
-    //   void isAuth();
-    // } catch (e) {
-    //   console.log(e);
-    // }
-    dispatch(userAction.setIsAuth(true));
+    console.log("TOKEN APP ", localStorage.getItem("token"));
+    const isAuth = async (): Promise<void> => {
+      const data = (await checkAuthentication(
+        localStorage.getItem("token") ?? "",
+      )) as ICheckAuthResponse;
+      dispatch(userAction.setIsAuth(data.isAuth));
+    };
+    try {
+      void isAuth();
+    } catch (e) {
+      console.log(e);
+    }
   }, [dispatch]);
 
   return (

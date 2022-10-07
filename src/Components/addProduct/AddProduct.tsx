@@ -1,5 +1,8 @@
 import React, { Fragment, useState } from "react";
-import config from "config/config.json";
+import { useDispatch } from "react-redux";
+import { IProductValues } from "services/productsApi/productsApi";
+import { createProduct } from "store/products/thunks";
+import { AppDispatch } from "store/store";
 
 import SquareButton from "components/ui/buttons/SquareButton";
 // import FormButton from "components/ui/buttons/FormButton";
@@ -8,6 +11,7 @@ import FormInput from "components/ui/inputs/FormInput";
 import FormArea from "components/ui/textareas/FormArea";
 
 const AddProduct = (): JSX.Element => {
+  const dispatch = useDispatch() as AppDispatch;
   const [productName, setProductName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -40,29 +44,13 @@ const AddProduct = (): JSX.Element => {
 
   const onClickHandler = (event: React.FormEvent<HTMLButtonElement>): void => {
     event.preventDefault();
-    const formData = new FormData();
-    formData.append("title", productName);
-    formData.append("image", selectedFile as File);
-    formData.append("price", price);
-    formData.append("description", description);
-    const addProduct = async (): Promise<void> => {
-      try {
-        const response = await fetch(
-          `${config.backendDomain}/product/add-product`,
-          {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer + ${localStorage.getItem("token") ?? ""}`,
-            },
-            body: formData,
-          },
-        );
-        console.log(await response.json());
-      } catch (error) {
-        console.log(error);
-      }
+    const productValues: IProductValues = {
+      title: productName,
+      selectedFile: selectedFile as File,
+      price,
+      description,
     };
-    void addProduct();
+    void dispatch(createProduct(productValues));
   };
   return (
     <Fragment>

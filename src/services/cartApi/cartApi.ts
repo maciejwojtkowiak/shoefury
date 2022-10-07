@@ -1,3 +1,4 @@
+import { IAddItemToCartResponse } from "types/ApiResponse";
 import { ICart } from "types/cart";
 import { IUser } from "types/user";
 
@@ -13,7 +14,11 @@ export const getCart = async (): Promise<ICart> => {
   return response.data.cart;
 };
 
-// export const addItemToCart = async (itemTitle: string): Promise<string> => {
-//   const response = await cartClient.post<string>("/cart/add", { itemTitle });
-//   return response;
-// };
+export const addItemToCart = async (
+  itemTitle: string,
+): Promise<IAddItemToCartResponse> => {
+  const response = await cartClient.post<IAddItemToCartResponse>("/cart/add", {
+    itemTitle,
+  });
+  return response.data;
+};
