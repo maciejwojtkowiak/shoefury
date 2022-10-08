@@ -14,11 +14,23 @@ export const checkoutCreation = async (
     `${config.backendDomain}/checkout/create-checkout`,
     { items: cart.items },
     {
-      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
     },
   );
+  return response.data;
+};
+
+export const getCheckoutData = async (): Promise<ICheckoutResponse> => {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  console.log("PARAM", urlParams.get("session_id"));
+  const response = await checkoutClient.get<ICheckoutResponse>(
+    `${config.backendDomain}/checkout/order-success?session_id=${
+      urlParams.get("session_id") ?? ""
+    }`,
+  );
+  console.log("DATA", response.data);
   return response.data;
 };
