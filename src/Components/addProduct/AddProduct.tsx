@@ -37,10 +37,6 @@ const AddProduct = (): JSX.Element => {
     setDescription(event.target.value);
   };
 
-  // const testHandler = (): void => {
-  //   console.log("hej");
-  // };
-
   const onClickHandler = (event: React.FormEvent<HTMLButtonElement>): void => {
     event.preventDefault();
     const formData = new FormData();

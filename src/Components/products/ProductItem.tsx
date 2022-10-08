@@ -25,7 +25,7 @@ const ProductItem = ({
   const onCartTouchEnd = (): void => {
     setCartTouched(false);
   };
-  const onAddToCart = (event: React.MouseEvent<HTMLAnchorElement>): void => {
+  const onAddToCart = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
     event.stopPropagation();
     const addItem = async (): Promise<void> => {
@@ -61,14 +61,14 @@ const ProductItem = ({
         {title}
         <img className="h-48 w-48" src={imageData} alt="product" />
         <h3 className="text-2xl font-bold">{price}$</h3>
-        <a
+        <button
           onMouseOver={onCartTouchStart}
           onMouseLeave={onCartTouchEnd}
           onClick={(event) => onAddToCart(event)}
           className="justify-self-end mr-8 p-2 border-2 rounded-full hover:bg-orange-400 duration-300 cursor-pointer"
         >
           <BsCartPlus size={24} color={cartTouched ? "white" : "black"} />
-        </a>
+        </button>
       </Link>
     </motion.div>
   );
