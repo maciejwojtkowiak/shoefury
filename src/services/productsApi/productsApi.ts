@@ -7,13 +7,6 @@ import {
 
 import productsClient from "./productsClient";
 
-export interface IProductValues {
-  title: string;
-  price: string;
-  description: string;
-  selectedFile: File;
-}
-
 export async function getProducts(
   pageNum: number,
 ): Promise<IGetProductsResponse> {
@@ -35,13 +28,8 @@ export async function getProduct(
 }
 
 export async function addProduct(
-  dataObj: IProductValues,
+  formData: FormData,
 ): Promise<IAddProductResponse> {
-  const formData = new FormData();
-  formData.append("title", dataObj.title);
-  formData.append("image", dataObj.selectedFile);
-  formData.append("price", dataObj.price);
-  formData.append("description", dataObj.description);
   const response = await productsClient.post<IAddProductResponse>(
     "/add-product",
     formData,
