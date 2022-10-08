@@ -6,6 +6,7 @@ import DetailPage from "pages/DetailPage";
 import { PrivateRoutes } from "utils/PrivateRoutes";
 
 import Navbar from "components/navbar/Navbar";
+import OrderSuccess from "components/order/OrderSuccess";
 
 import AddProductPage from "./pages/AddProductPage";
 import CartPage from "./pages/CartPage";
@@ -49,6 +50,7 @@ function App(): JSX.Element {
         <Route path={Paths.REGISTER} element={<Register />} />
         <Route path={`${Paths.PRODUCT}/:id`} element={<DetailPage />} />
         <Route path={Paths.LOGIN} element={<LoginPage />} />
+        <Route path={Paths.SUCCESS} element={<OrderSuccess />} />
       </Routes>
     </BrowserRouter>
   );

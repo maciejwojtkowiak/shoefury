@@ -2,8 +2,8 @@ import React from "react";
 
 import { useModal } from "components/ui/modal/use-modal";
 
+import UserInfo from "./userInfo/UserInfo";
 import OrderList from "./OrderList";
-import UserInfo from "./UserInfo";
 
 const Profile = (): JSX.Element => {
   const modal = useModal();
