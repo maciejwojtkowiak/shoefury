@@ -1,6 +1,5 @@
 import React, { Fragment, useState } from "react";
 import { useDispatch } from "react-redux";
-import { IProductValues } from "services/productsApi/productsApi";
 import { createProduct } from "store/products/thunks";
 import { AppDispatch } from "store/store";
 
@@ -12,14 +11,14 @@ import FormArea from "components/ui/textareas/FormArea";
 
 const AddProduct = (): JSX.Element => {
   const dispatch = useDispatch() as AppDispatch;
-  const [productName, setProductName] = useState("");
+  const [productTitle, setProductTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [selectedFile, setSelectedFile] = useState<File>();
   const onNameChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>,
   ): void => {
-    setProductName(event.target.value);
+    setProductTitle(event.target.value);
   };
 
   const onPriceChangeHandler = (
@@ -44,13 +43,12 @@ const AddProduct = (): JSX.Element => {
 
   const onClickHandler = (event: React.FormEvent<HTMLButtonElement>): void => {
     event.preventDefault();
-    const productValues: IProductValues = {
-      title: productName,
-      selectedFile: selectedFile as File,
-      price,
-      description,
-    };
-    void dispatch(createProduct(productValues));
+    const formData = new FormData();
+    formData.append("title", productTitle);
+    formData.append("image", selectedFile as File);
+    formData.append("price", price);
+    formData.append("description", description);
+    void dispatch(createProduct(formData));
   };
   return (
     <Fragment>

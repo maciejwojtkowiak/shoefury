@@ -1,9 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import {
-  addProduct,
-  getProducts,
-  IProductValues,
-} from "services/productsApi/productsApi";
+import { addProduct, getProducts } from "services/productsApi/productsApi";
 import { IGetProductsResponse } from "types/ApiResponse";
 
 export const fetchProducts = createAsyncThunk(
@@ -16,8 +12,8 @@ export const fetchProducts = createAsyncThunk(
 
 export const createProduct = createAsyncThunk(
   "add-product",
-  async (data: IProductValues) => {
-    const response = await addProduct(data);
+  async (formData: FormData) => {
+    const response = await addProduct(formData);
     console.log("RESP", response);
     return response;
   },
