@@ -1,4 +1,5 @@
 import config from "config/config.json";
+import { authorizationHeader } from "services/Authorization/authorization";
 import { ICart } from "types/cart";
 
 import { checkoutClient } from "./checkoutClient";
@@ -16,6 +17,7 @@ export const checkoutCreation = async (
     {
       headers: {
         "Content-Type": "application/json",
+        ...authorizationHeader(),
       },
     },
   );
@@ -30,6 +32,11 @@ export const getCheckoutData = async (): Promise<ICheckoutResponse> => {
     `${config.backendDomain}/checkout/order-success?session_id=${
       urlParams.get("session_id") ?? ""
     }`,
+    {
+      headers: {
+        ...authorizationHeader(),
+      },
+    },
   );
   console.log("DATA", response.data);
   return response.data;
