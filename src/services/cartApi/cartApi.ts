@@ -1,3 +1,4 @@
+import { authorizationHeader } from "services/Authorization/authorization";
 import { IAddItemToCartResponse } from "types/ApiResponse";
 import { ICart } from "types/cart";
 import { IUser } from "types/user";
@@ -8,7 +9,7 @@ export const getCart = async (): Promise<ICart> => {
   const response = await cartClient.get<IUser>("get-cart", {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("token") ?? ""}`,
+      ...authorizationHeader(),
     },
   });
   return response.data.cart;

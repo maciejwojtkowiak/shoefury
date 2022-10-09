@@ -1,3 +1,5 @@
+import { authorizationHeader } from "services/Authorization/authorization";
+
 import {
   IAddProductResponse,
   IGetProductResponse,
@@ -36,7 +38,7 @@ export async function addProduct(
     {
       headers: {
         "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${localStorage.getItem("token") ?? ""}`,
+        ...authorizationHeader(),
       },
     },
   );
