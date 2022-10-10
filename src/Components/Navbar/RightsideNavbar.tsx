@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Paths } from "config/Paths";
+import { Paths } from "config/paths";
 
 import Profile from "components/profile/Profile";
 import ModalPortal from "components/ui/modal/ModalPortal";

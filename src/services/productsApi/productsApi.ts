@@ -1,4 +1,4 @@
-import { authorizationHeader } from "services/Authorization/authorization";
+import { authorizationHeader } from "services/authorization/authorization";
 
 import {
   IAddProductResponse,

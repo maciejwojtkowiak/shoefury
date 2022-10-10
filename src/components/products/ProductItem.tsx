@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { BsCartPlus } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import config from "config/config.json";
-import { Paths } from "config/Paths";
+import { Paths } from "config/paths";
 import { motion } from "framer-motion";
+import { addItemToCart } from "services/cartApi/cartApi";
 
 interface ProductProps {
   id: string;
@@ -30,14 +30,7 @@ const ProductItem = ({
     event.stopPropagation();
     const addItem = async (): Promise<void> => {
       try {
-        await fetch(`${config.backendDomain}/cart/add`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token") ?? ""}`,
-          },
-          body: JSON.stringify({ productTitle: title }),
-        });
+        await addItemToCart(id);
       } catch (e) {
         console.log(e);
       }
@@ -64,7 +57,7 @@ const ProductItem = ({
         <button
           onMouseOver={onCartTouchStart}
           onMouseLeave={onCartTouchEnd}
-          onClick={(event) => onAddToCart(event)}
+          onClick={onAddToCart}
           className="justify-self-end mr-8 p-2 border-2 rounded-full hover:bg-orange-400 duration-300 cursor-pointer"
         >
           <BsCartPlus size={24} color={cartTouched ? "white" : "black"} />

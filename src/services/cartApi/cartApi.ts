@@ -1,4 +1,4 @@
-import { authorizationHeader } from "services/Authorization/authorization";
+import { authorizationHeader } from "services/authorization/authorization";
 import { IAddItemToCartResponse } from "types/ApiResponse";
 import { ICart } from "types/cart";
 import { IUser } from "types/user";
@@ -16,10 +16,18 @@ export const getCart = async (): Promise<ICart> => {
 };
 
 export const addItemToCart = async (
-  itemTitle: string,
+  productId: string,
 ): Promise<IAddItemToCartResponse> => {
-  const response = await cartClient.post<IAddItemToCartResponse>("/cart/add", {
-    itemTitle,
-  });
+  console.log("PRODUCT", productId);
+  const response = await cartClient.post<IAddItemToCartResponse>(
+    "/add",
+    { productId },
+    {
+      headers: {
+        ...authorizationHeader(),
+      },
+    },
+  );
+  console.log("RESPONSE", response);
   return response.data;
 };
