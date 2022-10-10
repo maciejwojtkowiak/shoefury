@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import config from "config/config.json";
+import { config } from "config/config";
 
 import FormButton from "components/ui/buttons/RoundedButton";
 

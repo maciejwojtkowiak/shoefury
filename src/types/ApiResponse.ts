@@ -1,41 +1,30 @@
 import { IProduct } from "types/product";
 
-export interface IGetProductsResponse {
+import { ApiResponseDefault } from "./api/ApiResponseDefault";
+
+export interface IGetProductsResponse extends ApiResponseDefault {
   products: IProduct[];
   pagesCount: number;
   totalProducts: string;
 }
 
-export interface IResponseError {
+export interface IResponseError extends ApiResponseDefault {
   err: string;
   message: string;
 }
 
-export interface IGetProductResponse {
+export interface IGetProductResponse extends ApiResponseDefault {
   product: IProduct;
 }
 
-export interface ICheckAuthResponse {
+export interface ICheckAuthResponse extends ApiResponseDefault {
   isAuth: boolean;
 }
 
-export interface ApiResponse<T> {
-  data: T;
-  err: boolean;
-  message: string;
-}
-
-export interface ILoginResponse {
-  message: string;
+export interface ILoginResponse extends ApiResponseDefault {
   token: string;
 }
 
-export interface IAddItemToCartResponse {
-  message: string;
-  error: boolean;
-}
+export interface IAddItemToCartResponse extends ApiResponseDefault {}
 
-export interface IAddProductResponse {
-  message: string;
-  error: boolean;
-}
+export interface IAddProductResponse extends ApiResponseDefault {}

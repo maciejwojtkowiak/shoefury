@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useParams } from "react-router-dom";
-import { Paths } from "config/Paths";
+import { Paths } from "config/paths";
 import { productsAction } from "store/products/products-slice";
 import { RootState } from "store/store";
 

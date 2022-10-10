@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Paths } from "config/Paths";
+import { Paths } from "config/paths";
 import DetailPage from "pages/DetailPage";
 import { PrivateRoutes } from "utils/PrivateRoutes";
 

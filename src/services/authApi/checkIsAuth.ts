@@ -1,4 +1,5 @@
 import { AxiosError } from "axios";
+import { authorizationHeader } from "services/authorization/authorization";
 import { ICheckAuthResponse } from "types/ApiResponse";
 
 import authClient from "./authClient";
@@ -12,7 +13,7 @@ export async function checkAuthentication(
       {},
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          ...authorizationHeader(),
         },
       },
     );
