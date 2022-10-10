@@ -1,6 +1,5 @@
 import React from "react";
-
-import { config } from "../../config/config";
+import { deleteCartItem } from "services/cartApi/cartApi";
 
 interface ProductRowProps {
   id: string;
@@ -17,15 +16,7 @@ const CartItem = ({
 }: ProductRowProps): JSX.Element => {
   const deleteItemHandler = (): void => {
     const deleteItem = async (): Promise<void> => {
-      const response = await fetch(`${config.backendDomain}/cart/delete-item`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token") ?? ""}`,
-        },
-        body: JSON.stringify({ productTitle: title }),
-      });
-      console.log(response, "RESPONSE DELETE");
+      await deleteCartItem(id);
     };
     void deleteItem();
   };
