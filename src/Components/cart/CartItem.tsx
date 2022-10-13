@@ -32,13 +32,12 @@ const CartItem = ({
         />
         <h3>{title}</h3>
       </div>
-      <div>
-        <h3>{quantity}</h3>
-      </div>
-      <div>
-        <h3>{+price * quantity}</h3>
-      </div>
-      <button className="absolute right-1 mr-16" onClick={deleteItemHandler}>
+      <h3>{quantity}</h3>
+      <h3>{+price * quantity}</h3>
+      <button
+        className="absolute right-1 mr-16 bg-orange-300 px-2 text-white"
+        onClick={deleteItemHandler}
+      >
         X
       </button>
     </div>
