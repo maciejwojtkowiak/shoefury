@@ -13,6 +13,7 @@ export const getCart = async (): Promise<ICart> => {
       ...authorizationHeader(),
     },
   });
+  console.log("RESPONSE", response.data);
   return response.data.cart;
 };
 

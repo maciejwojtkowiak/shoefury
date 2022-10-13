@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { checkoutCreation } from "services/checkoutApi/checkoutApi";
 import { fetchCart } from "store/cart/thunks";
 import { AppDispatch, RootState } from "store/store";
+import { decodeBase64 } from "utils/decodeBase64";
+
+import SquareButton from "components/ui/buttons/SquareButton";
 
 import CartItem from "./CartItem";
 import ColumnTitle from "./ColumnTitle";
@@ -37,6 +40,7 @@ const Cart = (): JSX.Element => {
                 <CartItem
                   key={product.product._id}
                   id={product.product._id}
+                  image={decodeBase64(product.product.imageData)}
                   title={product.product.title}
                   quantity={product.quantity}
                   price={product.product.price}
@@ -44,12 +48,14 @@ const Cart = (): JSX.Element => {
               );
             })}
           </div>
-          <button
-            className="border-2 justify-self-end px-16 py-2 bg-orange-300 mb-8 mr-8 mt-8 text-4xl font-bold text-white "
-            onClick={goToCheckout}
-          >
-            Buy
-          </button>
+          <SquareButton
+            buttonText="Buy"
+            width="w-64"
+            height="h-16"
+            margin="mr-8 mt-12 mb-4"
+            textSize="4xl"
+            onClickHandler={goToCheckout}
+          />
         </div>
       </div>
     </Fragment>
