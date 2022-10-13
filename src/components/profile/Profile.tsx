@@ -4,8 +4,8 @@ import { IProfile } from "types/api/profile/profile";
 
 import { useModal } from "components/ui/modal/use-modal";
 
+import OrderList from "./orders/OrderList";
 import UserInfo from "./userInfo/UserInfo";
-import OrderList from "./OrderList";
 
 const Profile = (): JSX.Element => {
   const [profileData, setProfileData] = useState<IProfile>();

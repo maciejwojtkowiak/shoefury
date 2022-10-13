@@ -50,6 +50,7 @@ const Cart = (): JSX.Element => {
           </div>
           <SquareButton
             buttonText="Buy"
+            disabled={!(cart?.items.length > 0)}
             width="w-64"
             height="h-16"
             margin="mr-8 mt-12 mb-4"
