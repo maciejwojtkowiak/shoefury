@@ -3,6 +3,7 @@ import { deleteCartItem } from "services/cartApi/cartApi";
 
 interface ProductRowProps {
   id: string;
+  image: string;
   quantity: number;
   price: string;
   title: string;
@@ -10,6 +11,7 @@ interface ProductRowProps {
 
 const CartItem = ({
   id,
+  image,
   quantity,
   price,
   title,
@@ -21,8 +23,13 @@ const CartItem = ({
     void deleteItem();
   };
   return (
-    <div className="w-full grid grid-cols-3 place-items-center relative">
-      <div>
+    <div className="w-full grid grid-cols-[1fr_1fr_1fr] place-items-center text-xl font-bold relative">
+      <div className="flex justify-center items-center w-24 h-24">
+        <img
+          className="absolute left-0 w-20 h-20 border-2 ml-12"
+          alt="product-image"
+          src={image}
+        />
         <h3>{title}</h3>
       </div>
       <div>

@@ -9,5 +9,6 @@ export const getProfile = async (): Promise<IProfile> => {
       ...authorizationHeader(),
     },
   });
+  console.log("RESPONSE", response.data);
   return response.data;
 };
