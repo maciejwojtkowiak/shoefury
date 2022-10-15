@@ -12,11 +12,16 @@ export const getProfile = async (): Promise<IProfile> => {
   return response.data;
 };
 
-export const getOrderRaport = async (): Promise<any> => {
-  const response = await profileClient.get<any>("/get-order-raport", {
-    headers: {
-      ...authorizationHeader(),
+export const getOrderRaport = async (orderId: string): Promise<any> => {
+  const response = await profileClient.get<any>(
+    `/get-order-raport/${orderId}`,
+    {
+      headers: {
+        responseType: "blob",
+        ...authorizationHeader(),
+      },
     },
-  });
+  );
+  console.log(response);
   return response.data;
 };

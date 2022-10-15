@@ -29,6 +29,7 @@ export const addItemToCart = async (
       },
     },
   );
+  console.log("ADD");
   return response.data;
 };
 
