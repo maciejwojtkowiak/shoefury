@@ -25,6 +25,8 @@ const Cart = (): JSX.Element => {
     void createCheckout();
   };
 
+  console.log(cart, "CART");
+
   return (
     <Fragment>
       <div className="w-full grid justify-content-center ">
