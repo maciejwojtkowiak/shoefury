@@ -11,12 +11,13 @@ const OrderItem = ({ orderId, totalPrice }: OrderItemProps): JSX.Element => {
   // TO DO duplication
   const downloadHandler = (): void => {
     const getOrderPdf = async (): Promise<void> => {
-      const response = await getOrderRaport(orderId);
+      console.log(orderId);
+      const response = await getOrderRaport(orderId.toString());
       console.log(response);
-      const file = window.URL.createObjectURL(
-        new Blob([response], { type: "application/pdf" }),
-      );
-      window.open(file);
+      // const file = window.URL.createObjectURL(
+      //   new Blob([response], { type: "application/pdf" }),
+      // );
+      // window.open(file);
     };
     void getOrderPdf();
   };
