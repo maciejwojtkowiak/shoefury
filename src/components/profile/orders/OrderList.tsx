@@ -26,9 +26,9 @@ const OrderList = ({ orders }: IOrderListProps): JSX.Element => {
         <OrderColumnTitle title="Raport (download)" />
         {orders.map((order) => (
           <OrderItem
-            key={order.order._id}
-            orderId={order.order._id}
-            totalPrice={order.order.totalPrice}
+            key={order.order?._id}
+            orderId={order.order?._id}
+            totalPrice={order.order?.totalPrice}
           />
         ))}
       </div>
