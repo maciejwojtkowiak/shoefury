@@ -17,6 +17,7 @@ export const getOrderRaport = async (orderId: string): Promise<string> => {
     `/get-order-raport/${orderId}`,
     {
       headers: {
+        responseType: "stream",
         ...authorizationHeader(),
       },
     },
