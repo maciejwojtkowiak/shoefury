@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { BsCartPlus } from "react-icons/bs";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Paths } from "config/paths";
 import { motion } from "framer-motion";
 import { addItemToCart } from "services/cartApi/cartApi";
+import { IProductData } from "services/productsApi/reviewApi";
+import { addReview } from "store/products/thunks";
+import { AppDispatch } from "store/store";
 
 interface ProductProps {
   id: string;
@@ -19,6 +23,7 @@ const ProductItem = ({
   title,
 }: ProductProps): JSX.Element => {
   const [cartTouched, setCartTouched] = useState(false);
+  const dispatch = useDispatch() as AppDispatch;
   const onCartTouchStart = (): void => {
     setCartTouched(true);
   };
@@ -36,6 +41,15 @@ const ProductItem = ({
       }
     };
     void addItem();
+  };
+
+  const onAddReview = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    event.stopPropagation();
+    const productData: IProductData = {
+      productId: id,
+      rate: 5,
+    };
+    void dispatch(addReview(productData));
   };
 
   return (
@@ -63,6 +77,7 @@ const ProductItem = ({
           <BsCartPlus size={24} color={cartTouched ? "white" : "black"} />
         </button>
       </Link>
+      <button onClick={(event) => onAddReview(event)}>Add review</button>
     </motion.div>
   );
 };

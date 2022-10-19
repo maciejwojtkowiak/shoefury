@@ -1,7 +1,8 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Paths } from "config/paths";
+import { userAction } from "store/user/user-slice";
 
 import Profile from "components/profile/Profile";
 import ModalPortal from "components/ui/modal/ModalPortal";
@@ -11,8 +12,10 @@ import { RootState } from "../../store/store";
 import CartIcon from "../svg/CartIcon";
 
 const RightSideNavbar = (): JSX.Element => {
+  const dispatch = useDispatch();
   const onLogout = (): void => {
     localStorage.removeItem("token");
+    dispatch(userAction.setIsAuth(false));
   };
   const isAuth = useSelector((state: RootState) => state.userReducer.isAuth);
   const modal = useModal();
