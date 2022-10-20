@@ -43,7 +43,7 @@ const ProductPriceBox = ({ product }: ProductPriceProps): JSX.Element => {
           <h3 className="self-end ml-2 font-bold">{product.price}$</h3>
         </div>
         <div className="flex">
-          {starsArray.map((star, index) => {
+          {starsArray.map((_, index) => {
             const starValue = index + 1;
             return (
               <FaStar
@@ -53,8 +53,7 @@ const ProductPriceBox = ({ product }: ProductPriceProps): JSX.Element => {
                     ? "#fde047"
                     : "black"
                 }
-                size={44}
-                className="mt-4 cursor-pointer pl-4 first:pl-0"
+                className="mt-4 w-auto h-6 cursor-pointer pl-4 first:pl-0"
                 onMouseEnter={() => onStarHover(starValue)}
                 onMouseLeave={onStartUnhover}
                 onClick={() => onReviewHandler(starValue)}
