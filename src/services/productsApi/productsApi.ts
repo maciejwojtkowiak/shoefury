@@ -1,8 +1,8 @@
 import { authorizationHeader } from "services/authorization/authorization";
+import { IGetProductResponse } from "types/api/product/product";
 
 import {
   IAddProductResponse,
-  IGetProductResponse,
   IGetProductsResponse,
   // IGetProductsResponse,
 } from "../../types/ApiResponse";
