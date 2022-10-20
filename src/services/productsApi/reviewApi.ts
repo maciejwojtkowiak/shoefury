@@ -9,10 +9,13 @@ export interface IProductData {
 export const addReviewOfProduct = async (
   productData: IProductData,
 ): Promise<void> => {
-  const response = await productsClient.post("/add-review", productData, {
+  await productsClient.post("/add-review", productData, {
     headers: {
       ...authorizationHeader(),
     },
   });
-  console.log(response);
+};
+
+export const getProductReviews = async (productId: string): Promise<void> => {
+  await productsClient.post(`get-review/${productId}`);
 };

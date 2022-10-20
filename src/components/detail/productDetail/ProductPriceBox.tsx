@@ -1,5 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { FaStar } from "react-icons/fa";
+import { useAppDispatch } from "store/hooks/reduxHooks";
+import { addReview } from "store/products/thunks";
 import { IProduct } from "types/product";
 
 import SquareButton from "components/ui/buttons/SquareButton";
@@ -11,9 +13,7 @@ interface ProductPriceProps {
 const MAX_STAR = 5;
 
 const ProductPriceBox = ({ product }: ProductPriceProps): JSX.Element => {
-  const onClickHandler = (): void => {
-    console.log("hej");
-  };
+  const dispatch = useAppDispatch();
   const [hoverState, setHoverState] = useState(false);
   const [starNumHovered, setStarNumHovered] = useState(1);
 
@@ -25,6 +25,14 @@ const ProductPriceBox = ({ product }: ProductPriceProps): JSX.Element => {
   const onStartUnhover = (): void => {
     setHoverState(false);
   };
+
+  const onReviewHandler = (rate: number): void => {
+    const createReview = async (): Promise<void> => {
+      void dispatch(addReview({ productId: product._id, rate }));
+    };
+    void createReview();
+  };
+
   const starsArray = useMemo(() => new Array(MAX_STAR).fill(""), []);
 
   return (
@@ -34,20 +42,26 @@ const ProductPriceBox = ({ product }: ProductPriceProps): JSX.Element => {
           <h1 className="text-6xl font-bold">{product.title}</h1>
           <h3 className="self-end ml-2 font-bold">{product.price}$</h3>
         </div>
-        {starsArray.map((star, index) => {
-          const starValue = index + 1;
-          return (
-            <FaStar
-              key={index}
-              color={
-                starNumHovered >= starValue && hoverState ? "yellow" : "green"
-              }
-              className="mt-4 cursor-pointer"
-              onMouseEnter={() => onStarHover(starValue)}
-              onMouseLeave={onStartUnhover}
-            />
-          );
-        })}
+        <div className="flex">
+          {starsArray.map((star, index) => {
+            const starValue = index + 1;
+            return (
+              <FaStar
+                key={index}
+                color={
+                  starNumHovered >= starValue && hoverState
+                    ? "#fde047"
+                    : "black"
+                }
+                size={44}
+                className="mt-4 cursor-pointer pl-4 first:pl-0"
+                onMouseEnter={() => onStarHover(starValue)}
+                onMouseLeave={onStartUnhover}
+                onClick={() => onReviewHandler(starValue)}
+              />
+            );
+          })}
+        </div>
       </div>
       <div className="h-full">
         <SquareButton
@@ -55,7 +69,7 @@ const ProductPriceBox = ({ product }: ProductPriceProps): JSX.Element => {
           height="h-[5rem]"
           textSize="4xl"
           buttonText="Add to cart"
-          onClickHandler={onClickHandler}
+          onClickHandler={() => console.log("HEJ")}
         />
       </div>
     </div>

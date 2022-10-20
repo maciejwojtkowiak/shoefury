@@ -1,8 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { AxiosError } from "axios";
+import { useAppDispatch, useAppSelector } from "store/hooks/reduxHooks";
 import { fetchProducts } from "store/products/thunks";
-import { AppDispatch, RootState } from "store/store";
 import { decodeBase64 } from "utils/decodeBase64";
 
 import ErrorComponent from "components/errors/ErrorComponent";
@@ -11,13 +10,8 @@ import ProductsNavigation from "./navigation/ProductsNavigation";
 import ProductItem from "./ProductItem";
 
 const Products = (): JSX.Element => {
-  const dispatch = useDispatch() as AppDispatch;
-  const products = useSelector(
-    (state: RootState) => state.productsReducer.products,
-  );
-  // const pageCount = useSelector(
-  //   (state: RootState) => state.productsReducer.pageNum,
-  // );
+  const dispatch = useAppDispatch();
+  const products = useAppSelector((state) => state.productsReducer.products);
   const pageCount = 15;
 
   const [actualPage, setActualPage] = useState(1);

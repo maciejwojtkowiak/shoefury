@@ -1,23 +1,22 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Paths } from "config/paths";
+import { useAppDispatch, useAppSelector } from "store/hooks/reduxHooks";
 import { userAction } from "store/user/user-slice";
 
 import Profile from "components/profile/Profile";
 import ModalPortal from "components/ui/modal/ModalPortal";
 import { useModal } from "components/ui/modal/use-modal";
 
-import { RootState } from "../../store/store";
 import CartIcon from "../svg/CartIcon";
 
 const RightSideNavbar = (): JSX.Element => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const onLogout = (): void => {
     localStorage.removeItem("token");
     dispatch(userAction.setIsAuth(false));
   };
-  const isAuth = useSelector((state: RootState) => state.userReducer.isAuth);
+  const isAuth = useAppSelector((state) => state.userReducer.isAuth);
   const modal = useModal();
   return (
     <div className="place-self-end flex gap-4 h-full items-center justify-center">

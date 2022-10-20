@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Paths } from "config/paths";
 import DetailPage from "pages/DetailPage";
+import { useAppDispatch } from "store/hooks/reduxHooks";
 import { PrivateRoutes } from "utils/PrivateRoutes";
 
 import Navbar from "components/navbar/Navbar";
@@ -20,7 +20,7 @@ import { ICheckAuthResponse } from "./types/ApiResponse";
 import "./App.css";
 
 function App(): JSX.Element {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   console.log("AUTH CHECK");
   // TO DO: Move to axios
   useEffect(() => {

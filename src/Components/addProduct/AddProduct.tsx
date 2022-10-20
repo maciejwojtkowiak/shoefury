@@ -1,7 +1,6 @@
 import React, { Fragment, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "store/hooks/reduxHooks";
 import { createProduct } from "store/products/thunks";
-import { AppDispatch } from "store/store";
 
 import SquareButton from "components/ui/buttons/SquareButton";
 // import FormButton from "components/ui/buttons/FormButton";
@@ -10,7 +9,7 @@ import FormInput from "components/ui/inputs/FormInput";
 import FormArea from "components/ui/textareas/FormArea";
 
 const AddProduct = (): JSX.Element => {
-  const dispatch = useDispatch() as AppDispatch;
+  const dispatch = useAppDispatch();
   const [productTitle, setProductTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");

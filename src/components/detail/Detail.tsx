@@ -1,15 +1,15 @@
 import React, { useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useParams } from "react-router-dom";
 import { Paths } from "config/paths";
+import { useAppDispatch, useAppSelector } from "store/hooks/reduxHooks";
 import { productsAction } from "store/products/products-slice";
 import { RootState } from "store/store";
 
 import ProductDetail from "./productDetail/ProductDetail";
 
 const Detail = (): JSX.Element => {
-  const dispatch = useDispatch();
-  const products = useSelector(
+  const dispatch = useAppDispatch();
+  const products = useAppSelector(
     (state: RootState) => state.productsReducer.products,
   );
   const { id } = useParams();

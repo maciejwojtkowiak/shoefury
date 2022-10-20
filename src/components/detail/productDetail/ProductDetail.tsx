@@ -1,8 +1,7 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { IProductData } from "services/productsApi/reviewApi";
+import { useAppDispatch } from "store/hooks/reduxHooks";
 import { addReview } from "store/products/thunks";
-import { AppDispatch } from "store/store";
 import { IProduct } from "types/product";
 
 import ProductDescription from "./ProductDescription/ProductDescription";
@@ -14,7 +13,7 @@ interface ProductDetailProps {
 }
 
 const ProductDetail = ({ product }: ProductDetailProps): JSX.Element => {
-  const dispatch = useDispatch() as AppDispatch;
+  const dispatch = useAppDispatch();
   const onAddReview = (event: React.MouseEvent): void => {
     event.stopPropagation();
     const productData: IProductData = {
