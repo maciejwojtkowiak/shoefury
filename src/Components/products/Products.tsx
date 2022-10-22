@@ -21,7 +21,6 @@ const Products = (): JSX.Element => {
 
   const loadProducts = (): void => {
     const getProducts = async (): Promise<void> => {
-      console.log(actualPage);
       await dispatch(fetchProducts(actualPage));
       setError(null);
     };

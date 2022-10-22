@@ -9,7 +9,7 @@ interface PortalProps {
 
 const Portal = ({ rootId, children }: PortalProps): JSX.Element => {
   const portalContainer = usePortal(rootId);
-  console.log(portalContainer);
+
   return createPortal(children, portalContainer);
 };
 

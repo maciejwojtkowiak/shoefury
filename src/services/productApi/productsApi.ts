@@ -5,7 +5,7 @@ import {
   IAddProductResponse,
   IGetProductsResponse,
   // IGetProductsResponse,
-} from "../../types/ApiResponse";
+} from "../../types/api/ApiResponse";
 
 import productsClient from "./productsClient";
 
@@ -15,7 +15,7 @@ export async function getProducts(
   const response = await productsClient.get<IGetProductsResponse>(
     `/get-products?page=${pageNum}`,
   );
-  console.log("RES", response);
+
   const data = response.data;
   return data;
 }
@@ -42,6 +42,6 @@ export async function addProduct(
       },
     },
   );
-  console.log(response, "PRODUCT");
+
   return response.data;
 }

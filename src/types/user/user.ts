@@ -1,8 +1,7 @@
-interface IOrderData {
-  _id: string;
-  totalPrice: number;
-}
+import { ICart } from "../cart/cart";
 
-export interface IOrder {
-  order: IOrderData;
+export interface IUser {
+  name: string;
+  email: string;
+  cart: ICart;
 }

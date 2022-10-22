@@ -3,13 +3,13 @@ import {
   addProduct,
   getProduct,
   getProducts,
-} from "services/productsApi/productsApi";
+} from "services/productApi/productsApi";
 import {
   addReviewOfProduct,
   IProductData,
-} from "services/productsApi/reviewApi";
+} from "services/productApi/reviewApi";
+import { IGetProductsResponse } from "types/api/ApiResponse";
 import { IGetProductResponse } from "types/api/product/product";
-import { IGetProductsResponse } from "types/ApiResponse";
 
 export const fetchProducts = createAsyncThunk(
   "/products",
@@ -31,7 +31,6 @@ export const createProduct = createAsyncThunk(
   "add-product",
   async (formData: FormData) => {
     const response = await addProduct(formData);
-    console.log("RESP", response);
     return response;
   },
 );
@@ -40,7 +39,6 @@ export const addReview = createAsyncThunk(
   "add-review",
   async (productData: IProductData) => {
     const response = await addReviewOfProduct(productData);
-    console.log("RESP", response);
     return response;
   },
 );

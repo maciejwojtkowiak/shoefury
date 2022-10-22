@@ -15,16 +15,14 @@ import MainPage from "./pages/MainPage";
 import Register from "./pages/Register";
 import { checkAuthentication } from "./services/authApi/checkIsAuth";
 import { userAction } from "./store/user/user-slice";
-import { ICheckAuthResponse } from "./types/ApiResponse";
+import { ICheckAuthResponse } from "./types/api/ApiResponse";
 
 import "./App.css";
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
-  console.log("AUTH CHECK");
   // TO DO: Move to axios
   useEffect(() => {
-    console.log("TOKEN APP ", localStorage.getItem("token"));
     const isAuth = async (): Promise<void> => {
       const data = (await checkAuthentication(
         localStorage.getItem("token") ?? "",

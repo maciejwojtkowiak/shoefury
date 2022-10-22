@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
 import mockedAxios from "axios";
-import { IProduct } from "types/product";
+import { IProductItem } from "types/product/product";
 
 import ReduxProvider from "components/wrappers/ReduxProvider";
 
@@ -20,7 +20,7 @@ describe("Test of products fetch", () => {
             _id: "123",
             imageData: "das82e2ej",
           },
-        ] as IProduct[],
+        ] as IProductItem[],
       },
     });
 

@@ -1,7 +1,7 @@
-import { IOrder } from "types/user/user";
+import { IOrder } from "types/order/Order";
 
 export interface IProfile {
   name: string;
   profileImage: string;
-  orders: IOrder[];
+  orders: Array<{ order: IOrder }>;
 }

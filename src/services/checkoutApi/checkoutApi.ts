@@ -1,5 +1,5 @@
 import { authorizationHeader } from "services/authorization/authorization";
-import { ICart } from "types/cart";
+import { ICart } from "types/cart/cart";
 
 import { checkoutClient } from "./checkoutClient";
 
@@ -26,7 +26,7 @@ export const checkoutCreation = async (
 export const getCheckoutData = async (): Promise<ICheckoutResponse> => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  console.log("PARAM", urlParams.get("session_id"));
+
   const response = await checkoutClient.get<ICheckoutResponse>(
     `order-success?session_id=${urlParams.get("session_id") ?? ""}`,
     {
@@ -35,6 +35,6 @@ export const getCheckoutData = async (): Promise<ICheckoutResponse> => {
       },
     },
   );
-  console.log("DATA", response.data);
+
   return response.data;
 };

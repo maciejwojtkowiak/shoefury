@@ -22,7 +22,6 @@ export const getOrderRaport = async (orderId: string): Promise<string> => {
       },
     },
   );
-  console.log(response.data);
 
   return response.data;
 };

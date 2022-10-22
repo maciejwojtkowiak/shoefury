@@ -1,8 +1,8 @@
-import { IProduct } from "types/product";
+import { IProductItem, IProductItemDetail } from "types/product/product";
 
 export interface IProductInitial {
-  products: IProduct[];
-  chosenProduct: IProduct | null;
+  products: IProductItem[];
+  chosenProduct: IProductItemDetail | null;
   pageNum: number;
   totalProducts: string;
 }

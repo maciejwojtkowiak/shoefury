@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IGetProductsResponse } from "types/api/ApiResponse";
 import { IGetProductResponse } from "types/api/product/product";
-import { IGetProductsResponse } from "types/ApiResponse";
-import { IProduct } from "types/product";
+import { IProductItemDetail } from "types/product/product";
 
 import { IProductInitial } from "./types/productState";
 import { fetchProduct, fetchProducts } from "./thunks";
@@ -18,7 +18,10 @@ const productsSlice = createSlice({
   initialState,
 
   reducers: {
-    setChosenProduct(state: IProductInitial, action: PayloadAction<IProduct>) {
+    setChosenProduct(
+      state: IProductInitial,
+      action: PayloadAction<IProductItemDetail>,
+    ) {
       state.chosenProduct = action.payload;
     },
   },

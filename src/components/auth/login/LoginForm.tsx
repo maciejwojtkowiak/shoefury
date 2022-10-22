@@ -23,7 +23,7 @@ const LoginForm = (): JSX.Element => {
     const handleLogin = async (): Promise<void> => {
       try {
         const response = await Login(email, password);
-        console.log("RESPONSE", response);
+
         // TO DO add type to login
         localStorage.setItem("token", response.token ?? "");
         navigate("/", { replace: true });
@@ -33,7 +33,7 @@ const LoginForm = (): JSX.Element => {
     };
     void handleLogin();
   };
-  console.log(email, password);
+
   return (
     <AuthForm>
       <FormHeader />

@@ -1,21 +1,22 @@
 import React from "react";
-import { IProductData } from "services/productsApi/reviewApi";
+import { IProductData } from "services/productApi/reviewApi";
 import { useAppDispatch } from "store/hooks/reduxHooks";
 import { addReview } from "store/products/thunks";
-import { IProduct } from "types/product";
+import { IProductItem } from "types/product/product";
 
 import ProductDescription from "./ProductDescription/ProductDescription";
 import ProductImageBox from "./ProductImageBox";
 import ProductPriceBox from "./ProductPriceBox";
 
 interface ProductDetailProps {
-  product: IProduct;
+  product: IProductItem;
 }
 
 const ProductDetail = ({ product }: ProductDetailProps): JSX.Element => {
   const dispatch = useAppDispatch();
   const onAddReview = (event: React.MouseEvent): void => {
     event.stopPropagation();
+    console.log("PRODUCTID", product._id);
     const productData: IProductData = {
       productId: product._id,
       rate: 5,

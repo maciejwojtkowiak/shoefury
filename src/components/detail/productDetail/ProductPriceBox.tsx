@@ -2,12 +2,12 @@ import React, { useMemo, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { useAppDispatch } from "store/hooks/reduxHooks";
 import { addReview } from "store/products/thunks";
-import { IProduct } from "types/product";
+import { IProductItemDetail } from "types/product/product";
 
 import SquareButton from "components/ui/buttons/SquareButton";
 
 interface ProductPriceProps {
-  product: IProduct;
+  product: IProductItemDetail;
 }
 // const MIN_STAR = 1;
 const MAX_STAR = 5;
