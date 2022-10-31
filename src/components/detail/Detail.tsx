@@ -18,6 +18,7 @@ const Detail = (): JSX.Element => {
     };
     void getProd();
   }, []);
+  console.log("DETAILED", detailedProduct);
 
   return (
     <React.Fragment>

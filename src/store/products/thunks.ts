@@ -28,7 +28,7 @@ export const fetchProduct = createAsyncThunk(
 );
 
 export const createProduct = createAsyncThunk(
-  "add-product",
+  "/add-product",
   async (formData: FormData) => {
     const response = await addProduct(formData);
     return response;
@@ -36,7 +36,7 @@ export const createProduct = createAsyncThunk(
 );
 
 export const addReview = createAsyncThunk(
-  "add-review",
+  "/add-review",
   async (productData: IProductData) => {
     const response = await addReviewOfProduct(productData);
     return response;
