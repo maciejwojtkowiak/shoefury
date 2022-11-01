@@ -42,7 +42,7 @@ const UserInfo = ({ name }: UserInfoProps): JSX.Element => {
           <form onSubmit={(event) => onSubmitHandler(event)}>
             <input
               ref={inputRef}
-              className="text-4xl rounded-md transition-all"
+              className="text-2xl py-2 px-4 rounded-md shadow-md focus:outline-none active:outline-none"
               onChange={onChangeHandler}
               value={nameValue}
             />
