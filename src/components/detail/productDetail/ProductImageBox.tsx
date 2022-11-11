@@ -1,13 +1,12 @@
 import React from "react";
-import { IProduct } from "types/product";
+import { IProductItemDetail } from "types/product/product";
 import { decodeBase64 } from "utils/decodeBase64";
 
 interface ProductImageBoxProps {
-  product: IProduct;
+  product: IProductItemDetail;
 }
 
 const ProductImageBox = ({ product }: ProductImageBoxProps): JSX.Element => {
-  console.log("IMG URL", product.imageData);
   return (
     <div className=" h-[32rem] w-[32rem] border-color-red-500 border-2 ">
       <img

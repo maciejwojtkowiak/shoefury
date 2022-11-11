@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 import { authorizationHeader } from "services/authorization/authorization";
-import { ICheckAuthResponse } from "types/ApiResponse";
+import { ICheckAuthResponse } from "types/api/ApiResponse";
 
 import authClient from "./authClient";
 

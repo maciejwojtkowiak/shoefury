@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IGetProductsResponse } from "types/ApiResponse";
-import { IProduct } from "types/product";
+import { IGetProductsResponse } from "types/api/ApiResponse";
+import { IGetProductResponse } from "types/api/product/product";
+import { IProductItemDetail } from "types/product/product";
 
 import { IProductInitial } from "./types/productState";
-import { fetchProducts } from "./thunks";
+import { fetchProduct, fetchProducts } from "./thunks";
 
 const initialState: IProductInitial = {
   products: [],
@@ -17,7 +18,10 @@ const productsSlice = createSlice({
   initialState,
 
   reducers: {
-    setChosenProduct(state: IProductInitial, action: PayloadAction<IProduct>) {
+    setChosenProduct(
+      state: IProductInitial,
+      action: PayloadAction<IProductItemDetail>,
+    ) {
       state.chosenProduct = action.payload;
     },
   },
@@ -28,6 +32,12 @@ const productsSlice = createSlice({
         state.products = [...action.payload.products];
         state.pageNum = action.payload.pagesCount;
         state.totalProducts = action.payload.totalProducts;
+      },
+    );
+    builder.addCase(
+      fetchProduct.fulfilled,
+      (state: IProductInitial, action: PayloadAction<IGetProductResponse>) => {
+        state.chosenProduct = action.payload.product;
       },
     );
   },

@@ -1,8 +1,8 @@
 import { authorizationHeader } from "services/authorization/authorization";
+import { IAddItemToCartResponse } from "types/api/ApiResponse";
 import { IDeleteCartItemResponse } from "types/api/cart/cart";
-import { IAddItemToCartResponse } from "types/ApiResponse";
-import { ICart } from "types/cart";
-import { IUser } from "types/user";
+import { ICart } from "types/cart/cart";
+import { IUser } from "types/user/user";
 
 import cartClient from "./cartApiClient";
 
@@ -13,7 +13,6 @@ export const getCart = async (): Promise<ICart> => {
       ...authorizationHeader(),
     },
   });
-  console.log("RESPONSE", response.data);
   return response.data.cart;
 };
 
@@ -29,14 +28,12 @@ export const addItemToCart = async (
       },
     },
   );
-  console.log("ADD");
   return response.data;
 };
 
 export const deleteCartItem = async (
   productId: string,
 ): Promise<IDeleteCartItemResponse | any> => {
-  console.log("RESPONSE");
   try {
     const response = await cartClient.post<IDeleteCartItemResponse>(
       "delete-item",
@@ -48,7 +45,6 @@ export const deleteCartItem = async (
         },
       },
     );
-    console.log("RESPONSE", response);
     return response.data;
   } catch (err) {
     console.log(err);

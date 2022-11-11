@@ -1,22 +1,65 @@
-import React from "react";
-import { IProduct } from "types/product";
+import React, { useMemo, useState } from "react";
+import { FaStar } from "react-icons/fa";
+import { useAppDispatch } from "store/hooks/reduxHooks";
+import { addReview } from "store/products/thunks";
+import { IProductItemDetail } from "types/product/product";
 
 import SquareButton from "components/ui/buttons/SquareButton";
 
 interface ProductPriceProps {
-  product: IProduct;
+  product: IProductItemDetail;
 }
+// const MIN_STAR = 1;
+const MAX_STAR = 5;
 
 const ProductPriceBox = ({ product }: ProductPriceProps): JSX.Element => {
-  const onClickHandler = (): void => {
-    console.log("hej");
+  const dispatch = useAppDispatch();
+  const [hoverState, setHoverState] = useState(false);
+  const [starNumHovered, setStarNumHovered] = useState(1);
+
+  const onStarHover = (starNum: number): void => {
+    setHoverState(true);
+    setStarNumHovered(starNum);
   };
+
+  const onStartUnhover = (): void => {
+    setHoverState(false);
+  };
+
+  const onReviewHandler = (rate: number): void => {
+    const createReview = async (): Promise<void> => {
+      void dispatch(addReview({ productId: product._id, rate }));
+    };
+    void createReview();
+  };
+
+  const starsArray = useMemo(() => new Array(MAX_STAR).fill(""), []);
+
   return (
     <div className="ml-16 w-full grid justify-evenly ">
-      <div>
+      <div className="flex flex-col">
         <div className="flex">
           <h1 className="text-6xl font-bold">{product.title}</h1>
           <h3 className="self-end ml-2 font-bold">{product.price}$</h3>
+        </div>
+        <div className="flex">
+          {starsArray.map((_, index) => {
+            const starValue = index + 1;
+            return (
+              <FaStar
+                key={index}
+                color={
+                  starNumHovered >= starValue && hoverState
+                    ? "#fde047"
+                    : "black"
+                }
+                className="mt-4 w-auto h-6 cursor-pointer pl-4 first:pl-0"
+                onMouseEnter={() => onStarHover(starValue)}
+                onMouseLeave={onStartUnhover}
+                onClick={() => onReviewHandler(starValue)}
+              />
+            );
+          })}
         </div>
       </div>
       <div className="h-full">
@@ -25,7 +68,7 @@ const ProductPriceBox = ({ product }: ProductPriceProps): JSX.Element => {
           height="h-[5rem]"
           textSize="4xl"
           buttonText="Add to cart"
-          onClickHandler={onClickHandler}
+          onClickHandler={() => console.log("HEJ")}
         />
       </div>
     </div>

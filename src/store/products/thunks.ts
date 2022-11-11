@@ -1,6 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { addProduct, getProducts } from "services/productsApi/productsApi";
-import { IGetProductsResponse } from "types/ApiResponse";
+import {
+  addProduct,
+  getProduct,
+  getProducts,
+} from "services/productApi/productsApi";
+import {
+  addReviewOfProduct,
+  IProductData,
+} from "services/productApi/reviewApi";
+import { IGetProductsResponse } from "types/api/ApiResponse";
+import { IGetProductResponse } from "types/api/product/product";
 
 export const fetchProducts = createAsyncThunk(
   "/products",
@@ -10,11 +19,26 @@ export const fetchProducts = createAsyncThunk(
   },
 );
 
+export const fetchProduct = createAsyncThunk(
+  "/get-product",
+  async (productId: string): Promise<IGetProductResponse> => {
+    const response = await getProduct(productId);
+    return response;
+  },
+);
+
 export const createProduct = createAsyncThunk(
-  "add-product",
+  "/add-product",
   async (formData: FormData) => {
     const response = await addProduct(formData);
-    console.log("RESP", response);
+    return response;
+  },
+);
+
+export const addReview = createAsyncThunk(
+  "/add-review",
+  async (productData: IProductData) => {
+    const response = await addReviewOfProduct(productData);
     return response;
   },
 );

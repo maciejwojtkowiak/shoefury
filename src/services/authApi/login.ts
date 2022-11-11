@@ -1,4 +1,4 @@
-import { ILoginResponse } from "types/ApiResponse";
+import { ILoginResponse } from "types/api/ApiResponse";
 
 import authClient from "./authClient";
 

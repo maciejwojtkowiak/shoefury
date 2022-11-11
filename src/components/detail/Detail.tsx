@@ -1,24 +1,24 @@
-import React, { useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useParams } from "react-router-dom";
-import { Paths } from "config/paths";
-import { productsAction } from "store/products/products-slice";
-import { RootState } from "store/store";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "store/hooks/reduxHooks";
+import { fetchProduct } from "store/products/thunks";
 
 import ProductDetail from "./productDetail/ProductDetail";
 
 const Detail = (): JSX.Element => {
-  const dispatch = useDispatch();
-  const products = useSelector(
-    (state: RootState) => state.productsReducer.products,
-  );
   const { id } = useParams();
-  const detailedProduct = useMemo(() => {
-    return products.find((product) => product._id === id);
-  }, []);
-  if (!detailedProduct) return <Navigate to={Paths.HOME} />;
+  const dispatch = useAppDispatch();
+  const detailedProduct = useAppSelector(
+    (state) => state.productsReducer.chosenProduct,
+  );
 
-  dispatch(productsAction.setChosenProduct(detailedProduct));
+  useEffect(() => {
+    const getProd = async (): Promise<void> => {
+      void dispatch(fetchProduct(id ?? ""));
+    };
+    void getProd();
+  }, []);
+  console.log("DETAILED", detailedProduct);
 
   return (
     <React.Fragment>

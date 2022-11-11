@@ -1,15 +1,15 @@
 import React from "react";
-import { IOrder } from "types/user/user";
+import { IOrder } from "types/order/Order";
 
+// import { IOrder } from "types/order/Order";
 import OrderColumnTitle from "./OrderColumnTitle";
 import OrderItem from "./OrderItem";
 
 interface IOrderListProps {
-  orders: IOrder[];
+  orders: Array<{ order: IOrder }>;
 }
 
 const OrderList = ({ orders }: IOrderListProps): JSX.Element => {
-  console.log("ORDERS", orders);
   if (orders.length === 0) {
     return (
       <div className="w-full mt-32 text-4xl font-bold grid place-items-center">

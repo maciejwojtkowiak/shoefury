@@ -1,8 +1,7 @@
 import React, { Fragment, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { checkoutCreation } from "services/checkoutApi/checkoutApi";
 import { fetchCart } from "store/cart/thunks";
-import { AppDispatch, RootState } from "store/store";
+import { useAppDispatch, useAppSelector } from "store/hooks/reduxHooks";
 import { decodeBase64 } from "utils/decodeBase64";
 
 import SquareButton from "components/ui/buttons/SquareButton";
@@ -11,8 +10,8 @@ import CartItem from "./CartItem";
 import ColumnTitle from "./ColumnTitle";
 
 const Cart = (): JSX.Element => {
-  const cart = useSelector((state: RootState) => state.cartReducer.cart);
-  const dispatch = useDispatch() as AppDispatch;
+  const cart = useAppSelector((state) => state.cartReducer.cart);
+  const dispatch = useAppDispatch();
   useEffect(() => {
     void dispatch(fetchCart());
   }, []);

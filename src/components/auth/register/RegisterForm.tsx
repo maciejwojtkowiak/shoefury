@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { config } from "config/config";
+import { useAppDispatch } from "store/hooks/reduxHooks";
 
 import FormButton from "components/ui/buttons/RoundedButton";
 
@@ -13,8 +14,8 @@ const RegisterForm = (): JSX.Element => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const onChangeHandler = (
     e: React.ChangeEvent<HTMLInputElement>,
     setValue: (val: string) => void,
@@ -42,6 +43,7 @@ const RegisterForm = (): JSX.Element => {
         const data = await response.json();
         localStorage.setItem("token", data.token);
         dispatch(userAction.setIsAuth(true));
+        navigate("/");
       } catch (error) {
         console.log(error);
       }

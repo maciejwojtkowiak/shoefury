@@ -22,7 +22,18 @@ export const getOrderRaport = async (orderId: string): Promise<string> => {
       },
     },
   );
-  console.log(response.data);
+  return response.data;
+};
 
+export const editName = async (name: string): Promise<string> => {
+  const response = await profileClient.patch<string>(
+    `/edit-name`,
+    { name },
+    {
+      headers: {
+        ...authorizationHeader(),
+      },
+    },
+  );
   return response.data;
 };
