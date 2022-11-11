@@ -28,7 +28,6 @@ export const addItemToCart = async (
       },
     },
   );
-
   return response.data;
 };
 
@@ -46,7 +45,6 @@ export const deleteCartItem = async (
         },
       },
     );
-
     return response.data;
   } catch (err) {
     console.log(err);

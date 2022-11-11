@@ -26,7 +26,6 @@ export const checkoutCreation = async (
 export const getCheckoutData = async (): Promise<ICheckoutResponse> => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-
   const response = await checkoutClient.get<ICheckoutResponse>(
     `order-success?session_id=${urlParams.get("session_id") ?? ""}`,
     {
@@ -35,6 +34,5 @@ export const getCheckoutData = async (): Promise<ICheckoutResponse> => {
       },
     },
   );
-
   return response.data;
 };
