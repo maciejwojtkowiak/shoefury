@@ -23,3 +23,14 @@ stages:
         dockerfile: '**/Dockerfile'
         tags: |
           $(tag)
+  - job: Push
+    displayName: Push to repository
+    steps:
+      - task: Docker@2
+        inputs:
+          repository: 'https://hub.docker.com/repository/docker/maciejwojtkowiak/shoefury-front'
+          command: 'push'
+          tags: '$(tag)'
+
+
+
