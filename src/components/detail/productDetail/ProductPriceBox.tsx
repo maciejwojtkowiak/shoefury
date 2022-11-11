@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { useAppDispatch } from "store/hooks/reduxHooks";
 import { addReview } from "store/products/thunks";
@@ -34,6 +34,26 @@ const ProductPriceBox = ({ product }: ProductPriceProps): JSX.Element => {
   };
 
   const starsArray = useMemo(() => new Array(MAX_STAR).fill(""), []);
+  const userRating = useMemo(() => {
+    const starRating = product.rating.rates.reduce(
+      (prevRate, acctualRate) => prevRate + acctualRate,
+      0,
+    );
+    return starRating;
+  }, []);
+
+  const handleStarColor = useCallback(
+    (starValue: number) => {
+      if (hoverState) {
+        return starNumHovered >= starValue && hoverState ? "#fde047" : "black";
+      }
+      if (!hoverState) {
+        return userRating - starValue <= 0.5 ? "#fde047" : "black";
+      }
+      return "black";
+    },
+    [hoverState, starNumHovered],
+  );
 
   return (
     <div className="ml-16 w-full grid justify-evenly ">
@@ -45,14 +65,11 @@ const ProductPriceBox = ({ product }: ProductPriceProps): JSX.Element => {
         <div className="flex">
           {starsArray.map((_, index) => {
             const starValue = index + 1;
+
             return (
               <FaStar
                 key={index}
-                color={
-                  starNumHovered >= starValue && hoverState
-                    ? "#fde047"
-                    : "black"
-                }
+                color={handleStarColor(starValue)}
                 className="mt-4 w-auto h-6 cursor-pointer pl-4 first:pl-0"
                 onMouseEnter={() => onStarHover(starValue)}
                 onMouseLeave={onStartUnhover}
