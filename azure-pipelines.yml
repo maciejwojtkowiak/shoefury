@@ -5,7 +5,8 @@ resources:
   - repo: self
 
 pool:
-  default
+  name: Default
+
 
 variables:
   tag: "$(Build.BuildId)"
