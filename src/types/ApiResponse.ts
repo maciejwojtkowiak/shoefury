@@ -1,9 +1,8 @@
-import { IProduct } from "types/product";
-
 import { ApiResponseDefault } from "./api/ApiResponseDefault";
+import { IProductItem } from "./product/product";
 
 export interface IGetProductsResponse extends ApiResponseDefault {
-  products: IProduct[];
+  products: IProductItem[];
   pagesCount: number;
   totalProducts: string;
 }
@@ -14,7 +13,7 @@ export interface IResponseError extends ApiResponseDefault {
 }
 
 export interface IGetProductResponse extends ApiResponseDefault {
-  product: IProduct;
+  product: IProductItem;
 }
 
 export interface ICheckAuthResponse extends ApiResponseDefault {
