@@ -1,11 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Paths } from "config/paths";
-<<<<<<< HEAD
-=======
 import { useAppDispatch, useAppSelector } from "store/hooks/reduxHooks";
 import { userAction } from "store/user/user-slice";
->>>>>>> dev
 
 import Profile from "components/profile/Profile";
 import ModalPortal from "components/ui/modal/ModalPortal";
@@ -19,11 +16,7 @@ const RightSideNavbar = (): JSX.Element => {
     localStorage.removeItem("token");
     dispatch(userAction.setIsAuth(false));
   };
-<<<<<<< HEAD
-  const isAuth = useSelector((state: RootState) => state.userReducer.isAuth);
-=======
   const isAuth = useAppSelector((state) => state.userReducer.isAuth);
->>>>>>> dev
   const modal = useModal();
   return (
     <div className="place-self-end flex gap-4 h-full items-center justify-center">

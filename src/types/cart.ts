@@ -1,4 +1,4 @@
-import { IProductItem } from "./product";
+import { IProductItem } from "./product/product";
 
 interface ICartItem {
   product: IProductItem;
