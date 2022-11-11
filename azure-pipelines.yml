@@ -25,6 +25,8 @@ stages:
           $(tag)
   - job: Push
     displayName: Push to repository
+    pool:
+        name: selfhost
     steps:
       - task: Docker@2
         inputs:
