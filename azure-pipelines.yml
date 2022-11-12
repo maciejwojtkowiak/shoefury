@@ -22,7 +22,7 @@ stages:
         command: build
         dockerfile: '**/Dockerfile'
         tags: |
-          $(tag)
+          shoefury-front
   - job: Push
     displayName: Push to repository
     pool:
@@ -36,7 +36,7 @@ stages:
         inputs:
           repository: 'https://hub.docker.com/repository/docker/maciejwojtkowiak/shoefury-front'
           command: 'push'
-          tags: '$(tag)'
+          tags: shoefury-front
 
 
 
