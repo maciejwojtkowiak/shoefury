@@ -30,6 +30,10 @@ stages:
     steps:
       - task: Docker@2
         inputs:
+          containerRegistry: 'docker-hub'
+          command: 'login'
+      - task: Docker@2
+        inputs:
           repository: 'https://hub.docker.com/repository/docker/maciejwojtkowiak/shoefury-front'
           command: 'push'
           tags: '$(tag)'
