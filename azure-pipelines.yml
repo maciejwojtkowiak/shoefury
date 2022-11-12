@@ -21,7 +21,7 @@ stages:
       inputs:
         command: 'build'
         Dockerfile: '**/Dockerfile'
-        tags: 'maciejwojtkowiak/shoefury-frontend'
+        tags: 'latest'
   - job: Push
     displayName: Push to repository
     pool:
@@ -35,7 +35,7 @@ stages:
         inputs:
           repository: 'https://hub.docker.com/repository/docker/maciejwojtkowiak/shoefury-frontend'
           command: 'push'
-          tags: 'maciejwojtkowiak/shoefury-frontend'
+          tags: 'latest'
 
 
 
