@@ -33,7 +33,7 @@ stages:
           command: 'login'
       - task: Docker@2
         inputs:
-          repository: 'https://hub.docker.com/repository/docker/maciejwojtkowiak/shoefury-frontend'
+          repository: 'maciejwojtkowiak/shoefury-frontend'
           command: 'push'
           tags: 'latest'
 
