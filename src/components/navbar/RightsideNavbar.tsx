@@ -34,8 +34,12 @@ const RightSideNavbar = (): JSX.Element => {
       <li className="mr-4">
         {!isAuth ? (
           <div className="flex gap-4">
-            <Link to={Paths.REGISTER}>Register</Link>
-            <Link to={Paths.LOGIN}>Login</Link>
+            <Link data-testid="register-btn" to={Paths.REGISTER}>
+              Register
+            </Link>
+            <Link data-testid="login-btn" to={Paths.LOGIN}>
+              Login
+            </Link>
           </div>
         ) : (
           <div className="flex gap-4">
