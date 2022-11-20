@@ -4,6 +4,10 @@ trigger:
 resources:
   - repo: self
 
+pool:
+  name: selfhost
+
+
 variables:
   tag: "$(Build.BuildId)"
 
