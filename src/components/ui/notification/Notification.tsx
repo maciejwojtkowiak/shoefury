@@ -4,8 +4,10 @@ import { useAppSelector } from "store/hooks/reduxHooks";
 const Notification = (): JSX.Element => {
   const message = useAppSelector((state) => state.notificationReducer.message);
   return (
-    <div className="absolute top-[13%] right-[8%] z-10 bg-white drop-shadow-xl w-[300px] h-[60px] grid place-items-center">
-      <p className="font-bold">{message}Account has been created</p>
+    <div className="absolute top-[150%] right-[5%] bg-white drop-shadow-2xl w-[350px] h-[80px] grid place-items-center">
+      <p className="font-bold text-2xl underline">
+        {message}Account has been created
+      </p>
     </div>
   );
 };

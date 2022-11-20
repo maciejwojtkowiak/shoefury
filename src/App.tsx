@@ -45,23 +45,23 @@ function App(): JSX.Element {
   }, [notificationIsShown]);
 
   return (
-    <div className="relative">
-      <BrowserRouter>
+    <BrowserRouter>
+      <div className="relative">
         <Navbar />
-        <Routes>
-          <Route element={<PrivateRoutes />}>
-            <Route path={Paths.ADDPRODUCT} element={<AddProductPage />} />
-            <Route path={Paths.CART} element={<CartPage />} />
-          </Route>
-          <Route path={Paths.HOME} element={<MainPage />} />
-          <Route path={Paths.REGISTER} element={<Register />} />
-          <Route path={`${Paths.PRODUCT}/:id`} element={<DetailPage />} />
-          <Route path={Paths.LOGIN} element={<LoginPage />} />
-          <Route path={Paths.SUCCESS} element={<OrderSuccess />} />
-        </Routes>
         {notificationIsShown ? <Notification /> : null}
-      </BrowserRouter>
-    </div>
+      </div>
+      <Routes>
+        <Route element={<PrivateRoutes />}>
+          <Route path={Paths.ADDPRODUCT} element={<AddProductPage />} />
+          <Route path={Paths.CART} element={<CartPage />} />
+        </Route>
+        <Route path={Paths.HOME} element={<MainPage />} />
+        <Route path={Paths.REGISTER} element={<Register />} />
+        <Route path={`${Paths.PRODUCT}/:id`} element={<DetailPage />} />
+        <Route path={Paths.LOGIN} element={<LoginPage />} />
+        <Route path={Paths.SUCCESS} element={<OrderSuccess />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

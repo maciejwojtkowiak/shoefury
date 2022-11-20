@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import { HiLightningBolt } from "react-icons/hi";
+import { theme } from "config/theme";
 
 const LogoIcon = (): JSX.Element => {
   return (
@@ -12,8 +13,8 @@ const LogoIcon = (): JSX.Element => {
           x2="0%"
           y2="0%"
         >
-          <stop stopColor="#fdba74" offset="0%" />
-          <stop stopColor="#f97316" offset="100%" />
+          <stop stopColor={theme.orangeLight} offset="0%" />
+          <stop stopColor={theme.orangeMain} offset="100%" />
         </linearGradient>
       </svg>
       <HiLightningBolt style={{ fill: "url(#orange-gradient)" }} size={48} />
