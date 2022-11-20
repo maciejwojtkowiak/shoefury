@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { config } from "config/config";
 import { useAppDispatch } from "store/hooks/reduxHooks";
+import { registerUser } from "store/user/thunks";
 
 import FormButton from "components/ui/buttons/RoundedButton";
 
@@ -29,19 +29,9 @@ const RegisterForm = (): JSX.Element => {
 
     const handleRegister = async (): Promise<void> => {
       try {
-        const response = await fetch(`${config.backendDomain}/auth/register`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name,
-            email,
-            password,
-          }),
-        });
-        const data = await response.json();
-        localStorage.setItem("token", data.token);
+        void dispatch(registerUser({ name, email, password }));
+        // const data = await response.json();
+        // localStorage.setItem("token", data.token);
         dispatch(userAction.setIsAuth(true));
         navigate("/");
       } catch (error) {

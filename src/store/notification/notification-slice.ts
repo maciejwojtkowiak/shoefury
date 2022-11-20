@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { registerUser } from "store/user/thunks";
 
 export type NotificationType = "info" | "success" | "error";
 
@@ -25,6 +26,12 @@ const notificationSlice = createSlice({
     hideNotification(state: NotificationInitial) {
       state.isShown = false;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(registerUser.fulfilled, (state, action) => {
+      state.isShown = true;
+      state.message = action.payload;
+    });
   },
 });
 
