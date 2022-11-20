@@ -4,6 +4,7 @@ import { config } from "config/config";
 import { Paths } from "config/paths";
 import DetailPage from "pages/DetailPage";
 import { useAppDispatch, useAppSelector } from "store/hooks/reduxHooks";
+import { notificationAction } from "store/notification/notification-slice";
 import { PrivateRoutes } from "utils/PrivateRoutes";
 
 import Navbar from "components/navbar/Navbar";
@@ -40,7 +41,9 @@ function App(): JSX.Element {
   }, [dispatch]);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {}, config.notificationDuration);
+    const timeout = setTimeout(() => {
+      dispatch(notificationAction.hideNotification());
+    }, config.notificationDuration);
     return () => clearTimeout(timeout);
   }, [notificationIsShown]);
 

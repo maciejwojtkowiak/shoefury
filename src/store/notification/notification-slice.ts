@@ -2,13 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export type NotificationType = "info" | "success" | "error";
 
-interface NotificationInitialState {
+interface NotificationInitial {
   isShown: boolean;
   message: string;
   type: NotificationType;
 }
 
-const notificationInitial: NotificationInitialState = {
+const notificationInitial: NotificationInitial = {
   isShown: true,
   message: "",
   type: "info",
@@ -17,7 +17,15 @@ const notificationInitial: NotificationInitialState = {
 const notificationSlice = createSlice({
   name: "notification",
   initialState: notificationInitial,
-  reducers: {},
+  reducers: {
+    showNotification(state: NotificationInitial) {
+      state.isShown = true;
+    },
+
+    hideNotification(state: NotificationInitial) {
+      state.isShown = false;
+    },
+  },
 });
 
 export const notificationAction = notificationSlice.actions;

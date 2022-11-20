@@ -42,6 +42,8 @@ const ProductPriceBox = ({ product }: ProductPriceProps): JSX.Element => {
     return starRating;
   }, []);
 
+  console.log(product.rating.rates);
+
   const handleStarColor = useCallback(
     (starValue: number) => {
       if (hoverState) {
