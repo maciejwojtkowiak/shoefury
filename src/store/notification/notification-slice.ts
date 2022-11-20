@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-type NotificationType = "info" | "error";
+export type NotificationType = "info" | "success" | "error";
 
 interface NotificationInitialState {
   isShown: boolean;
