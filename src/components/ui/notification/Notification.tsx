@@ -10,12 +10,15 @@ const Notification = (): JSX.Element => {
     return theme.infoOrange;
   };
   return (
-    <div className="absolute top-[150%] right-[5%] bg-white drop-shadow-2xl w-[350px] h-[80px] grid place-items-center">
+    <div
+      className="absolute top-[150%] right-[5%] bg-white drop-shadow-2xl w-[350px] h-[80px] grid place-items-center"
+      data-testid="notification"
+    >
       <p
         className="font-bold text-2xl underline"
         style={{ textDecorationColor: colorHandler() }}
       >
-        {notification.message}Account has been created
+        {notification.message}
       </p>
     </div>
   );

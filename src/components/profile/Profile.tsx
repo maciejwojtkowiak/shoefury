@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useModal } from "hooks/use-modal";
 import { getProfile } from "services/profileApi/profileApi";
 import { IProfile } from "types/api/profile/profile";
-
-import { useModal } from "components/ui/modal/use-modal";
 
 import OrderList from "./orders/OrderList";
 import UserInfo from "./userInfo/UserInfo";

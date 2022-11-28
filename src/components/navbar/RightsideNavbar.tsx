@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Paths } from "config/paths";
+import { useModal } from "hooks/use-modal";
 import { useAppDispatch, useAppSelector } from "store/hooks/reduxHooks";
 import { userAction } from "store/user/user-slice";
 
 import Profile from "components/profile/Profile";
 import ModalPortal from "components/ui/modal/ModalPortal";
-import { useModal } from "components/ui/modal/use-modal";
 
 import CartIcon from "../svg/CartIcon";
 

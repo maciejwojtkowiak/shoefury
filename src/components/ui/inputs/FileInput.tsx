@@ -2,10 +2,15 @@ import React from "react";
 
 interface FileInputProps {
   label: string;
+  name: string;
   onFileUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const FileInput = ({ label, onFileUpload }: FileInputProps): JSX.Element => {
+const FileInput = ({
+  label,
+  name,
+  onFileUpload,
+}: FileInputProps): JSX.Element => {
   return (
     <div>
       <label
@@ -18,6 +23,7 @@ const FileInput = ({ label, onFileUpload }: FileInputProps): JSX.Element => {
         className="border-2 border-orange-200 cursor-pointer file:cursor-pointer file:bg-orange-300 file:px-6 file:py-2 file:mr-4 file:border-none p-2 file:font-bold file:text-white"
         placeholder="Product name"
         onChange={onFileUpload}
+        name={name}
         id="file_input"
         type="file"
       />

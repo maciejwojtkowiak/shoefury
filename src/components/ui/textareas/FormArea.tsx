@@ -2,11 +2,13 @@ import React, { ChangeEvent } from "react";
 
 interface FormAreaProps {
   onChangeHandler: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  name: string;
   placeholder: string;
 }
 
 const FormArea = ({
   onChangeHandler,
+  name,
   placeholder,
 }: FormAreaProps): JSX.Element => {
   return (

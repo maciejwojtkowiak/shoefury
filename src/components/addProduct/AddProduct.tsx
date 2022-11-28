@@ -51,19 +51,26 @@ const AddProduct = (): JSX.Element => {
         <form className="flex justify-center items-center flex-col border-2 px-6 py-24 bg-white gap-8 w-[500px] h-[700px]  ">
           <FormInput
             placeholder="Product name"
+            name="product-name"
             onChange={onNameChangeHandler}
             type="text"
           />
           <FormInput
             placeholder="Product Price"
+            name="price"
             onChange={onPriceChangeHandler}
             type="text"
           />
           <FormArea
             placeholder="Product description"
+            name="product-desc"
             onChangeHandler={onDescriptionChange}
           />
-          <FileInput label="Upload product image" onFileUpload={onFileUpload} />
+          <FileInput
+            label="Upload product image"
+            name="product-img-upload"
+            onFileUpload={onFileUpload}
+          />
           <SquareButton
             width="w-[12rem]"
             height="h-[8rem]"

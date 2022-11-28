@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useValidation } from "hooks/use-validation";
 import { Login } from "services/authApi/login";
 
 import FormButton from "components/ui/buttons/RoundedButton";
@@ -20,6 +21,7 @@ const LoginForm = (): JSX.Element => {
   };
   const loginHandler = (event: React.FormEvent<HTMLButtonElement>): void => {
     event.preventDefault();
+    const validation = useValidation();
     const handleLogin = async (): Promise<void> => {
       try {
         const response = await Login(email, password);
@@ -39,15 +41,21 @@ const LoginForm = (): JSX.Element => {
       <FormHeader />
       <FormInput
         onChange={(e) => onValueChange(e, setEmail)}
+        name="email"
         placeholder="Enter email"
         type="email"
       />
       <FormInput
         onChange={(e) => onValueChange(e, setPassword)}
+        name="password"
         placeholder="Enter password"
         type="password"
       />
-      <FormButton onClickHandler={loginHandler} buttonText="Login" />
+      <FormButton
+        onClickHandler={loginHandler}
+        name="login-btn"
+        buttonText="Login"
+      />
     </AuthForm>
   );
 };
