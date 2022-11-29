@@ -21,7 +21,7 @@ const LoginForm = (): JSX.Element => {
   };
   const loginHandler = (event: React.FormEvent<HTMLButtonElement>): void => {
     event.preventDefault();
-    const validation = useValidation();
+
     const handleLogin = async (): Promise<void> => {
       try {
         const response = await Login(email, password);
@@ -35,18 +35,21 @@ const LoginForm = (): JSX.Element => {
     };
     void handleLogin();
   };
+  const validation = useValidation();
 
   return (
     <AuthForm>
       <FormHeader />
       <FormInput
         onChange={(e) => onValueChange(e, setEmail)}
+        isValid={validation.validFields.email.isValid}
         name="email"
         placeholder="Enter email"
         type="email"
       />
       <FormInput
         onChange={(e) => onValueChange(e, setPassword)}
+        isValid={validation.validFields.email.isValid}
         name="password"
         placeholder="Enter password"
         type="password"

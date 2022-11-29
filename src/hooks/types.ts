@@ -14,4 +14,5 @@ export interface ValidationFields {
   email: ValidationField;
   username: ValidationField;
   password: ValidationField;
+  generic: ValidationField;
 }
