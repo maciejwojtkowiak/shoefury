@@ -51,22 +51,25 @@ const RegisterForm = (): JSX.Element => {
       <LogoSection />
       <FormInput
         placeholder="Enter your name"
-        isValid={validation.validFields.username.isValid}
         name="username"
         type="text"
+        validationType="username"
+        value={name}
         onChange={(e) => onChangeHandler(e, setName)}
       />
       <FormInput
         placeholder="Enter your email"
-        isValid={validation.validFields.email.isValid}
         name="email"
         type="email"
+        validationType="email"
+        value={email}
         onChange={(e) => onChangeHandler(e, setEmail)}
       />
       <FormInput
         placeholder="Enter your password"
-        isValid={validation.validFields.password.isValid}
         name="password"
+        validationType="password"
+        value={password}
         type="password"
         onChange={(e) => onChangeHandler(e, setPassword)}
       />

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useValidation } from "hooks/use-validation";
 import { Login } from "services/authApi/login";
 
 import FormButton from "components/ui/buttons/RoundedButton";
@@ -35,24 +34,25 @@ const LoginForm = (): JSX.Element => {
     };
     void handleLogin();
   };
-  const validation = useValidation();
 
   return (
     <AuthForm>
       <FormHeader />
       <FormInput
         onChange={(e) => onValueChange(e, setEmail)}
-        isValid={validation.validFields.email.isValid}
         name="email"
         placeholder="Enter email"
         type="email"
+        validationType="email"
+        value={email}
       />
       <FormInput
         onChange={(e) => onValueChange(e, setPassword)}
-        isValid={validation.validFields.email.isValid}
         name="password"
         placeholder="Enter password"
         type="password"
+        validationType="password"
+        value={password}
       />
       <FormButton
         onClickHandler={loginHandler}

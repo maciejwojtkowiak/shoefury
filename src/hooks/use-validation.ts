@@ -23,11 +23,18 @@ export const useValidation = (): UseValidation => {
       isValid: false,
       isDirty: false,
     },
-    generic: {
+    genericInput: {
       isValid: false,
       isDirty: false,
     },
   });
+
+  const [isBlurred, setIsBlured] = useState<boolean>(false);
+
+  const onBlurHandler = (): void => {
+    setIsBlured(true);
+  };
+  const isDirty = !!isBlurred;
 
   const validationFailed = (type: PossibleValidationFields): void => {
     setValidFields((prevValid) => {
@@ -35,7 +42,7 @@ export const useValidation = (): UseValidation => {
         ...prevValid,
         [type]: {
           isValid: false,
-          isDirty: true,
+          isDirty,
         },
       };
     });
@@ -47,7 +54,7 @@ export const useValidation = (): UseValidation => {
         ...prevValid,
         [type]: {
           isValid: true,
-          isDirty: true,
+          isDirty,
         },
       };
     });
@@ -77,5 +84,7 @@ export const useValidation = (): UseValidation => {
   return {
     validation,
     validFields,
+    isBlurred,
+    onBlurHandler,
   };
 };

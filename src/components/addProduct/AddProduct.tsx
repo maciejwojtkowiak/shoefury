@@ -52,12 +52,16 @@ const AddProduct = (): JSX.Element => {
           <FormInput
             placeholder="Product name"
             name="product-name"
+            validationType="genericInput"
+            value={productTitle}
             onChange={onNameChangeHandler}
             type="text"
           />
           <FormInput
             placeholder="Product Price"
             name="price"
+            value={price}
+            validationType="genericInput"
             onChange={onPriceChangeHandler}
             type="text"
           />
