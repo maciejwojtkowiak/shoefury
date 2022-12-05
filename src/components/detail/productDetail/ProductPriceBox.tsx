@@ -36,13 +36,11 @@ const ProductPriceBox = ({ product }: ProductPriceProps): JSX.Element => {
   const starsArray = useMemo(() => new Array(MAX_STAR).fill(""), []);
   const userRating = useMemo(() => {
     const starRating = product.rating.rates.reduce(
-      (prevRate, acctualRate) => prevRate + acctualRate,
+      (prevRate, acctualRate) => +prevRate + +acctualRate,
       0,
     );
-    return starRating;
+    return starRating / product.rating.rates.length;
   }, []);
-
-  console.log(product.rating.rates);
 
   const handleStarColor = useCallback(
     (starValue: number) => {
@@ -50,7 +48,7 @@ const ProductPriceBox = ({ product }: ProductPriceProps): JSX.Element => {
         return starNumHovered >= starValue && hoverState ? "#fde047" : "black";
       }
       if (!hoverState) {
-        return userRating - starValue <= 0.5 ? "#fde047" : "black";
+        return userRating - starValue >= 0.5 ? "#fde047" : "black";
       }
       return "black";
     },

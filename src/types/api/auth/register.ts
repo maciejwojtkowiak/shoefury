@@ -1,3 +1,5 @@
 import { ApiResponseDefault } from "../ApiResponseDefault";
 
-export interface RegisterResponse extends ApiResponseDefault {}
+export interface RegisterResponse extends ApiResponseDefault {
+  token: string;
+}

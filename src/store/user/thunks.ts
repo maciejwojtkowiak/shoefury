@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { config } from "config/config";
 import { register } from "services/authApi/register";
 import { editName } from "services/profileApi/profileApi";
 import { IRegisterData } from "types/auth/Auth";
@@ -19,7 +20,7 @@ export const registerUser = createAsyncThunk(
       authData.email,
       authData.password,
     );
-    console.log("RES", response);
+    localStorage.setItem(config.jwtToken, response.token);
     return response.message;
   },
 );

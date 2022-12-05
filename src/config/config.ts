@@ -4,4 +4,5 @@ export const config = {
   minPasswordLength: 10,
   minCapitalLetter: 1,
   minSpecialCharacter: 1,
+  jwtToken: "token",
 };

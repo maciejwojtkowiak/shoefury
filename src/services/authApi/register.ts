@@ -12,5 +12,6 @@ export const register = async (
     email,
     password,
   });
+  console.log("REGISTEr", response);
   return response.data;
 };
