@@ -1,5 +1,5 @@
 export const regexData = {
-  containsWhitespace: /\s/,
+  containsWhitespace: /^\S+$/,
   containsCapitalLetter: /\?=.*[A-Z]/,
   containsSpecialCharacter: /\?=.*\W/,
 };

@@ -4,8 +4,8 @@ export type PossibleValidationFields =
   | "username"
   | "genericInput";
 
-export interface UseValidation {
-  validation: (value: string, type: PossibleValidationFields) => void;
+export interface IUseValidation {
+  validate: (value: string, type: PossibleValidationFields) => void;
   validFields: ValidationFields;
   onBlurHandler: () => void;
   isBlurred: boolean;
@@ -14,6 +14,7 @@ export interface UseValidation {
 export interface ValidationField {
   isValid: boolean;
   isDirty: boolean;
+  validationLabel: string;
 }
 
 export interface ValidationFields {

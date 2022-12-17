@@ -4,28 +4,32 @@ import { regexData } from "utils/regex/regex";
 import { regexChecker } from "utils/regex/regexChecker";
 
 import {
+  IUseValidation,
   PossibleValidationFields,
-  UseValidation,
   ValidationFields,
 } from "./types";
 
-export const useValidation = (): UseValidation => {
+export const useValidation = (): IUseValidation => {
   const [validFields, setValidFields] = useState<ValidationFields>({
     email: {
       isValid: false,
       isDirty: false,
+      validationLabel: "",
     },
     username: {
       isValid: false,
       isDirty: false,
+      validationLabel: "",
     },
     password: {
       isValid: false,
       isDirty: false,
+      validationLabel: "",
     },
     genericInput: {
       isValid: false,
       isDirty: false,
+      validationLabel: "",
     },
   });
 
@@ -36,13 +40,17 @@ export const useValidation = (): UseValidation => {
   };
   const isDirty = !!isBlurred;
 
-  const validationFailed = (type: PossibleValidationFields): void => {
+  const validationFailed = (
+    type: PossibleValidationFields,
+    validationMessage: string,
+  ): void => {
     setValidFields((prevValid) => {
       return {
         ...prevValid,
         [type]: {
           isValid: false,
           isDirty,
+          validtionLabel: validationMessage,
         },
       };
     });
@@ -55,19 +63,23 @@ export const useValidation = (): UseValidation => {
         [type]: {
           isValid: true,
           isDirty,
+          validationLabel: "",
         },
       };
     });
   };
-  const validation = (value: string, type: PossibleValidationFields): void => {
-    // generic validation
-    // walidacja w FormInput komponent
-    if (!value) validationFailed(type);
+  const validate = (value: string, type: PossibleValidationFields): void => {
+    if (!value) validationFailed(type, "Input can not be empty");
     else validationSuccess(type);
-
     if (type === "email") {
-      if (!regexChecker(regexData.containsWhitespace, value))
-        validationFailed(type);
+      console.log(regexChecker(regexData.containsWhitespace, value));
+      if (!regexChecker(regexData.containsWhitespace, value)) {
+        console.log("VALIDATION STAGE");
+        validationFailed(
+          type,
+          "email should have valid format <email>@<provider>.<extension>",
+        );
+      }
     }
 
     if (type === "password") {
@@ -82,7 +94,7 @@ export const useValidation = (): UseValidation => {
   };
 
   return {
-    validation,
+    validate,
     validFields,
     isBlurred,
     onBlurHandler,
