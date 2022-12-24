@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useValidation } from "hooks/use-validation";
 import { useAppDispatch } from "store/hooks/reduxHooks";
 import { registerUser } from "store/user/thunks";
 
@@ -15,7 +14,6 @@ const RegisterForm = (): JSX.Element => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const validation = useValidation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const onChangeHandler = (
@@ -43,9 +41,6 @@ const RegisterForm = (): JSX.Element => {
     void handleRegister();
   };
 
-  useEffect(() => {
-    validation.validation(name, "username");
-  }, [name]);
   return (
     <AuthForm>
       <LogoSection />

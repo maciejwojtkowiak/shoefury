@@ -5,7 +5,9 @@ interface ValidationLabelProps {
 }
 
 const ValidationLabel = ({ labelText }: ValidationLabelProps): JSX.Element => {
-  return <label>{labelText}</label>;
+  return (
+    <label className="text-sm text-red-500 font-semibold">{labelText}</label>
+  );
 };
 
 export default ValidationLabel;

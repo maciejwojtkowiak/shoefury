@@ -44,13 +44,14 @@ export const useValidation = (): IUseValidation => {
     type: PossibleValidationFields,
     validationMessage: string,
   ): void => {
+    console.log("VALIDATION", validationMessage);
     setValidFields((prevValid) => {
       return {
         ...prevValid,
         [type]: {
           isValid: false,
           isDirty,
-          validtionLabel: validationMessage,
+          validationLabel: validationMessage,
         },
       };
     });

@@ -26,10 +26,9 @@ const FormInput = ({
     validation.validate(value, validationType);
   }, [value]);
   const field = validation.validFields[validationType];
-  console.log(field.validationLabel);
 
   return (
-    <div>
+    <div className="w-full">
       <input
         style={{ borderColor: field.isDirty && !field.isValid ? "red" : "" }}
         onChange={onChange}
@@ -40,7 +39,9 @@ const FormInput = ({
         value={value}
         className="border-b-2 border-orange-200 focus:border-orange-400 focus:outline-none transition delay-50 w-full"
       />
-      <ValidationLabel labelText={field.validationLabel} />
+      {field.isDirty && !field.isValid ? (
+        <ValidationLabel labelText={field.validationLabel} />
+      ) : null}
     </div>
   );
 };
