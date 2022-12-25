@@ -1,6 +1,5 @@
 import { createPortal } from "react-dom";
-
-import { usePortal } from "./use-portal";
+import { usePortal } from "hooks/use-portal";
 
 interface PortalProps {
   rootId: string;
