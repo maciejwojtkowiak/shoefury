@@ -65,11 +65,9 @@ export const useValidation = (
     errorMessage: string,
   ): void => {
     if (conditionToFail) {
-      console.log("failure", errorMessage);
       validationFailed(errorMessage);
       throw new Error("Validaiton failed");
     }
-    validationSuccess();
   };
   const validate = (value: string): void => {
     try {
@@ -87,17 +85,18 @@ export const useValidation = (
           value.length < config.minPasswordLength,
           `Password must have ${config.minPasswordLength} characters`,
         );
+        console.log(regexData.containsSpecialCharacter.test(value));
         checkFailureHandler(
-          regexChecker(regexData.containsCapitalLetter, value),
+          !regexChecker(regexData.containsCapitalLetter, value),
           "Password must contain capital letter",
         );
-        if (
-          value.length < config.minPasswordLength &&
-          regexChecker(regexData.containsSpecialCharacter, value)
-        ) {
-          validationSuccess();
-        }
+
+        checkFailureHandler(
+          !regexChecker(regexData.containsSpecialCharacter, value),
+          "Password must contain special character",
+        );
       }
+      validationSuccess();
     } catch (error) {}
   };
 
