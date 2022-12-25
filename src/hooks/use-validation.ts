@@ -65,37 +65,40 @@ export const useValidation = (
     errorMessage: string,
   ): void => {
     if (conditionToFail) {
+      console.log("failure", errorMessage);
       validationFailed(errorMessage);
-      return;
+      throw new Error("Validaiton failed");
     }
     validationSuccess();
   };
   const validate = (value: string): void => {
-    checkFailureHandler(!value, "Input can not be empty");
+    try {
+      checkFailureHandler(value.length === 0, "Input can not be empty");
 
-    if (type === "email") {
-      checkFailureHandler(
-        !regexChecker(regexData.containsWhitespace, value),
-        "email should have valid format <email>@<provider>.<extension>",
-      );
-    }
-
-    if (type === "password") {
-      checkFailureHandler(
-        value.length < config.minPasswordLength,
-        `Password must have ${config.minPasswordLength} characters`,
-      );
-      checkFailureHandler(
-        regexChecker(regexData.containsCapitalLetter, value),
-        "Password must contain capital letter",
-      );
-      if (
-        value.length < config.minPasswordLength &&
-        regexChecker(regexData.containsSpecialCharacter, value)
-      ) {
-        validationSuccess();
+      if (type === "email") {
+        checkFailureHandler(
+          !regexChecker(regexData.containsWhitespace, value),
+          "email should have valid format <email>@<provider>.<extension>",
+        );
       }
-    }
+
+      if (type === "password") {
+        checkFailureHandler(
+          value.length < config.minPasswordLength,
+          `Password must have ${config.minPasswordLength} characters`,
+        );
+        checkFailureHandler(
+          regexChecker(regexData.containsCapitalLetter, value),
+          "Password must contain capital letter",
+        );
+        if (
+          value.length < config.minPasswordLength &&
+          regexChecker(regexData.containsSpecialCharacter, value)
+        ) {
+          validationSuccess();
+        }
+      }
+    } catch (error) {}
   };
 
   return {

@@ -27,8 +27,6 @@ const FormInput = ({
     validation.validate(value);
   }, [value]);
   const field = validation.validFields[validationType];
-  console.log("isvalid", field.isValid);
-  console.log("isdirty", field.isDirty);
 
   return (
     <div className="w-full">
