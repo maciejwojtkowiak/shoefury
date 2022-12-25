@@ -5,7 +5,7 @@ export type PossibleValidationFields =
   | "genericInput";
 
 export interface IUseValidation {
-  validate: (value: string, type: PossibleValidationFields) => void;
+  validate: (value: string) => void;
   validFields: ValidationFields;
   onBlurHandler: () => void;
   isBlurred: boolean;

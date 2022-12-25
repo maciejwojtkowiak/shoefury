@@ -9,7 +9,9 @@ import {
   ValidationFields,
 } from "./types";
 
-export const useValidation = (): IUseValidation => {
+export const useValidation = (
+  type: PossibleValidationFields,
+): IUseValidation => {
   const [validFields, setValidFields] = useState<ValidationFields>({
     email: {
       isValid: false,
@@ -40,11 +42,7 @@ export const useValidation = (): IUseValidation => {
   };
   const isDirty = !!isBlurred;
 
-  const validationFailed = (
-    type: PossibleValidationFields,
-    validationMessage: string,
-  ): void => {
-    console.log("VALIDATION", validationMessage);
+  const validationFailed = (validationMessage: string): void => {
     setValidFields((prevValid) => {
       return {
         ...prevValid,
@@ -57,7 +55,7 @@ export const useValidation = (): IUseValidation => {
     });
   };
 
-  const validationSuccess = (type: PossibleValidationFields): void => {
+  const validationSuccess = (): void => {
     setValidFields((prevValid) => {
       return {
         ...prevValid,
@@ -69,27 +67,41 @@ export const useValidation = (): IUseValidation => {
       };
     });
   };
-  const validate = (value: string, type: PossibleValidationFields): void => {
-    if (!value) validationFailed(type, "Input can not be empty");
-    else validationSuccess(type);
+
+  const checkFailureHandler = (
+    conditionToFail: boolean,
+    errorMessage: string,
+  ): void => {
+    if (conditionToFail) {
+      validationFailed(errorMessage);
+      return;
+    }
+    validationSuccess();
+  };
+  const validate = (value: string): void => {
+    checkFailureHandler(!value, "Input can not be empty");
+
     if (type === "email") {
-      console.log(regexChecker(regexData.containsWhitespace, value));
-      if (!regexChecker(regexData.containsWhitespace, value)) {
-        console.log("VALIDATION STAGE");
-        validationFailed(
-          type,
-          "email should have valid format <email>@<provider>.<extension>",
-        );
-      }
+      checkFailureHandler(
+        !regexChecker(regexData.containsWhitespace, value),
+        "email should have valid format <email>@<provider>.<extension>",
+      );
     }
 
     if (type === "password") {
+      checkFailureHandler(
+        value.length < config.minPasswordLength,
+        `Password must have ${config.minPasswordLength} characters`,
+      );
+      checkFailureHandler(
+        regexChecker(regexData.containsCapitalLetter, value),
+        "Password must contain capital letter",
+      );
       if (
         value.length < config.minPasswordLength &&
-        regexChecker(regexData.containsCapitalLetter, value) &&
         regexChecker(regexData.containsSpecialCharacter, value)
       ) {
-        validationSuccess(type);
+        validationSuccess();
       }
     }
   };

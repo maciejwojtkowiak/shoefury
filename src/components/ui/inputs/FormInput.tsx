@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { theme } from "config/theme";
 import { PossibleValidationFields } from "hooks/types";
 import { useValidation } from "hooks/use-validation";
 
@@ -21,16 +22,18 @@ const FormInput = ({
   value,
   type,
 }: FormInputProps): JSX.Element => {
-  const validation = useValidation();
+  const validation = useValidation(validationType);
   useEffect(() => {
-    validation.validate(value, validationType);
+    validation.validate(value);
   }, [value]);
   const field = validation.validFields[validationType];
 
   return (
     <div className="w-full">
       <input
-        style={{ borderColor: field.isDirty && !field.isValid ? "red" : "" }}
+        style={{
+          borderColor: field.isDirty && !field.isValid ? theme.errorRed : "",
+        }}
         onChange={onChange}
         onBlur={validation.onBlurHandler}
         name={name}
