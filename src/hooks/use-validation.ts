@@ -40,7 +40,6 @@ export const useValidation = (
   const onBlurHandler = (): void => {
     setIsBlured(true);
   };
-  const isDirty = !!isBlurred;
 
   const validationFailed = (validationMessage: string): void => {
     setValidFields((prevValid) => {
@@ -48,7 +47,7 @@ export const useValidation = (
         ...prevValid,
         [type]: {
           isValid: false,
-          isDirty,
+          isDirty: isBlurred,
           validationLabel: validationMessage,
         },
       };
@@ -61,7 +60,7 @@ export const useValidation = (
         ...prevValid,
         [type]: {
           isValid: true,
-          isDirty,
+          isDirty: isBlurred,
           validationLabel: "",
         },
       };

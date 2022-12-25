@@ -18,8 +18,5 @@ export interface ValidationField {
 }
 
 export interface ValidationFields {
-  email: ValidationField;
-  username: ValidationField;
-  password: ValidationField;
-  genericInput: ValidationField;
+  [key: string]: ValidationField;
 }
