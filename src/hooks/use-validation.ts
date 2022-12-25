@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { config } from "config/config";
 import { regexData } from "utils/regex/regex";
 import { regexChecker } from "utils/regex/regexChecker";
@@ -13,22 +13,7 @@ export const useValidation = (
   type: PossibleValidationFields,
 ): IUseValidation => {
   const [validFields, setValidFields] = useState<ValidationFields>({
-    email: {
-      isValid: false,
-      isDirty: false,
-      validationLabel: "",
-    },
-    username: {
-      isValid: false,
-      isDirty: false,
-      validationLabel: "",
-    },
-    password: {
-      isValid: false,
-      isDirty: false,
-      validationLabel: "",
-    },
-    genericInput: {
+    [type]: {
       isValid: false,
       isDirty: false,
       validationLabel: "",
@@ -37,14 +22,23 @@ export const useValidation = (
 
   const [isBlurred, setIsBlured] = useState<boolean>(false);
 
+  useEffect(() => {
+    setValidFields((prevValid) => {
+      return {
+        [type]: {
+          ...prevValid[type],
+          isDirty: isBlurred,
+        },
+      };
+    });
+  }, [isBlurred]);
   const onBlurHandler = (): void => {
     setIsBlured(true);
   };
 
   const validationFailed = (validationMessage: string): void => {
-    setValidFields((prevValid) => {
+    setValidFields(() => {
       return {
-        ...prevValid,
         [type]: {
           isValid: false,
           isDirty: isBlurred,
@@ -55,9 +49,8 @@ export const useValidation = (
   };
 
   const validationSuccess = (): void => {
-    setValidFields((prevValid) => {
+    setValidFields(() => {
       return {
-        ...prevValid,
         [type]: {
           isValid: true,
           isDirty: isBlurred,
