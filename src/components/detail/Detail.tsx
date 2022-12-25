@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "store/hooks/reduxHooks";
 import { fetchProduct } from "store/products/thunks";
 
+import CommentSection from "./comment/CommentSection";
 import ProductDetail from "./productDetail/ProductDetail";
 
 const Detail = (): JSX.Element => {
@@ -24,6 +25,7 @@ const Detail = (): JSX.Element => {
       {detailedProduct && (
         <>
           <ProductDetail product={detailedProduct} />
+          <CommentSection />
         </>
       )}
     </React.Fragment>

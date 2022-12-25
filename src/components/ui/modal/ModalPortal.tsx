@@ -1,12 +1,12 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 
 import Portal from "components/portal/Portal";
 import CloseIcon from "components/svg/CloseIcon";
 
-import { IUseModal } from "./types";
+import { IModalProps } from "./types";
 
-interface ModalPortalProps extends IUseModal {
-  children: JSX.Element;
+interface ModalPortalProps extends PropsWithChildren {
+  modalProps: IModalProps;
 }
 
 const ModalPortal = ({

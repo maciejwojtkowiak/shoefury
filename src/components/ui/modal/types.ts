@@ -1,4 +1,4 @@
-interface IModalProps {
+export interface IModalProps {
   hideHandler: () => void;
   modalIsShown: boolean;
 }
